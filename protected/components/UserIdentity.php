@@ -17,6 +17,8 @@ class UserIdentity extends CUserIdentity
 	 */
 	public function authenticate()
 	{
+		return self::ERROR_USERNAME_INVALID;
+		
 		$users=array(
 			// username => password
 			'demo'=>'demo',
