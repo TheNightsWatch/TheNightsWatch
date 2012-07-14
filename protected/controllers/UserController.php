@@ -8,6 +8,21 @@ class UserController extends Controller
 		$this->render('index',array('users' => $brothers));
 	}
 	
+	public function actionHead($unique,$refresh = false)
+	{
+		$head = imagecreatetruecolor(16,16);
+		imagealphablending($head,false);
+		imagesavealpha($head,true);
+		
+		$skin = imagecreatefromstring(file_get_contents("http://s3.amazonaws.com/MinecraftSkins/".urlencode($unique).".png"));
+		imagesavealpha($skin,true);
+		imagealphablending($skin,false);
+		
+		imagecopyresampled($head,$skin,0,0,8,8,16,16,8,8);
+		header("Content-Type: image/png");
+		imagepng($head);
+	}
+	
 	public function actionView($unique)
 	{
 		$user = User::model()->findByAttributes(array('ign' => $unique));

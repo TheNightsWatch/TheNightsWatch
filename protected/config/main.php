@@ -23,6 +23,7 @@ return array(
 				// Other Routes
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
 				'<controller:\w+>/<id:\d+>/<action:\w+>'=>'<controller>/<action>',
+				'<controller:\w+>/<unique\w+>/<action:\w+>'=>'<controller>/<action>',
 				
 				// User Specific
 				'user' => 'user/index',
