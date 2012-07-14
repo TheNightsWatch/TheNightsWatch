@@ -23,14 +23,15 @@ return array(
 				// Other Routes
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
 				'<controller:\w+>/<id:\d+>/<action:\w+>'=>'<controller>/<action>',
-				'<controller:\w+>/<unique\w+>/<action:\w+>'=>'<controller>/<action>',
 				
 				// User Specific
 				'user' => 'user/index',
 				'user/<unique:\w+>'=>'user/view',
+				'user/<unique:\w+>/<action:\w+>'=>'user/<action>',
 				
 				// Controller/Action
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+				'<controller:\w+>/<unique\w+>/<action:\w+>'=>'<controller>/<action>',
 				
 				// Site Routes
 				'<action:\w+>' => 'site/<action>',

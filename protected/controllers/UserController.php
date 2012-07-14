@@ -13,7 +13,7 @@ class UserController extends Controller
 		$head = imagecreatetruecolor(16,16);
 		imagealphablending($head,false);
 		imagesavealpha($head,true);
-		$data = file_get_contents("http://s3.amazonaws.com/MinecraftSkins/".urlencode($unique).".png");
+		$data = @file_get_contents("http://s3.amazonaws.com/MinecraftSkins/".urlencode($unique).".png");
 		if($data)
 		{
 			$skin = imagecreatefromstring($data);
