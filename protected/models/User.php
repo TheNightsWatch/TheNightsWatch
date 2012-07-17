@@ -49,5 +49,11 @@ class User extends CActiveRecord
 				return ucfirst(strtolower($this->type));
 		}
 	}
+	
+	public function headUrl($size = 16, $withHelm = true)
+	{
+		$part = $withHelm ? 'helm' : 'head';
+		return "http://www.minotar.net/{$part}/".urlencode($this->ign)."/{$size}.png";
+	}
 
 }
