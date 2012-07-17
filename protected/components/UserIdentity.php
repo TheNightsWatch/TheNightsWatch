@@ -9,6 +9,8 @@ class UserIdentity extends CUserIdentity
 {
 	const ERROR_NO_PASSWORD = 3;
 	
+	private $_id = null;
+	
 	/**
 	 * Authenticates a user.
 	 * @return boolean whether authentication succeeds.
@@ -39,7 +41,13 @@ class UserIdentity extends CUserIdentity
 			return !$this->errorCode;
 		}
 
+		$this->_id = $user->id;
 		$this->errorCode = self::ERROR_NONE;
 		return !$this->errorCode;
+	}
+	
+	public function getID()
+	{
+		return $this->_id;
 	}
 }

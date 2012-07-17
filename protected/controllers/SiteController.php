@@ -97,6 +97,8 @@ class SiteController extends Controller
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+		
+		if(!Yii::app()->user->isGuest) $this->redirect(array('site/index'));
 
 		// collect user input data
 		if(isset($_POST['LoginForm']))
