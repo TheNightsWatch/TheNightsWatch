@@ -29,7 +29,18 @@ class SiteController extends Controller
 	{
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
-		$this->render('index');
+		$last15 = User::model()->findAll(array(
+			'order' => 'IF(rank = \'COMMANDER\',1,0) DESC, id DESC',
+			'limit' => 15
+		)); 
+		
+		// Move the Lord Commander from pos 1 to pos 15.
+		$lc = array_shift($last15);
+		array_push($last15,$lc);
+		
+		$this->render('index',array(
+			'last15' => $last15,
+		));
 	}
 
 	/**
