@@ -27,17 +27,24 @@ class SiteController extends Controller
 	 */
 	public function actionIndex()
 	{
-		// renders the view file 'protected/views/site/index.php'
-		// using the default layout 'protected/views/layouts/main.php'
+		$this->clearPageTitle();
+		
 		$last15 = User::model()->findAll(array(
-			'order' => 'IF(rank = \'COMMANDER\',1,0) DESC, id DESC',
+			'order' => 'IF(rank != \'MEMBER\',1,0) DESC, IF(rank = \'COMMANDER\',1,0) DESC, id DESC',
 			'limit' => 15
 		)); 
 		
-		// Move the Lord Commander from pos 1 to pos 15.
-		$lc = array_shift($last15);
-		array_push($last15,$lc);
-		
+		for($i = 0;$i < 5;++$i)
+		{
+			$temp = array_shift($last15);
+			if($temp->rank == 'MEMBER')
+			{
+				array_unshift($last15,$temp);
+				continue;
+			}
+			array_push($last15,$temp);
+		}
+
 		$this->render('index',array(
 			'last15' => $last15,
 		));

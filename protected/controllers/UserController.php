@@ -4,6 +4,7 @@ class UserController extends Controller
 {	
 	public function actionIndex()
 	{
+		$this->setPageTitle('Member List');
 		$brothers = User::model()->findAll();
 		$this->render('index',array('users' => $brothers));
 	}
@@ -35,6 +36,10 @@ class UserController extends Controller
 			$this->render('notAMember',array('name' => $unique));
 			return;
 		}
+		
+		$this->setPageTitle($user->ign);
+		
+		Yii::app()->clientScript->registerLinkTag('shortcut icon','image/png',$user->headUrl(16));
 		
 		$this->layout = '//layouts/userColumn';
 		
