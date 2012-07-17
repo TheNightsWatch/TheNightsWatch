@@ -26,6 +26,9 @@ class User extends CActiveRecord
 			case 'title':
 				return $this->_getTitle();
 				
+			case 'type':
+				return (parent::__get('type') == null ? 'Member' : parent::__get('type'));
+				
 			default:
 				return parent::__get($var);
 		}
