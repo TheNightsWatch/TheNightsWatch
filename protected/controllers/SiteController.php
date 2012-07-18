@@ -106,10 +106,40 @@ class SiteController extends Controller
 			$model->attributes=$_POST['LoginForm'];
 			// validate user input and redirect to the previous page if valid
 			if($model->validate() && $model->login())
+			{
+				$user = User::model()->findByAttributes(array('ign' => $model->username));
+				$user->updateLastLogin();
 				$this->redirect(Yii::app()->user->returnUrl);
+			}
 		}
 		// display the login form
 		$this->render('login',array('model'=>$model));
+	}
+	
+	public function actionRegister()
+	{
+		$model=new RegisterForm;
+		
+		if(isset($_POST['ajax']) && $_POST['ajax']=='register-form')
+		{
+			echo CActiveForm::validate($model);
+			Yii::app()->end();
+		}
+		
+		if(!Yii::app()->user->isGuest) $this->redirect(array('site/index'));
+		
+		if(isset($_POST['RegisterForm']))
+		{
+			$model->attributes=$_POST['RegisterForm'];
+			if($model->validate() && $model->register())
+			{
+				$user = User::model()->findByAttributes(array('ign' => $model->ign));
+				$user->updateLastLogin();
+				$this->redirect(Yii::app()->user->returnUrl);
+			}
+		}
+		
+		$this->render('register',array('model'=>$model));
 	}
 
 	/**

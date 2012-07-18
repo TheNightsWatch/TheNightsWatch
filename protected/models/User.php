@@ -2,6 +2,9 @@
 
 class User extends CActiveRecord
 {
+	const TYPE_RANGER = 'RANGER';
+	const TYPE_MAESTER = 'MAESTER';
+	
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
@@ -16,6 +19,13 @@ class User extends CActiveRecord
 	{
 		return array(
 			'socialProfile' => array(self::HAS_ONE, 'SocialProfile', 'userID'),
+		);
+	}
+	
+	public function rules()
+	{
+		return array(
+			array('joinDate','default','value'=>new CDbExpression('NOW()'),'on'=>'insert'),
 		);
 	}
 	
@@ -56,4 +66,16 @@ class User extends CActiveRecord
 		return "http://www.minotar.net/{$part}/".urlencode($this->ign)."/{$size}.png";
 	}
 
+	public function setPassword($password)
+	{
+		$bcrypt = new Bcrypt(15);
+		$hash = $bcrypt->hash($password);
+		$this->password = $hash;
+	}
+	
+	public function updateLastLogin()
+	{
+		$this->lastLogin = new CDbExpression('NOW()');
+		if(!$this->save()) throw new Exception('Couldn\'t save?');
+	}
 }
