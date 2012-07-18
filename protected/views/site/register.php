@@ -33,6 +33,9 @@ $this->breadcrumbs=array(
 		<?php echo $form->labelEx($model,'ign'); ?>
 		<?php echo $form->textField($model,'ign'); ?>
 		<?php echo $form->error($model,'ign'); ?>
+		<p class="note">
+			Please remember, your Minecraft username is cAsE sEnSiTiVe.
+		</p>
 	</div>
 	
 	<div class="row">
@@ -45,6 +48,9 @@ $this->breadcrumbs=array(
 		<?php echo $form->labelEx($model,'password'); ?>
 		<?php echo $form->passwordField($model,'password'); ?>
 		<?php echo $form->error($model,'password'); ?>
+		<p class="note">
+			This does <strong>not</strong> have to be the same as your Minecraft password, and will be one-way encrypted.
+		</p>
 	</div>
 	
 	<div class="row">
