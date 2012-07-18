@@ -7,6 +7,15 @@ $this->breadcrumbs=array(
 
 <h1>Register</h1>
 
+<p><strong>Important Things to remember before joining the watch:</strong></p>
+<ul>
+	<li>The Watch does not take part in the politics of the realm.  By joining the watch, you must forget the politcs of any churches you belonged to.  You may keep the religion, but stay out of their Holy Wars.</li>
+	<li>The Watch is (semi) permanent.  Once you have taken the black, there is (almost) no going back.  To leave the watch, you must request your dismissal/retirement through the Council (right now, by using ModMail on the Subreddit).</li>
+	<li>You join the watch reborn.  Release any old grudges you have.  Once you have joined the watch, your past crimes are forgiven.</li>
+	<li>The Watch does not take revenge.  Kill-On-Sight is Restricted for those that have comitted atrocious crimes against the watch, or will attack you upon seeing you.  It is not for people who have murdered you but are otherwise friendly.</li>
+	<li>You are accountable for your actions.  If you seem to be killing a large number of players and acting like a bandit, the Council will hold you responsible and you may be found guilty of desertion.  Such a finding would have you placed on the Watch's KoS list.</li>
+</ul>
+
 <p>Please fill out the following credentials, and take the vow of the Night's Watch:</p>
 
 <div class="form">
