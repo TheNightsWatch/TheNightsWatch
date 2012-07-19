@@ -156,6 +156,6 @@ class SiteController extends Controller
 	 */
 	public function actionTeamspeak()
 	{
-		$this->redirect('ts3server://ts88.light-speed.com:6724?channel=The%20Nights%20Watch',301);
+		$this->redirect('ts3server://ts88.light-speed.com?port=6724&channel=The%20Nights%20Watch',301);
 	}
 }

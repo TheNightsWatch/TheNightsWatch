@@ -60,10 +60,15 @@ class User extends CActiveRecord
 		}
 	}
 	
-	public function headUrl($size = 16, $withHelm = true)
+	public static function getHead($unique, $size = 16, $withHelm = true)
 	{
 		$part = $withHelm ? 'helm' : 'head';
-		return "http://www.minotar.net/{$part}/".urlencode($this->ign)."/{$size}.png";
+		return "http://www.minotar.net/{$part}/".urlencode($unique)."/{$size}.png";
+	}
+	
+	public function headUrl($size = 16, $withHelm = true)
+	{
+		return self::getHead($this->ign,$size,$withHelm);
 	}
 
 	public function setPassword($password)

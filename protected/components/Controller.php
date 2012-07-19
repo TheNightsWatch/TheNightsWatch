@@ -48,4 +48,11 @@ class Controller extends CController
 				return $this->_pageTitle=$name.' - '.Yii::app()->name;
 		}
 	}
+	
+	public function jsonOut($array,$status = 200)
+	{
+		header("Content-Type: application/json");
+		echo json_encode($array);
+		Yii::app()->end($status);
+	}
 }

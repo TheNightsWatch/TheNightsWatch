@@ -9,22 +9,9 @@ class UserController extends Controller
 		$this->render('index',array('users' => $brothers));
 	}
 	
-	public function actionHead($unique,$refresh = false)
+	public function actionHead($unique,$size = 16)
 	{
-		$head = imagecreatetruecolor(16,16);
-		imagealphablending($head,false);
-		imagesavealpha($head,true);
-		$data = @file_get_contents("http://s3.amazonaws.com/MinecraftSkins/".urlencode($unique).".png");
-		if($data)
-		{
-			$skin = imagecreatefromstring($data);
-			imagesavealpha($skin,true);
-			imagealphablending($skin,false);
-		
-			imagecopyresampled($head,$skin,0,0,8,8,16,16,8,8);
-		}
-		header("Content-Type: image/png");
-		imagepng($head);
+		$this->redirect(User::getHead($unique,$size),true,301);
 	}
 	
 	public function actionView($unique)

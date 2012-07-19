@@ -20,6 +20,9 @@ return array(
 				// Specific Routes
 				'' => 'site/index',
 				'chat' => 'chat/index',
+				'login' => 'site/login',
+				'register' => 'site/register',
+				'logout' => 'site/logout',
 				
 				// Other Routes
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
@@ -33,9 +36,6 @@ return array(
 				// Controller/Action
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 				'<controller:\w+>/<unique\w+>/<action:\w+>'=>'<controller>/<action>',
-				
-				// Site Routes
-				'<action:\w+>' => 'site/<action>',
 			),
 		),
 		'errorHandler'=>array(
