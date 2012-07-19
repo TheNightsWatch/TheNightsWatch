@@ -15,7 +15,7 @@ Yii::app()->clientScript->registerCoreScript('jquery');
 		var box = $(this).closest('.electionBox');
 		
 		if($(this).val() > 0)
-			newSrc = electionHeadImageTpl.replace('NAME',$(this).text());
+			newSrc = electionHeadImageTpl.replace('NAME',$(this).find('option:selected').text());
 		else
 			newSrc = blankGif;
 		
