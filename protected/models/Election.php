@@ -22,11 +22,11 @@ class Election extends CActiveRecord
 	
 	public static function findAllOngoing()
 	{
-		return Election::model()->findAll('startTime >= NOW() AND endTime < NOW()');
+		return Election::model()->findAll('startTime <= NOW() AND endTime > NOW()');
 	}
 	
 	public static function countAllOngoing()
 	{
-		return Election::model()->count('startTime >= NOW() AND endTime < NOW()');
+		return Election::model()->count('startTime <= NOW() AND endTime > NOW()');
 	}
 }
