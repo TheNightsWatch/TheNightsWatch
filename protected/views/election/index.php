@@ -1,14 +1,5 @@
 <?php
 Yii::app()->clientScript->registerCoreScript('jquery');
-
-if($elections)
-{
-	$ra = array_pop($elections);
-	array_push($elections,$ra);
-	array_push($elections,$ra);
-	array_push($elections,$ra);
-	array_push($elections,$ra);
-}
 ?>
 <div style="text-align: center;">
 	<?php
