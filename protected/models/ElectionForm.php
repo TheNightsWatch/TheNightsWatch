@@ -78,10 +78,11 @@ class ElectionForm extends CFormModel
 	
 	public function getCandidateDropdownArray()
 	{
+		$user = User::model()->findByPk(Yii::app()->user->getId());
 		$array = array(null => '');
 		foreach($this->getElection()->candidates as $candidate)
 		{
-			$array[$candidate->user->id] = $candidate->user->ign;
+			$array[$candidate->user->id] = $candidate->user->ign . ($user->rank == 'COMMANDER' ? ' (' . ElectionVote::model()->countByAttributes(array('candidateID' => $candidate->user->id, 'electionID' => $this->electionID)) . ')' : null);
 		}
 		return $array;
 	}
