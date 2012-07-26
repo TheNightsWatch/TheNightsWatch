@@ -61,7 +61,15 @@ class ElectionController extends Controller
 		}
 
 		$this->setPageTitle('Current Elections');
-		$elections = Election::model()->findAll('startTime <= NOW() AND endTime > NOW()');
+		//$elections = Election::model()->findAll('startTime <= NOW() AND endTime > NOW()');
 		$this->render('index',array('elections' => $elections));
+	}
+	
+	public function actionResults()
+	{
+		$elections = Election::model()->findAll(array('condition' => 'endTime <= NOW()', 'order' => 'endTime DESC'));
+		
+		$this->setPageTitle('Election Results');
+		$this->render('result',array('elections' => $elections));
 	}
 }

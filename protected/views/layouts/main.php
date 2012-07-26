@@ -26,12 +26,15 @@
 	</div><!-- header -->
 
 	<div id="mainmenu">
-		<?php $this->widget('zii.widgets.CMenu',array(
+		<?php
+		$ongoingElections = Election::countAllOngoing();
+		$this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
 				array('label'=>'Home', 'url'=>array('site/index')),
 			//	array('label'=>'Chat', 'url'=>array('/chat')),
 				array('label'=>'Members', 'url'=>array('user/index')),
-				array('label'=>'Elections', 'url'=>array('election/index'), 'visible'=>(Election::countAllOngoing() && !Yii::app()->user->isGuest)),
+				array('label'=>'Elections', 'url'=>array('election/index'), 'visible'=>($ongoingElections && !Yii::app()->user->isGuest)),
+				array('label'=>'Election Results', 'url' => array('election/results'), 'visible' => !$ongoingElections),
 				array('label'=>'Reddit', 'url'=>'http://reddit.com/r/TheNightsWatch'),
 				array('label'=>'Teamspeak', 'url'=>array('site/teamspeak')),
 				array('label'=>'Login', 'url'=>array('site/login'), 'visible'=>Yii::app()->user->isGuest, 'linkOptions' => array('style' => 'float:right;position:relative;top:-4px;')),
