@@ -5,7 +5,7 @@ class UserController extends Controller
 	public function actionIndex()
 	{
 		$this->setPageTitle('Member List');
-		$brothers = User::model()->findAll();
+		$brothers = User::model()->findAllByAttributes(array('deserter' => 'NO'));
 		$this->render('index',array('users' => $brothers));
 	}
 	
@@ -22,6 +22,12 @@ class UserController extends Controller
 			$this->layout = '//layouts/column1';
 			$this->render('notAMember',array('name' => $unique));
 			return;
+		}
+		if($user->deserter != 'NO')
+		{
+			if($user->deserter == 'LEFT') $verbbed = 'left';
+			else $verbbed = 'deserted';
+			throw new CHttpException(410,"{$user->ign} has {$verbbed} the Night's Watch.");
 		}
 		
 		$this->setPageTitle($user->ign);
