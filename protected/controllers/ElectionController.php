@@ -2,30 +2,49 @@
 
 class ElectionController extends Controller
 {
+	public function filters()
+	{
+		return array(
+			'accessControl',
+		);
+	}
+
+	public function accessRules()
+	{
+		return array(
+			array('allow',
+				'actions' => array('index','results'),
+				'users' => array('@'),
+			),
+			array('allow',
+				'actions'=>array('results'),
+				'users' => array('*'),
+			),
+			array('deny',
+				'actions' => array('index'),
+				'users' => array('*'),
+			)
+		);
+	}
+
 	public function actionIndex()
 	{
-		if(Yii::app()->user->isGuest)
-		{
-			$this->render('../site/error',array('message' => 'You must be logged in to vote.'));
-			return;
-		}
-		
 		$elections = Election::model()->findAll('startTime <= NOW() AND endTime > NOW()');
 		$user = User::model()->findByPk(Yii::app()->user->getId());
-		
+
 		foreach($elections as $k => $election)
 		{
 			$time = strtotime($election->startTime);
 			$joinTime = strtotime($user->joinDate);
 			if($joinTime > $time) unset($elections[$k]);
 		}
-		
+
 		if(!count($elections))
 		{
 			$this->render('../site/error',array('message' => 'In order to prevent election fraud, you are unable to participate in elections that started before you joined the Watch'));
 			return;
 		}
-		
+
 		$model = new ElectionForm;
 
 		// if it is ajax validation request
@@ -64,11 +83,11 @@ class ElectionController extends Controller
 		//$elections = Election::model()->findAll('startTime <= NOW() AND endTime > NOW()');
 		$this->render('index',array('elections' => $elections));
 	}
-	
+
 	public function actionResults()
 	{
 		$elections = Election::model()->findAll(array('condition' => 'endTime <= NOW()', 'order' => 'endTime DESC'));
-		
+
 		$this->setPageTitle('Election Results');
 		$this->render('result',array('elections' => $elections));
 	}
