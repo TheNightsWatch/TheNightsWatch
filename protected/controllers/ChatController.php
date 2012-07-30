@@ -25,6 +25,13 @@ class ChatController extends Controller
 
 	public function actionIndex()
 	{
+		$messages = ChatMessage::model()->with('user')->findByAttributes(array('room' => 'lobby'),array(
+			'condition' => 'timestamp > NOW()-60*60*6',
+			'limit' => 10,
+		));
 
+		$this->render('index',array(
+			'messages' => $messages,
+		));
 	}
 }
