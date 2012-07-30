@@ -7,6 +7,7 @@ return array(
 		'application.models.*',
 		'application.components.*',
 		'application.vendors.*',
+		'application.filters.*',
 	),
 	'modules'=>array(),
 	'components'=>array(
