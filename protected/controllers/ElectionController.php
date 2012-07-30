@@ -6,6 +6,9 @@ class ElectionController extends Controller
 	{
 		return array(
 			'accessControl',
+			array(
+				'application.filters.BanFilter + index',
+			),
 		);
 	}
 
