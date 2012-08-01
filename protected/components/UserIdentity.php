@@ -8,6 +8,7 @@
 class UserIdentity extends CUserIdentity
 {
 	const ERROR_NO_PASSWORD = 3;
+	const ERROR_DESERTION = 4;
 	
 	private $_id = null;
 	
@@ -23,6 +24,13 @@ class UserIdentity extends CUserIdentity
 		if($user === null)
 		{
 			$this->errorCode = self::ERROR_USERNAME_INVALID;
+			return !$this->errorCode;
+		}
+		
+		// User left or deserted
+		if($user->deserter != 'NO')
+		{
+			$this->errorCode = self::ERROR_DESERTION;
 			return !$this->errorCode;
 		}
 		

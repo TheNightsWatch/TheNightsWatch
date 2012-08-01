@@ -33,6 +33,7 @@
 				array('label'=>'Home', 'url'=>array('site/index')),
 			//	array('label'=>'Chat', 'url'=>array('/chat')),
 				array('label'=>'Members', 'url'=>array('user/index')),
+				array('label'=>'Chat', 'url'=>array('chat/index'), 'visible'=>!Yii::app()->user->isGuest),
 				array('label'=>'Elections', 'url'=>array('election/index'), 'visible'=>($ongoingElections && !Yii::app()->user->isGuest)),
 				array('label'=>'Election Results', 'url' => array('election/results'), 'visible' => !$ongoingElections),
 				array('label'=>'Reddit', 'url'=>'http://reddit.com/r/TheNightsWatch'),

@@ -4,6 +4,7 @@ return array(
 	'name'=>'The Night\'s Watch',
 	'preload'=>array('log'),
 	'import'=>array(
+		'application.forms.*',
 		'application.models.*',
 		'application.components.*',
 		'application.vendors.*',
@@ -11,6 +12,10 @@ return array(
 	),
 	'modules'=>array(),
 	'components'=>array(
+		'request'=>array(
+			'enableCsrfValidation' => true,
+			'enableCookieValidation' => true,
+		),
 		'user'=>array(
 			'allowAutoLogin'=>true,
 		),
@@ -24,16 +29,16 @@ return array(
 				'login' => 'site/login',
 				'register' => 'site/register',
 				'logout' => 'site/logout',
-				
+
 				// Other Routes
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
 				'<controller:\w+>/<id:\d+>/<action:\w+>'=>'<controller>/<action>',
-				
+
 				// User Specific
 				'user' => 'user/index',
 				'user/<unique:\w+>'=>'user/view',
 				'user/<unique:\w+>/<action:\w+>'=>'user/<action>',
-				
+
 				// Controller/Action
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 				'<controller:\w+>/<unique\w+>/<action:\w+>'=>'<controller>/<action>',
