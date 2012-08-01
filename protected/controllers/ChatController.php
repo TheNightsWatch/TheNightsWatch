@@ -2,6 +2,8 @@
 
 class ChatController extends Controller
 {
+	public $chatUsers = array();
+
 	public function filters()
 	{
 		return array(
@@ -34,10 +36,25 @@ class ChatController extends Controller
 
 	public function actionView($room = 'lobby')
 	{
-		$messages = ChatMessage::model()->with('user')->findAllByAttributes(array('room' => $room),array(
-			'condition' => 'timestamp > NOW()-60*60*6',
-			'limit' => 10,
+		$this->layout = '//layouts/chatColumn';
+		$data = ChatMessage::model()->with('user')->findAllByAttributes(array('room' => $room),array(
+			'limit' => 20,
+			'order' => 'timestamp DESC',
 		));
+
+		$messages = array();
+		foreach($data as $datum)
+		{
+			array_unshift($messages,$datum);
+		}
+
+		$this->chatUsers = User::model()->with(array(
+			'chatViews' => array(
+				'joinType'=>'INNER JOIN',
+				'condition'=>'chatViews.room = :room AND timestamp > FROM_UNIXTIME(UNIX_TIMESTAMP()-60)',
+				'params' => array('room' => $room),
+			),
+		))->findAll();
 
 		$this->render('index',array(
 			'messages' => $messages,
@@ -46,13 +63,27 @@ class ChatController extends Controller
 
 	public function actionNew($since,$room = 'lobby')
 	{
-		$messages = ChatMessage::model()->with('user')->findAllByAttributes(array('room' => $room),'id > :since',array('since' => $since));
+		$view = ChatView::model()->findByAttributes(array(
+			'room' => $room,
+			'userID' => Yii::app()->user->getId(),
+		));
+		if(!$view)
+		{
+			$view = new ChatView;
+			$view->room = $room;
+			$view->userID = Yii::app()->user->getId();
+		}
+		$view->timestamp = time();
+		$view->save();
+		
+		$messages = ChatMessage::model()->with('user')->findAllByAttributes(array('room' => $room),'t.id > :since',array('since' => $since));
 		$output = array();
 		foreach($messages as $message)
 		{
 			$output[] = array(
 				'id' => $message->id,
 				'message' => $message->message,
+				'timestamp' => $message->timestamp->format("H:i:s"),
 				'user' => array(
 					'id' => $message->user->id,
 					'ign' => $message->user->ign,
@@ -61,9 +92,27 @@ class ChatController extends Controller
 				),
 			);
 		}
-		$this->jsonOut($output);
+		
+		$users = User::model()->with(array(
+			'chatViews' => array(
+				'joinType'=>'INNER JOIN',
+				'condition'=>'chatViews.room = :room AND timestamp > FROM_UNIXTIME(UNIX_TIMESTAMP()-60*5)',
+				'params' => array('room' => $room),
+			),
+		))->findAll();
+		$uout = array();
+		foreach($users as $user)
+		{
+			$uout[] = array(
+				'id' => $user->id,
+				'ign' => $user->ign,
+				'type' => $user->type,
+				'rank' => $user->rank,
+			);
+		}
+		$this->jsonOut(array('users' => $uout, 'messages' => $output, 'csrf' => array('name' => Yii::app()->request->csrfTokenName, 'token' => Yii::app()->request->csrfToken)));
 	}
-	
+
 	public function actionPing($room = 'lobby')
 	{
 		$this->jsonOut('Not Supported',501);
@@ -89,7 +138,7 @@ class ChatController extends Controller
 						'name' => Yii::app()->request->csrfTokenName,
 						'value' => Yii::app()->request->csrfToken,
 					),
-				));
+				),200,true);
 			}
 		}
 		$this->redirect(array('chat/index'));

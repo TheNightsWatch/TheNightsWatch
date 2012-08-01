@@ -8,7 +8,7 @@ class ChatForm extends CFormModel
 	{
 		return array(
 			array('message','required'),
-			array('message','length','min'=>5),	
+			array('message','length','min'=>1),	
 		);
 	}
 }

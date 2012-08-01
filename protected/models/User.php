@@ -27,6 +27,7 @@ class User extends CActiveRecord
 	{
 		return array(
 			'socialProfile' => array(self::HAS_ONE, 'SocialProfile', 'userID'),
+			'chatViews' => array(self::HAS_MANY, 'ChatView', 'userID'),
 		);
 	}
 	
