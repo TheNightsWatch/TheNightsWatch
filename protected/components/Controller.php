@@ -25,16 +25,26 @@ class Controller extends CController
 
 	private $_pageTitle = null;
 
+	/**
+	 * Sets the page title to "$string - App Name"
+	 */
 	public function setPageTitle($string = null)
 	{
 		$this->_pageTitle = ($string !== null ? $string . ' - ' : '') . Yii::app()->name;
 	}
-	
+
+	/**
+	 * Clears the page title
+	 */
 	public function clearPageTitle()
 	{
 		$this->setPageTitle(null);
 	}
 
+	/**
+	 * Returns the page title
+	 * @return string
+	 */
 	public function getPageTitle()
 	{
 		if($this->_pageTitle !== null)
@@ -48,11 +58,18 @@ class Controller extends CController
 				return $this->_pageTitle=$name.' - '.Yii::app()->name;
 		}
 	}
-	
-	public function jsonOut($array,$status = 200)
+
+	/**
+	 * Output JSON Data instead of a View
+	 *
+	 * @param mixed $info Information to JSON Encode.
+	 * @param int $status Status code to send.  Defaults to 200.
+	 * @param boolean $end Whether or not to end the request.  Defaults to true.
+	 */
+	public function jsonOut($info,$status = 200,$end = true)
 	{
-		header("Content-Type: application/json");
-		echo json_encode($array);
-		Yii::app()->end($status);
+		header("Content-Type: application/json",true,$status);
+		echo CJSON::encode($info);
+		Yii::app()->end(0,$end);
 	}
 }
