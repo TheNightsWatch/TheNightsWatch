@@ -49,8 +49,14 @@ class LoginForm extends CFormModel
 		if(!$this->hasErrors())
 		{
 			$this->_identity=new UserIdentity($this->username,$this->password);
-			if(!$this->_identity->authenticate())
-				$this->addError('password','Incorrect username or password.');
+			if(!$this->_identity->authenticate()) switch($this->_identity->errorCode)
+			{
+				case UserIdentity::ERROR_DESERTION:
+					$this->addError('username','You may not log in as you have left the Watch.');
+					break;
+				default:
+					$this->addError('password','Incorrect username or password.');
+			}
 		}
 	}
 

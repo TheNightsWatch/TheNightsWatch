@@ -5,6 +5,14 @@ class User extends CActiveRecord
 	const TYPE_RANGER = 'RANGER';
 	const TYPE_MAESTER = 'MAESTER';
 	
+	private $regex = array(
+		'donorLevel' => '/Showing stats for:.*\[([^]]+)\]/',
+		'zombieRecord' => '/<b>Zombie Kill Count \(Record\):[^\d]+(\d+)/',
+		'zombieCurrent' => '/<b>Zombie Kill Count \(Current\):[^\d]+(\d+)/',
+		'lastOnline' => '/Last Online Date:[^p]*(\d{4}-\d{2}-\d{2} \d+:\d{2}:\d{2} AM|PM [^<]+)/',
+		'serverJoin' => '/Server Join Date:[^p]*(\d{4}-\d{2}-\d{2} \d+:\d{2}:\d{2} AM|PM [^<]+)/',
+	);
+	
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
@@ -19,6 +27,7 @@ class User extends CActiveRecord
 	{
 		return array(
 			'socialProfile' => array(self::HAS_ONE, 'SocialProfile', 'userID'),
+			'chatViews' => array(self::HAS_MANY, 'ChatView', 'userID'),
 		);
 	}
 	
