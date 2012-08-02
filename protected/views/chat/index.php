@@ -63,7 +63,6 @@ messageQueue.prototype.load = function(_this,callback)
 			stime.pop();
 			var stime = stime.join(":");
 			li.find('.timestamp').attr('title',timestamp).text(stime);
-			li.find('.timestamp').text(data.messages[i].timestamp);
 			li.find('.username').text(data.messages[i].user.ign).attr('href',data.messages[i].user.url);
 			li.find('.message').text(data.messages[i].message);
 			$('#messages').append(li);
@@ -220,6 +219,7 @@ function doScroll()
 #template { display: none; }
 #messages,#chatters { list-style-type: none; margin: 0px; padding: 0px; }
 #messages a.username,#chatters a.username { color: #317396; text-decoration: none; }
+a.username:hover { color: #06C; }
 #chatters { color: #317396; }
 #chatters li { line-height: 16px; padding-bottom: 2px; }
 #chatters li img { width:16px;height:16px;vertical-align:middle; }
