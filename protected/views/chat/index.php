@@ -219,7 +219,7 @@ function doScroll()
 #template { display: none; }
 #messages,#chatters { list-style-type: none; margin: 0px; padding: 0px; }
 #messages a.username,#chatters a.username { color: #317396; text-decoration: none; }
-a.username:hover { color: #06C; }
+#messages a.username:hover,#chatters a.username:hover { color: #06C; }
 #chatters { color: #317396; }
 #chatters li { line-height: 16px; padding-bottom: 2px; }
 #chatters li img { width:16px;height:16px;vertical-align:middle; }
