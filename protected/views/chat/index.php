@@ -215,6 +215,10 @@ function doScroll()
 	height: 300px;
 	overflow-y: scroll;
 }
+#messages li { color: #DDD; padding-bottom: 3px; }
+#messages .timestamp { color: #999; }
+#messages .username { color: #777; }
+#messages .message { color: #444; }
 #chatForm
 {
 	width: 100%;
