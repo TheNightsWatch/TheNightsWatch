@@ -47,7 +47,7 @@ Date.prototype.getLargeChatStamp = function(_this)
 	if(_this === undefined) _this = this;
 	return _this.getPaddedHours() + ':' + _this.getPaddedMinutes() + ':' + _this.getPaddedSeconds();
 }
-messageQueue.prototype.initialLoad = function()
+messageQueue.prototype.initialLoad = function(_this)
 {
 	if(this.currentTimeout) clearTimeout(this.currentTimeout);
 	_this = this;
@@ -56,7 +56,6 @@ messageQueue.prototype.initialLoad = function()
 messageQueue.prototype.load = function(_this,callback)
 {
 	if(_this === undefined) _this = this;
-	console.log('messageQueue.load');
 	if(_this.currentTimeout) clearTimeout(_this.currentTimeout);
 	$.getJSON('<?php echo $this->createUrl('chat/new'); ?>?since=' + _this.lastID,function(data)
 	{
@@ -114,18 +113,19 @@ function titleBar() {
 	this.focused = true;
 	this.onlyFlashWhenNotFocused = true;
 	_this = this;
-	$(window).on('focus',function() 
-	{ 
-		_this.focused = true;
-		if(_this.onlyFlashWhenNotFocused)
-		{
-			console.log('Turning off flash message');
-			_this.flashMessage(false,_this);
-		}
-	});
-	$(window).on('blur',function()
-	{ 
-		_this.focused = false; 
+	$(document).ready(function() {
+		$(window).on('focus',function() 
+		{ 
+			_this.focused = true;
+			if(_this.onlyFlashWhenNotFocused)
+			{
+				_this.flashMessage(false,_this);
+			}
+		});
+		$(window).on('blur',function()
+		{ 
+			_this.focused = false; 
+		});
 	});
 }
 titleBar.prototype.update = function(counter,newFlag,_this)
@@ -153,7 +153,6 @@ titleBar.prototype.updateTitlebar = function(counter,newFlag,_this)
 titleBar.prototype.flashMessage = function(message,_this)
 {
 	if(_this === undefined) _this = this;
-	console.log(_this);
 	if(message === undefined || message == null || message == false)
 	{
 		_this.flashingMsgFlag = false;
@@ -206,19 +205,18 @@ titleBar.prototype.getOriginal = function(_this)
 		title.setAttribute("data-original",title.innerHTML);
 	return title.getAttribute("data-original");
 }
-document.titleBar = new titleBar;
 document.messageQueue = new messageQueue;
+document.titleBar = new titleBar;
 $(document).ready(function()
 {
 	$('#messages').prop({ scrollTop: $('#messages').prop('scrollHeight') });
-	document.messageQueue.initialLoad();
+	document.messageQueue.initialLoad(document.messageQueue);
 	$('#message').on('keyup',function() {
 		if($(this).val().length > 0 && $('#chatForm button').attr('disabled')) $('#chatForm button').attr('disabled',false);
 		else if($(this).val().length < 1) $('#chatForm button').attr('disabled',true);
 	});
 	$('#chatForm').on('submit',function(e) {
 		e.preventDefault();
-		console.log('Doing Ajax Submit');
 		var data = $('#chatForm').serialize();
 		$('#chatForm input,#chatForm button').attr('disabled',true);
 		$.post('<?php echo $this->createUrl('chat/post'); ?>',data,function() {
