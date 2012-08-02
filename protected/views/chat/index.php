@@ -208,7 +208,7 @@ $(document).ready(function()
 			});
 		});
 	});
-	$('#messages .timestamp').each(function(ele) {
+	$('#messages .timestamp').each(function(i,ele) {
 		var ele = $(ele);
 		var date = new Date(ele.attr('data-epoch')*1000);
 		ele.attr('title',date.getLargeChatStamp()).text(date.getSmallChatStamp());
