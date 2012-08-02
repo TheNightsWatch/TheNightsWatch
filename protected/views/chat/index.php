@@ -211,7 +211,7 @@ $(document).ready(function()
 	$('#messages .timestamp').each(function(ele) {
 		var ele = $(ele);
 		var date = new Date(ele.attr('data-epoch')*1000);
-		ele.title(date.getLargeChatStamp()).text(date.getSmallChatStamp());
+		ele.attr('title',date.getLargeChatStamp()).text(date.getSmallChatStamp());
 	});
 });
 function getShouldScroll()
