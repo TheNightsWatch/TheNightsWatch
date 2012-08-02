@@ -16,12 +16,12 @@ function messageQueue()
 	this.lastID = <?php echo $lastID; ?>;
 	this.currentTimeout = undefined;
 }
-Date.prototype.getSmallChatStamp() = function(_this)
+Date.prototype.getSmallChatStamp = function(_this)
 {
 	if(_this === undefined) _this = this;
 	return _this.getHours() + ':' + _this.getMinutes();
 }
-Date.prototype.getLargeChatStamp() = function(_this)
+Date.prototype.getLargeChatStamp = function(_this)
 {
 	if(_this === undefined) _this = this;
 	return _this.getHours() + ':' + _this.getMinutes() + ':' + _this.getSeconds();
