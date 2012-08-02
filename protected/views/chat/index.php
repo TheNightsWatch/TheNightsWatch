@@ -2,7 +2,7 @@
 <ol id="messages">
 	<li id="template">[<span class="timestamp" data-epoch=""></span>] &lt;<a href="" class="username"></a>&gt; <span class="message"></span></li>
 	<?php foreach($messages as $message): $lastID = $message->id; ?>
-		<li>[<span class="timestamp" data-epoch="<?php $message->timestamp->getTimestamp(); ?>" title="<?php echo $message->timestamp->format("H:i:s"); ?>"><?php echo $message->timestamp->format("H:i"); ?></span>] &lt;<a href="<?php echo $this->createUrl('user/view',array('unique' => $message->user->ign)); ?>" class="username"><?php echo htmlspecialchars($message->user->ign); ?></a>&gt; <span class="message"><?php echo htmlspecialchars($message->message); ?></span></li>
+		<li>[<span class="timestamp" data-epoch="<?php echo $message->timestamp->getTimestamp(); ?>" title="<?php echo $message->timestamp->format("H:i:s"); ?>"><?php echo $message->timestamp->format("H:i"); ?></span>] &lt;<a href="<?php echo $this->createUrl('user/view',array('unique' => $message->user->ign)); ?>" class="username"><?php echo htmlspecialchars($message->user->ign); ?></a>&gt; <span class="message"><?php echo htmlspecialchars($message->message); ?></span></li>
 	<?php endforeach; ?>
 </ol>
 <form id="chatForm" action="<?php echo $this->createUrl('chat/post'); ?>" method="post">
