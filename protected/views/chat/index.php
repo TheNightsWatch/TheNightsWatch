@@ -2,7 +2,7 @@
 <ol id="messages">
 	<li id="template">[<span class="timestamp"></span>] &lt;<span class="username"></span>&gt; <span class="message"></span></li>
 	<?php foreach($messages as $message): $lastID = $message->id; ?>
-		<li><span class="timestamp" title="<?php echo $message->timestamp->format("H:i:s"); ?>"><?php echo $message->timestamp->format("H:i"); ?></span> <span class="username"><?php echo htmlspecialchars($message->user->ign); ?></span> <span class="message"><?php echo htmlspecialchars($message->message); ?></span></li>
+		<li>[<span class="timestamp" title="<?php echo $message->timestamp->format("H:i:s"); ?>"><?php echo $message->timestamp->format("H:i"); ?></span>] &lt;<span class="username"><?php echo htmlspecialchars($message->user->ign); ?></span>&gt; <span class="message"><?php echo htmlspecialchars($message->message); ?></span></li>
 	<?php endforeach; ?>
 </ol>
 <form id="chatForm" action="<?php echo $this->createUrl('chat/post'); ?>" method="post">
