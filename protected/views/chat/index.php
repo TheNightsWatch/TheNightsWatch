@@ -1,8 +1,8 @@
 <?php Yii::app()->clientScript->registerCoreScript('jquery'); $lastID = 0; ?>
 <ol id="messages">
-	<li id="template">[<span class="timestamp"></span>] &lt;<a href="" class="username"></a>&gt; <span class="message"></span></li>
+	<li id="template">[<span class="timestamp" data-epoch=""></span>] &lt;<a href="" class="username"></a>&gt; <span class="message"></span></li>
 	<?php foreach($messages as $message): $lastID = $message->id; ?>
-		<li>[<span class="timestamp" title="<?php echo $message->timestamp->format("H:i:s"); ?>"><?php echo $message->timestamp->format("H:i"); ?></span>] &lt;<a href="<?php echo $this->createUrl('user/view',array('unique' => $message->user->ign)); ?>" class="username"><?php echo htmlspecialchars($message->user->ign); ?></a>&gt; <span class="message"><?php echo htmlspecialchars($message->message); ?></span></li>
+		<li>[<span class="timestamp" data-epoch="<?php $message->timestamp->getTimestamp(); ?>" title="<?php echo $message->timestamp->format("H:i:s"); ?>"><?php echo $message->timestamp->format("H:i"); ?></span>] &lt;<a href="<?php echo $this->createUrl('user/view',array('unique' => $message->user->ign)); ?>" class="username"><?php echo htmlspecialchars($message->user->ign); ?></a>&gt; <span class="message"><?php echo htmlspecialchars($message->message); ?></span></li>
 	<?php endforeach; ?>
 </ol>
 <form id="chatForm" action="<?php echo $this->createUrl('chat/post'); ?>" method="post">
@@ -15,6 +15,16 @@ function messageQueue()
 {
 	this.lastID = <?php echo $lastID; ?>;
 	this.currentTimeout = undefined;
+}
+Date.prototype.getSmallChatStamp() = function(_this)
+{
+	if(_this === undefined) _this = this;
+	return _this.getHours() + ':' + _this.getMinutes();
+}
+Date.prototype.getLargeChatStamp() = function(_this)
+{
+	if(_this === undefined) _this = this;
+	return _this.getHours() + ':' + _this.getMinutes() + ':' + _this.getSeconds();
 }
 messageQueue.prototype.initialLoad = function()
 {
@@ -58,11 +68,8 @@ messageQueue.prototype.load = function(_this,callback)
 			_this.lastID = data.messages[i].id;
 			
 			var li = ele.clone();
-			var timestamp = data.messages[i].timestamp;
-			var stime = timestamp.split(":");
-			stime.pop();
-			var stime = stime.join(":");
-			li.find('.timestamp').attr('title',timestamp).text(stime);
+			var date = new Date(data.messages[i].timestamp*1000);
+			li.find('.timestamp').attr('title',date.getLargeChatStamp()).text(date.getSmallChatStamp());
 			li.find('.username').text(data.messages[i].user.ign).attr('href',data.messages[i].user.url);
 			li.find('.message').text(data.messages[i].message);
 			$('#messages').append(li);
@@ -200,6 +207,11 @@ $(document).ready(function()
 				$('#message').val('');
 			});
 		});
+	});
+	$('#messages .timestamp').each(function(ele) {
+		var ele = $(ele);
+		var date = new Date(ele.attr('data-epoch')*1000);
+		ele.title(date.getLargeChatStamp()).text(date.getSmallChatStamp());
 	});
 });
 function getShouldScroll()
