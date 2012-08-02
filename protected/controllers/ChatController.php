@@ -89,6 +89,7 @@ class ChatController extends Controller
 					'ign' => $message->user->ign,
 					'type' => $message->user->type,
 					'rank' => $message->user->rank,
+					'url' => $this->createUrl('user/view',array('unique' => $message->user->ign)),
 				),
 			);
 		}
@@ -108,6 +109,8 @@ class ChatController extends Controller
 				'ign' => $user->ign,
 				'type' => $user->type,
 				'rank' => $user->rank,
+				'img' => $user->headUrl(16),
+				'url' => $this->createUrl('user/view',array('unique' => $user->ign)),
 			);
 		}
 		$this->jsonOut(array('users' => $uout, 'messages' => $output, 'csrf' => array('name' => Yii::app()->request->csrfTokenName, 'token' => Yii::app()->request->csrfToken)));

@@ -1,8 +1,8 @@
 <?php Yii::app()->clientScript->registerCoreScript('jquery'); $lastID = 0; ?>
 <ol id="messages">
-	<li id="template">[<span class="timestamp"></span>] &lt;<span class="username"></span>&gt; <span class="message"></span></li>
+	<li id="template">[<span class="timestamp"></span>] &lt;<a href="" class="username"></a>&gt; <span class="message"></span></li>
 	<?php foreach($messages as $message): $lastID = $message->id; ?>
-		<li>[<span class="timestamp" title="<?php echo $message->timestamp->format("H:i:s"); ?>"><?php echo $message->timestamp->format("H:i"); ?></span>] &lt;<span class="username"><?php echo htmlspecialchars($message->user->ign); ?></span>&gt; <span class="message"><?php echo htmlspecialchars($message->message); ?></span></li>
+		<li>[<span class="timestamp" title="<?php echo $message->timestamp->format("H:i:s"); ?>"><?php echo $message->timestamp->format("H:i"); ?></span>] &lt;<a href="<?php echo $this->createUrl('user/view',array('unique' => $message->user->ign)); ?>" class="username"><?php echo htmlspecialchars($message->user->ign); ?></a>&gt; <span class="message"><?php echo htmlspecialchars($message->message); ?></span></li>
 	<?php endforeach; ?>
 </ol>
 <form id="chatForm" action="<?php echo $this->createUrl('chat/post'); ?>" method="post">
@@ -36,7 +36,13 @@ messageQueue.prototype.load = function(_this,callback)
 			for(var i in data.users)
 			{
 				var li = $(document.createElement("li"));
-				li.text(data.users[i].ign);
+				var a = $(document.createElement("a"));
+				a.attr('href',data.users[i].url);
+				var img = $(document.createElement("img"));
+				img.attr('src',data.users[i].img);
+				a.append(img);
+				a.html(a.html() + ' ' + data.users[i].ign);
+				li.append(a);
 				nuserol.append(li);
 			}
 			$('#chatters').html(nuserol.html());
@@ -58,7 +64,7 @@ messageQueue.prototype.load = function(_this,callback)
 			var stime = stime.join(":");
 			li.find('.timestamp').attr('title',timestamp).text(stime);
 			li.find('.timestamp').text(data.messages[i].timestamp);
-			li.find('.username').text(data.messages[i].user.ign);
+			li.find('.username').text(data.messages[i].user.ign).attr('href',data.messages[i].user.url);
 			li.find('.message').text(data.messages[i].message);
 			$('#messages').append(li);
 			document.titleBar.flashMessage(data.messages[i].user.ign);
@@ -213,6 +219,10 @@ function doScroll()
 <style>
 #template { display: none; }
 #messages,#chatters { list-style-type: none; margin: 0px; padding: 0px; }
+#messages a.username,#chatters a.username { color: #317396; text-decoration: none; }
+#chatters { color: #317396; }
+#chatters li { line-height: 16px; padding-bottom: 2px; }
+#chatters li img { width:16px;height:16px;vertical-align:middle; }
 #messages
 {
 	display: block;
@@ -220,8 +230,8 @@ function doScroll()
 	height: 300px;
 	overflow-y: scroll;
 }
-#messages li { color: white; padding-bottom: 3px; font-size: 1pt; }
-#messages li span { font-size: 10pt; }
+#messages li { color: white; padding-bottom: 3px; font-size: 6pt; }
+#messages li * { font-size: 10pt; }
 #messages .timestamp { color: #999; }
 #messages .username { color: #317396; }
 #messages .message { color: #444; }
