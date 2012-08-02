@@ -51,6 +51,7 @@ class ChatController extends Controller
 		$this->chatUsers = User::model()->with(array(
 			'chatViews' => array(
 				'joinType'=>'INNER JOIN',
+				'order' => 'rank DESC',
 				'condition'=>'chatViews.room = :room AND timestamp > FROM_UNIXTIME(UNIX_TIMESTAMP()-60)',
 				'params' => array('room' => $room),
 			),
@@ -98,6 +99,7 @@ class ChatController extends Controller
 		$users = User::model()->with(array(
 			'chatViews' => array(
 				'joinType'=>'INNER JOIN',
+				'order' => 'rank DESC',
 				'condition'=>'chatViews.room = :room AND timestamp > FROM_UNIXTIME(UNIX_TIMESTAMP()-60*5)',
 				'params' => array('room' => $room),
 			),
