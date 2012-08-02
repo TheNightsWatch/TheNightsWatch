@@ -37,7 +37,7 @@ messageQueue.prototype.load = function(_this,callback)
 			{
 				var li = $(document.createElement("li"));
 				var a = $(document.createElement("a"));
-				a.attr('href',data.users[i].url);
+				a.attr('href',data.users[i].url).addClass('username');
 				var img = $(document.createElement("img"));
 				img.attr('src',data.users[i].img);
 				a.append(img);
