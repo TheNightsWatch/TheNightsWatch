@@ -14,6 +14,7 @@ return array(
 	'components'=>array(
 		'request'=>array(
 			'enableCsrfValidation' => true,
+			'enableCookieValidation' => true,
 		),
 		'user'=>array(
 			'allowAutoLogin'=>true,
