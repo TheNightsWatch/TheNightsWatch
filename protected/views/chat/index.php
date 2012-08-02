@@ -2,7 +2,7 @@
 <ol id="messages">
 	<li id="template">[<span class="timestamp"></span>] &lt;<span class="username"></span>&gt; <span class="message"></span></li>
 	<?php foreach($messages as $message): $lastID = $message->id; ?>
-		<li>[<span class="timestamp"><?php echo $message->timestamp->format("H:i:s"); ?></span>] &lt;<span class="username"><?php echo htmlspecialchars($message->user->ign); ?></span>&gt; <span class="message"><?php echo htmlspecialchars($message->message); ?></span></li>
+		<li><span class="timestamp" title="<?php echo $message->timestamp->format("H:i:s"); ?>"><?php echo $message->timestamp->format("H:i"); ?></span> <span class="username"><?php echo htmlspecialchars($message->user->ign); ?></span> <span class="message"><?php echo htmlspecialchars($message->message); ?></span></li>
 	<?php endforeach; ?>
 </ol>
 <form id="chatForm" action="<?php echo $this->createUrl('chat/post'); ?>" method="post">
@@ -52,6 +52,11 @@ messageQueue.prototype.load = function(_this,callback)
 			_this.lastID = data.messages[i].id;
 			
 			var li = ele.clone();
+			var timestamp = data.messages[i].timestamp;
+			var stime = timestamp.split(":");
+			stime.pop();
+			var stime = stime.join(":");
+			li.find('.timestamp').attr('title',timestamp).text(stime);
 			li.find('.timestamp').text(data.messages[i].timestamp);
 			li.find('.username').text(data.messages[i].user.ign);
 			li.find('.message').text(data.messages[i].message);
@@ -215,9 +220,10 @@ function doScroll()
 	height: 300px;
 	overflow-y: scroll;
 }
-#messages li { color: #DDD; padding-bottom: 3px; }
+#messages li { color: white; padding-bottom: 3px; font-size: 1pt; }
+#messages li span { font-size: 10pt; }
 #messages .timestamp { color: #999; }
-#messages .username { color: #777; }
+#messages .username { color: #317396; }
 #messages .message { color: #444; }
 #chatForm
 {
