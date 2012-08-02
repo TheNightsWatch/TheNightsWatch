@@ -89,6 +89,7 @@ class ChatController extends Controller
 					'ign' => $message->user->ign,
 					'type' => $message->user->type,
 					'rank' => $message->user->rank,
+					'img' => $message->user->headUrl(64),
 					'url' => $this->createUrl('user/view',array('unique' => $message->user->ign)),
 				),
 			);
