@@ -2,10 +2,13 @@
 
 class TextParser
 {
-	const SUBREDDIT_REGEX = '#^|\s(/r/\w+)#';
-	const LINK_REGEX ='#((https?:\/\/|www.)([-\w.]+)+(:\d+)?(\/([\w\/_.]*(\?\S+)?)?)?)#i';
+	const LINK_REGEX ='#((https?:\/\/|www.)([-\w.]+)+(:\d+)?(\/([\w\/_.-]*(\?\S+)?)?)?)#i';
 	const ITALIC_REGEX = '#(^|\s)(\*)(.[^\*]*)(\*)#';
 	const BOLD_REGEX = '#(^|\s)(\*\*)(.[^\*]*)(\*\*)#i';
+	
+	// DEV
+	const SUBREDDIT_REGEX = '#^|\s(/r/\w+)#';
+	const REDDIT_LINK_REGEX = '#\[([^]]+)\]\(([^)]*)\)#';
 	
 	private $text;
 	
