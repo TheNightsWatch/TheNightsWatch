@@ -48,7 +48,7 @@ messageQueue.prototype.load = function(_this,callback)
 			var date = new Date(data.messages[i].timestamp*1000);
 			li.find('.timestamp').attr('title',date.getLargeChatStamp()).text(date.getSmallChatStamp());
 			li.find('.username').text(data.messages[i].user.ign).attr('href',data.messages[i].user.url);
-			li.find('.message').text(data.messages[i].message);
+			li.find('.message').html(data.messages[i].html);
 			$('#messages').append(li);
 			if(data.messages[i].user.ign != document.myIGN)
 			{
@@ -57,7 +57,7 @@ messageQueue.prototype.load = function(_this,callback)
 				{
 					if(window.webkitNotifications.checkPermission() != 0) return;
 
-					var notif = window.webkitNotifications.createNotification(data.messages[i].user.img,data.messages[i].user.ign,data.messages[i].message);
+					var notif = window.webkitNotifications.createNotification(data.messages[i].user.img,data.messages[i].user.ign,data.messages[i].text);
 					notif.ondisplay = function() { setTimeout(function() { notif.cancel(); },3000); };
 					notif.show();
 				}; },1);

@@ -83,7 +83,8 @@ class ChatController extends Controller
 		{
 			$output[] = array(
 				'id' => $message->id,
-				'message' => $message->message,
+				'text' => $message->message,
+				'html' => TextParser::parse(htmlspecialchars($message->message)),
 				'timestamp' => $message->timestamp->getTimestamp(),
 				'user' => array(
 					'id' => $message->user->id,
