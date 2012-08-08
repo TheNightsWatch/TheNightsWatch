@@ -1,10 +1,18 @@
+html
+{
+	background-image: url('../images/icon.png');
+	background-color: rgba(239, 239, 239, 0.75);
+	background-position: bottom right;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+}
 body
 {
 	margin: 0;
 	padding: 0;
 	color: #555;
 	font: normal 10pt Arial,Helvetica,sans-serif;
-	background: #EFEFEF;
+	background: none;
 }
 
 #page
@@ -12,6 +20,7 @@ body
 	margin-top: 5px;
 	margin-bottom: 5px;
 	background: white;
+	background: rgba(255,255,255,0.9);
 	border: 1px solid #C9E0ED;
 }
 
