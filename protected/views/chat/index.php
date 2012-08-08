@@ -76,6 +76,7 @@ $(document).ready(function()
 	width: 100%;
 	height: 300px;
 	overflow-y: scroll;
+	overflow-x: hidden;
 }
 #messages li { color: white; padding-bottom: 3px; font-size: 6pt; }
 #messages li * { font-size: 10pt; }
