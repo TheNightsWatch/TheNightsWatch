@@ -7,7 +7,7 @@
 <div class="span-5 last">
 	<div id="sidebar"><ol id="chatters">
 		<?php foreach($this->chatUsers as $user): ?>
-			<li><a href="<?php echo $this->createUrl('user/view',array('unique' => $user->ign)); ?>" class="username"><img src="<?php echo $user->headUrl(16); ?>" /> <?php echo htmlspecialchars($user->ign); ?></a></li>
+			<li><a href="<?php echo $this->createUrl('user/view',array('unique' => $user->ign)); ?>" class="username" title="<?php echo htmlspecialchars($user->title); ?>"><img src="<?php echo $user->headUrl(16); ?>" /> <?php echo htmlspecialchars($user->ign); ?></a></li>
 		<?php endforeach; ?>
 	</ol></div><!-- sidebar -->
 </div>

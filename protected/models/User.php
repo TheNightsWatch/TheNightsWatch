@@ -63,7 +63,7 @@ class User extends CActiveRecord
 				return 'Council Member';
 			case 'HEAD':
 				if($this->type == 'MAESTER') return 'Grand Maester';
-				return 'Head ' . ucfirst(strtolower($this->type));
+				return 'First ' . ucfirst(strtolower($this->type));
 			default:
 				return ucfirst(strtolower($this->type));
 		}

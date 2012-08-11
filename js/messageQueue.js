@@ -24,7 +24,7 @@ messageQueue.prototype.load = function(_this,callback)
 			{
 				var li = $(document.createElement("li"));
 				var a = $(document.createElement("a"));
-				a.attr('href',data.users[i].url).addClass('username');
+				a.attr('href',data.users[i].url).addClass('username').attr('title',data.users[i].title);
 				var img = $(document.createElement("img"));
 				img.attr('src',data.users[i].img);
 				a.append(img);
@@ -47,7 +47,7 @@ messageQueue.prototype.load = function(_this,callback)
 			var li = ele.clone();
 			var date = new Date(data.messages[i].timestamp*1000);
 			li.find('.timestamp').attr('title',date.getLargeChatStamp()).text(date.getSmallChatStamp());
-			li.find('.username').text(data.messages[i].user.ign).attr('href',data.messages[i].user.url);
+			li.find('.username').text(data.messages[i].user.ign).attr('href',data.messages[i].user.url).attr('title',data.messages[i].user.title);
 			li.find('.message').html(data.messages[i].html);
 			$('#messages').append(li);
 			if(data.messages[i].user.ign != document.myIGN)
