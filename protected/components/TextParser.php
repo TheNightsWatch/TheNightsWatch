@@ -2,7 +2,7 @@
 
 class TextParser
 {
-	const LINK_REGEX ='#((https?:\/\/|www.)([-\w.]+)+(:\d+)?(\/([\w\/_.-]*(\?\S+)?)?)?)#i';
+	const LINK_REGEX ='#((https?:\/\/|www.)([-\w.]+)+(:\d+)?(\/([\w\/_.-\#%]*(\?\S+)?)?)?)#i';
 	const ITALIC_REGEX = '#(^|\s)(\*)(.[^\*]*)(\*)#';
 	const BOLD_REGEX = '#(^|\s)(\*\*)(.[^\*]*)(\*\*)#i';
 	
