@@ -2,13 +2,13 @@
 	Yii::app()->clientScript->registerCoreScript('jquery');
 	Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/Date.js');
 	Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/titleBar.js');
-	Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/messageQueue.js?v=20120804v1');
+	Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/messageQueue.js?v=20120810v1');
 	$lastID = 0; 
 ?>
 <ol id="messages">
 	<li id="template">[<span class="timestamp" data-epoch=""></span>] &lt;<a href="" class="username"></a>&gt; <span class="message"></span></li>
 	<?php foreach($messages as $message): $lastID = $message->id; ?>
-		<li>[<span class="timestamp" data-epoch="<?php echo $message->timestamp->getTimestamp(); ?>" title="<?php echo $message->timestamp->format("H:i:s"); ?>"><?php echo $message->timestamp->format("H:i"); ?></span>] &lt;<a href="<?php echo $this->createUrl('user/view',array('unique' => $message->user->ign)); ?>" class="username"><?php echo htmlspecialchars($message->user->ign); ?></a>&gt; <span class="message"><?php echo TextParser::parse(htmlspecialchars($message->message)); ?></span></li>
+		<li>[<span class="timestamp" data-epoch="<?php echo $message->timestamp->getTimestamp(); ?>" title="<?php echo $message->timestamp->format("H:i:s"); ?>"><?php echo $message->timestamp->format("H:i"); ?></span>] &lt;<a href="<?php echo $this->createUrl('user/view',array('unique' => $message->user->ign)); ?>" class="username" title="<?php echo htmlspecialchars($message->user->title); ?>"><?php echo htmlspecialchars($message->user->ign); ?></a>&gt; <span class="message"><?php echo TextParser::parse(htmlspecialchars($message->message)); ?></span></li>
 	<?php endforeach; ?>
 </ol>
 <form id="chatForm" action="<?php echo $this->createUrl('chat/post'); ?>" method="post">
