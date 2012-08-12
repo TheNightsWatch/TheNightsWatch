@@ -20,6 +20,12 @@ class UserProfileForm extends CFormModel
             $model->reddit = $user->socialProfile->reddit;
             $model->skype = $user->socialProfile->skype;
         }
+        if($user->settings)
+        {
+            $model->email = $user->settings->email;
+        } else {
+            $model->email = true;
+        }
         return $model;
     }
 
@@ -34,12 +40,15 @@ class UserProfileForm extends CFormModel
 
     public function save()
     {
+        // On the User Model
+        $this->user->type = $this->profession;
+
+        // On the User Social Profile Model
         if($this->user->socialProfile == null)
         {
             $this->user->socialProfile = new SocialProfile;
             $this->user->socialProfile->userID = $this->user->id;
         }
-        $this->user->type = $this->profession;
 
         if(!empty($this->reddit))
             $this->user->socialProfile->reddit = $this->reddit;
@@ -51,6 +60,15 @@ class UserProfileForm extends CFormModel
         else
             $this->user->socialProfile->skype = NULL;
 
-        return $this->user->socialProfile->save() && $this->user->save();
+        // On the User Settings Model
+        if($this->user->settings == null)
+        {
+            $this->user->settings = new UserSetting;
+            $this->user->settings->userID = $this->user->id;
+        }
+        $this->user->settings->email = $this->email;
+
+        // Saves
+        return ($this->user->socialProfile->save() && $this->user->save() && $this->user->settings->save());
     }
 }
