@@ -23,12 +23,12 @@ $this->breadcrumbs = array(
 	        'validateOnSubmit' => true,
 	    )
     ))?>
-    <div class="row">
+	<div class="row">
 		<?php echo $form->labelEx($model,'profession'); ?>
 		<?php echo $form->dropDownList($model,'profession',array(NULL => '', User::TYPE_RANGER => 'Ranger - I want to kill the undead',User::TYPE_MAESTER => 'Maester - I want to heal the living and support the Rangers')); ?>
 		<?php echo $form->error($model,'profession'); ?>
 	</div>
-	
+
 	<div class="row">
 		<?php echo $form->labelEx($model,'reddit'); ?>
 		<?php echo $form->textField($model,'reddit'); ?>
@@ -39,6 +39,12 @@ $this->breadcrumbs = array(
 		<?php echo $form->labelEx($model,'skype'); ?>
 		<?php echo $form->textField($model,'skype'); ?>
 		<?php echo $form->error($model,'skype'); ?>
+	</div>
+
+	<div class="row">
+		<label><?php echo $form->checkbox($model,'email'); ?> <em>Send me
+				email updates on Night's Watch activities</em> <?php echo $form->error($model,'email'); ?>
+	
 	</div>
 
 	<div class="row buttons">

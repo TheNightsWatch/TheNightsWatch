@@ -26,7 +26,7 @@ class SiteController extends Controller
         return array(
             'accessControl',
             array(
-                'BanFilter + profile',
+            		'BanFilter + profile, KOS',
             ),
         );
     }
@@ -35,11 +35,11 @@ class SiteController extends Controller
     {
         return array(
             array('allow',
-                'actions'=>array('profile'),
+                'actions'=>array('profile','KOS'),
                 'users' => array('@'),
             ),
             array('deny',
-                'actions'=>array('profile'),
+                'actions'=>array('profile','KOS'),
                 'users'=>array('*')
             ),
         );
@@ -200,6 +200,11 @@ class SiteController extends Controller
      */
     public function actionTeamspeak()
     {
-        $this->redirect('ts3server://ts.tundrasofangmar.net?port=9991',301);
+        $this->redirect('ts3server://ts.tundrasofangmar.net?port=9991&channel=The Night\'s Watch',301);
+    }
+    
+    public function actionKOS()
+    {
+        $this->redirect('https://docs.google.com/spreadsheet/ccc?key=0Aqn3YLIby6B7dHRNTDhHY1pueGN1MGNtRE91VnQ4TEE',301);
     }
 }

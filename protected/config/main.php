@@ -30,6 +30,7 @@ return array(
 				'register' => 'site/register',
 				'logout' => 'site/logout',
 			    'profile' => 'site/profile',
+			    'KOS' => 'site/KOS',
 
 				// Other Routes
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
