@@ -42,7 +42,8 @@
 				array('label'=>'Teamspeak', 'url'=>array('site/teamspeak')),
 				array('label'=>'Login', 'url'=>array('site/login'), 'visible'=>Yii::app()->user->isGuest, 'linkOptions' => array('style' => 'float:right;position:relative;top:-4px;')),
 				array('label'=>'Join', 'url'=>array('site/register'), 'visible'=>Yii::app()->user->isGuest, 'linkOptions' => array('style' => 'float:right;position:relative;top:-4px;')),
-				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('site/logout'), 'visible'=>!Yii::app()->user->isGuest, 'linkOptions' => array('style' => 'float:right;position:relative;top:-4px;'))
+				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('site/logout'), 'visible'=>!Yii::app()->user->isGuest, 'linkOptions' => array('style' => 'float:right;position:relative;top:-4px;')),
+			    array('label'=>'Profile', 'url'=>array('site/profile'), 'visible'=>!Yii::app()->user->isGuest, 'linkOptions' => array('style' => 'float:right;position:relative;top:-4px;')),
 			),
 		)); ?>
 	</div><!-- mainmenu -->
