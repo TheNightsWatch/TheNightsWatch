@@ -23,6 +23,12 @@ $this->breadcrumbs = array(
 	        'validateOnSubmit' => true,
 	    )
     ))?>
+    <div class="row">
+		<?php echo $form->labelEx($model,'profession'); ?>
+		<?php echo $form->dropDownList($model,'profession',array(NULL => '', User::TYPE_RANGER => 'Ranger - I want to kill the undead',User::TYPE_MAESTER => 'Maester - I want to heal the living and support the Rangers')); ?>
+		<?php echo $form->error($model,'profession'); ?>
+	</div>
+	
 	<div class="row">
 		<?php echo $form->labelEx($model,'reddit'); ?>
 		<?php echo $form->textField($model,'reddit'); ?>
