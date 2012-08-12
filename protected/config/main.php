@@ -31,7 +31,7 @@ return array(
 				'logout' => 'site/logout',
 			    'profile' => 'site/profile',
 			    'KOS' => 'site/KOS',
-
+			    
 				// Other Routes
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
 				'<controller:\w+>/<id:\d+>/<action:\w+>'=>'<controller>/<action>',
