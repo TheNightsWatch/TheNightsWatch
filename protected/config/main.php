@@ -29,6 +29,7 @@ return array(
 				'login' => 'site/login',
 				'register' => 'site/register',
 				'logout' => 'site/logout',
+			    'profile' => 'site/profile',
 
 				// Other Routes
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
