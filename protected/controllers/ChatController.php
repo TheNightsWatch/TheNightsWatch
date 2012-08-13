@@ -3,6 +3,7 @@
 class ChatController extends Controller
 {
 	public $chatUsers = array();
+	public $announcement;
 
 	public function filters()
 	{
@@ -56,6 +57,17 @@ class ChatController extends Controller
 				'params' => array('room' => $room),
 			),
 		))->findAll();
+		
+		$announcement = Announcement::model()->find(array(
+		    'order' => 'id DESC',
+	    ));
+		
+		
+		if($announcement->expires == NULL || $announcement->expires->getTimestamp() > time())
+		{
+	        echo "DEFINITELY SET ANNOUNCEMENT";
+		    $this->announcement = $announcement;
+		}
 
 		$this->render('index',array(
 			'messages' => $messages,

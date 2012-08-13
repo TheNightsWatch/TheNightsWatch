@@ -1,4 +1,9 @@
 <?php $this->beginContent('//layouts/main'); ?>
+<?php if(isset($this->announcement)): ?>
+<div id="announcement">
+    Latest Announcement: <a href="<?php echo $this->createUrl('announcement/view',array('id' => $this->announcement->id)); ?>"><?php echo htmlspecialchars($this->announcement->subject); ?></a>
+</div>
+<?php endif; ?>
 <div class="span-19">
 	<div id="content">
 		<?php echo $content; ?>

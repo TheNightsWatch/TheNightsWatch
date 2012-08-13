@@ -95,4 +95,9 @@ $(document).ready(function()
 {
 	width: 50px;
 }
+#announcement {
+    border: 1px solid #DDD;
+    padding: 5px;
+    margin: 5px 20px 0px 20px;
+}
 </style>
