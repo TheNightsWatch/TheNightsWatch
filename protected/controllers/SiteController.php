@@ -200,7 +200,7 @@ class SiteController extends Controller
      */
     public function actionTeamspeak()
     {
-        $this->redirect('ts3server://ts.tundrasofangmar.net?port=9991&channel=The Night\'s Watch',301);
+        $this->render('teamspeak',array('teamspeak' => 'ts3server://ts.tundrasofangmar.net?port=9991&channel=The Night\'s Watch'));
     }
     
     public function actionKOS()
