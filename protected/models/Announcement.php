@@ -8,14 +8,14 @@
  * @property string subject
  * @property string body
  */
-class Email extends ActiveRecord
+class Announcement extends ActiveRecord
 {
     public static function model($c=__CLASS__)
     {
         return parent::model($c);
     }
     
-    public function tableName() { return 'email'; }
+    public function tableName() { return 'announcement'; }
     
     public function relations()
     {
