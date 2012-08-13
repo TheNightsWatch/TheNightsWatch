@@ -8,7 +8,7 @@ class AnnouncementController extends Controller
         if(!$announcement)
             throw new CHttpException(404,"No Such Announcement");
 
-        if(Yii::app()->user->isGuest && ($announcement->go_public == NULL || $announcement->go_public->getTimestamp() < time()))
+        if(Yii::app()->user->isGuest && ($announcement->go_public == NULL || $announcement->go_public->getTimestamp() > time()))
             throw new CHttpException(403,"Access Denied");
         
         $this->render('view',array('model' => $announcement));
