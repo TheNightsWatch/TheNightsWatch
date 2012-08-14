@@ -10,6 +10,7 @@ class PremiumFilter extends CFilter
 		$data = file_get_contents($url);
 		
 		if($data == "true") return true;
+		
 		return false;
 	}
 	protected function postFilter($chain)
