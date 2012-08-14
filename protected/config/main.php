@@ -31,6 +31,8 @@ return array(
 				'logout' => 'site/logout',
 			    'profile' => 'site/profile',
 			    'KOS' => 'site/KOS',
+			    'mods' => 'site/mods',
+			    'minecraft.jar' => 'site/modDownload',
 			    
 				// Other Routes
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
