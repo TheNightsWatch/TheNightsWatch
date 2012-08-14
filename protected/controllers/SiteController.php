@@ -38,11 +38,11 @@ class SiteController extends Controller
     {
         return array(
             array('allow',
-                'actions'=>array('profile','KOS','mod','mods'),
+                'actions'=>array('profile','KOS','modDownload','mods'),
                 'users' => array('@'),
             ),
             array('deny',
-                'actions'=>array('profile','KOS','mod','mods'),
+                'actions'=>array('profile','KOS','modDownload','mods'),
                 'users'=>array('*')
             ),
         );
