@@ -26,7 +26,10 @@ class SiteController extends Controller
         return array(
             'accessControl',
             array(
-            		'BanFilter + profile, KOS',
+                'BanFilter + profile, KOS, mod, mods',
+            ),
+            array(
+                'PremiumFilter + mods, modDownload',
             ),
         );
     }
@@ -35,11 +38,11 @@ class SiteController extends Controller
     {
         return array(
             array('allow',
-                'actions'=>array('profile','KOS'),
+                'actions'=>array('profile','KOS','mod','mods'),
                 'users' => array('@'),
             ),
             array('deny',
-                'actions'=>array('profile','KOS'),
+                'actions'=>array('profile','KOS','mod','mods'),
                 'users'=>array('*')
             ),
         );
@@ -76,19 +79,44 @@ class SiteController extends Controller
         ));
     }
 
+    public function actionMods()
+    {
+        $this->render('mods');
+    }
+    
+    public function actionModDownload()
+    {
+        /*
+         * This actively filters out non-logged in users, banned users, and non-premium users.
+        *
+        * Unfortunately, we can't verify that the person they've claimed is their own minecraft account.
+        *
+        * Well, fuck.
+        */
+        Yii::app()->session->close();
+        if(file_exists(Yii::app()->basePath.'/data/minecraft.jar'))
+        {
+            header("Content-Type: application/java-archive");
+            header("Content-Disposition: attachment; filename=minecraft.jar");
+            echo file_get_contents(Yii::app()->basePath.'/data/minecraft.jar');
+            die();
+        }
+        throw new CHttpException(404,"Minecraft Modification does not exist.");
+    }
+
     public function actionProfile()
     {
         $user = User::model()->findByPk(Yii::app()->user->getId());
         $model = UserProfileForm::withUser($user);
-        
+
         if(isset($_POST['UserProfileForm']))
         {
-        	$model->attributes=$_POST['UserProfileForm'];
-        	if($model->validate() && $model->save())
-        	{
-        		Yii::app()->user->setFlash('profile','Your profile has been updated.');
-        		$this->refresh();
-        	}
+            $model->attributes=$_POST['UserProfileForm'];
+            if($model->validate() && $model->save())
+            {
+                Yii::app()->user->setFlash('profile','Your profile has been updated.');
+                $this->refresh();
+            }
         }
          
         $this->render('profile',array('model' => $model));
@@ -202,7 +230,7 @@ class SiteController extends Controller
     {
         $this->render('teamspeak',array('teamspeak' => 'ts3server://ts.tundrasofangmar.net?port=9991&channel=The Night\'s Watch'));
     }
-    
+
     public function actionKOS()
     {
         $this->redirect('https://docs.google.com/spreadsheet/ccc?key=0Aqn3YLIby6B7dHRNTDhHY1pueGN1MGNtRE91VnQ4TEE',301);
