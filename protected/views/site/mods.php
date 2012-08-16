@@ -12,7 +12,7 @@
 <p>If you don't want to play with modding around, we've made a <a href="<?php echo $this->createUrl('site/modDownload'); ?>">a nifty minecraft.jar [1.3.1]</a> that has all of it for you - and don't worry!  It's protected.  You can only access it if you're a member of the watch and a Minecraft Premium user.  Just stick it in <tt><a href="file:///%APPDATA%/.minecraft/bin">%APPDATA%/.minecraft/bin</a></tt> (overwriting your previous installation) and you're ready to go!</p>
 
 <p><strong>To add a MineCape:</strong></p>
-<p>Goto the <a href="http://www.minecapes.net/upload">>MineCape upload page</a> and choose import from URL. Add the URL of the cape: <a href="http://i.imgur.com/PW6NX.png">http://i.imgur.com/PW6NX.png</a> and then follow the instructions on screen for how to activate the cape. Make sure you have the MineCape mod installed.</p>
+<p>Goto the <a href="http://www.minecapes.net/upload">MineCape upload page</a> and choose import from URL. Add the URL of the cape: <a href="http://i.imgur.com/PW6NX.png">http://i.imgur.com/PW6NX.png</a> and then follow the instructions on screen for how to activate the cape. Make sure you have the MineCape mod installed.</p>
 
 <p><strong>Notes about using on MineZ:</strong></p>
 <p>All of the above mods are currently all allowed on the MineZ servers. If you see ANYTHING about ANY of these mods not being allowed, TELL US RIGHT AWAY. We do not want to be encouraging users to use illegal mods.</p>
