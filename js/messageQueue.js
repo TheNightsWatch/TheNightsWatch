@@ -106,7 +106,7 @@ messageQueue.prototype.load = function(_this, callback) {
 						}, 3000);
 					}, 1);
 				};
-				doThings(mData);
+				if(!_this.focused) doThings(mData);
 			}
 		}
 
