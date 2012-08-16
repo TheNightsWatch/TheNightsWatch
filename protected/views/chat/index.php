@@ -2,7 +2,7 @@
 Yii::app()->clientScript->registerCoreScript('jquery');
 Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/Date.js');
 Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/titleBar.js');
-Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/messageQueue.js?v=20120810v1');
+Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/messageQueue.js?v=20120815v2');
 $lastID = 0;
 ?>
 <ol id="messages">
