@@ -29,12 +29,12 @@ function titleBar() {
 }
 titleBar.prototype.update = function(counter, newFlag, _this) {
 	if (_this === undefined)
-		_this = this;
+		var _this = this;
 	_this.updateTitlebar(counter, newFlag, _this);
 };
 titleBar.prototype.updateTitlebar = function(counter, newFlag, _this) {
 	if (_this === undefined)
-		_this = this;
+		var _this = this;
 	if (counter !== undefined && counter !== null)
 		_this.counter = counter;
 	if (newFlag !== undefined && newFlag !== null)
@@ -60,7 +60,7 @@ titleBar.prototype.updateTitlebar = function(counter, newFlag, _this) {
 };
 titleBar.prototype.flashMessage = function(message, _this) {
 	if (_this === undefined)
-		_this = this;
+		var _this = this;
 	if (message === undefined || message == null || message == false) {
 		_this.flashingMsgFlag = false;
 		_this.showingFlashMsg = false;
@@ -85,7 +85,7 @@ titleBar.prototype.flashMessage = function(message, _this) {
 };
 titleBar.prototype.flash = function(truefalse, _this) {
 	if (_this === undefined)
-		_this = this;
+		var _this = this;
 	if (_this.onlyFlashWhenNotFocused && _this.focused)
 		return false;
 	if (truefalse == undefined) {
@@ -104,6 +104,6 @@ titleBar.prototype.flash = function(truefalse, _this) {
 };
 titleBar.prototype.getOriginal = function(_this) {
 	if (_this === undefined)
-		_this = this;
+		var _this = this;
 	return _this.original;
 };

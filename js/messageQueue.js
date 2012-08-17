@@ -20,14 +20,14 @@ function messageQueue(lastID, pingURL) {
 messageQueue.prototype.initialLoad = function(_this) {
 	if (this.currentTimeout)
 		clearTimeout(this.currentTimeout);
-	_this = this;
+	var _this = this;
 	_this.currentTimeout = setTimeout(function() {
 		_this.load(_this);
 	}, 2000);
 };
 messageQueue.prototype.load = function(_this, callback) {
 	if (_this === undefined)
-		_this = this;
+		var _this = this;
 	if (_this.currentTimeout)
 		clearTimeout(_this.currentTimeout);
 	$.getJSON(_this.pingURL + '?since=' + _this.lastID, function(data) {
