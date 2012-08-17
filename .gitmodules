@@ -1,0 +1,3 @@
+[submodule "external/skin"]
+	path = external/skin
+	url = https://github.com/navarr/3-D-Minecraft-Skin-Viewer.git

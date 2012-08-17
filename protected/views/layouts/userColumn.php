@@ -11,7 +11,7 @@
 			'title'=>$this->columnData['name'],
 		));
 	?>
-		<iframe src="http://minez.net/skin/index.php?user=<?= urlencode($this->columnData['name']) ?>&amp;refresh" title="skin" width="100%" height="200px"></iframe>
+		<iframe src="<?= Yii::app()->baseUrl ?>/external/skin?user=<?= urlencode($this->columnData['name']) ?>&amp;refresh" title="skin" width="100%" height="200px"></iframe>
 	<?php 
 		$this->widget('zii.widgets.CMenu', array(
 			'items'=>$this->menu,
