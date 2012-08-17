@@ -37,6 +37,9 @@ return array(
 				// Other Routes
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
 				'<controller:\w+>/<id:\d+>/<action:\w+>'=>'<controller>/<action>',
+				
+				// Cape Route
+				'cape/<unique:\w+>.png'=>'user/cape',
 
 				// User Specific
 				'user' => 'user/index',

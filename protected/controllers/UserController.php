@@ -1,7 +1,7 @@
 <?php
 
 class UserController extends Controller
-{	
+{
 	public function actionIndex()
 	{
 		$this->setPageTitle('Member List');
@@ -12,6 +12,23 @@ class UserController extends Controller
 	public function actionHead($unique,$size = 16)
 	{
 		$this->redirect(User::getHead($unique,$size),true,301);
+	}
+	
+	public function actionCape($unique)
+	{
+		$user = User::model()->findByAttributes(array('ign' => $unique));
+		if(!$user)
+		{
+			throw new CHttpException(404,"No Such User");
+		}
+		if($user->deserter != 'NO')
+		{
+			throw new CHttpException(404,"No Longer a Member");
+		}
+		Yii::app()->session->close();
+		header("Content-Type: image/png");
+		echo file_get_contents(Yii::app()->basePath."/data/member-cape.png");
+		Yii::app()->end();
 	}
 	
 	public function actionView($unique)
