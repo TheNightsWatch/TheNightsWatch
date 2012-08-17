@@ -1,3 +1,7 @@
+.gitignore
 index-test.php
 protected/config/local.php
 .settings/
+favicon.gif
+protected/data/minecraft.jar
+google87b937d428a0ebfd.html

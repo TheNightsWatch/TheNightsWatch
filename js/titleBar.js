@@ -13,7 +13,7 @@ function titleBar() {
 	};
 	this.focused = true;
 	this.onlyFlashWhenNotFocused = true;
-	_this = this;
+	var _this = this;
 
 	$(document).ready(function() {
 		$(window).on('focus', function() {

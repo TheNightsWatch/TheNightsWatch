@@ -4,7 +4,7 @@ function messageQueue(lastID, pingURL) {
 	this.currentTimeout = undefined;
 	this.focused = true;
 
-	_this = this;
+	var _this = this;
 
 	// Is the user focused on our window?
 	$(document).ready(function() {
