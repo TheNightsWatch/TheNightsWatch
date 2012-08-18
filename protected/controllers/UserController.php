@@ -21,7 +21,7 @@ class UserController extends Controller
 	    {
 	    	throw new CHttpException(404,"No Such User");
 	    }
-	    if($user->deserter != 'NO')
+	    if($user->deserter != 'LEFT')
 	    {
 	    	throw new CHttpException(404,"No Longer a Member");
 	    }
@@ -40,7 +40,14 @@ class UserController extends Controller
 	    $user = $this->capeBailOrUser($unique);
 		Yii::app()->session->close();
 		header("Content-Type: image/png");
-		echo file_get_contents(Yii::app()->basePath."/data/member-cape.png");
+		$file = "";
+		if($user->deserter == 'DESERTER') $file = 'deserter-cape';
+		elseif($user->rank == 'COMMANDER') $file = 'commander-cape';
+		elseif($user->rank == 'HEAD' && $user->type == 'RANGER') $file = 'firstRanger-cape';
+		elseif($user->rank == 'HEAD' && $user->type == 'MAESTER') $file = 'grandMaester-cape';
+		elseif($user->type == 'RANGER') $file = 'ranger-cape';
+		elseif($user->type == 'MAESTER') $file = 'maester-cape';
+		echo file_get_contents(Yii::app()->basePath."/data/{$file}.png");
 		Yii::app()->end();
 	}
 	
