@@ -21,7 +21,7 @@ class UserController extends Controller
 	    {
 	    	throw new CHttpException(404,"No Such User");
 	    }
-	    if($user->deserter != 'LEFT')
+	    if($user->deserter == 'LEFT')
 	    {
 	    	throw new CHttpException(404,"No Longer a Member");
 	    }
