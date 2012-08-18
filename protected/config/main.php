@@ -39,7 +39,8 @@ return array(
 				'<controller:\w+>/<id:\d+>/<action:\w+>'=>'<controller>/<action>',
 				
 				// Cape Route
-				'cape/<unique:\w+>.png'=>'user/cape',
+                array('user/cape','pattern' => 'cape/<unique:\w+>.png', 'verb' => 'GET'),
+			    array('user/capeHead','pattern' => 'cape/<unique:\w+>.png', 'verb' => 'HEAD'),
 
 				// User Specific
 				'user' => 'user/index',

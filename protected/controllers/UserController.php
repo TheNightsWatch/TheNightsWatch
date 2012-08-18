@@ -14,17 +14,30 @@ class UserController extends Controller
 		$this->redirect(User::getHead($unique,$size),true,301);
 	}
 	
+	private function capeBailOrUser($user)
+	{
+	    $user = User::model()->findByAttributes(array('ign' => $user));
+	    if(!$user)
+	    {
+	    	throw new CHttpException(404,"No Such User");
+	    }
+	    if($user->deserter != 'NO')
+	    {
+	    	throw new CHttpException(404,"No Longer a Member");
+	    }
+	    return $user;
+	}
+	
+	public function actionCapeHead($unique)
+	{
+        $this->capeBailOrUser($unique);
+    	header("HTTP/1.1 200 OK");
+    	Yii::app()->end();
+	}
+	
 	public function actionCape($unique)
 	{
-		$user = User::model()->findByAttributes(array('ign' => $unique));
-		if(!$user)
-		{
-			throw new CHttpException(404,"No Such User");
-		}
-		if($user->deserter != 'NO')
-		{
-			throw new CHttpException(404,"No Longer a Member");
-		}
+	    $user = $this->capeBailOrUser($unique);
 		Yii::app()->session->close();
 		header("Content-Type: image/png");
 		echo file_get_contents(Yii::app()->basePath."/data/member-cape.png");
