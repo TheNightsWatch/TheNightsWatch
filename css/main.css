@@ -1,7 +1,7 @@
 html
 {
 	background-image: url('../images/icon.png');
-	background-color: rgba(239, 239, 239, 0.75);
+	background-color: black;
 	background-position: bottom right;
 	background-attachment: fixed;
 	background-repeat: no-repeat;
@@ -10,25 +10,44 @@ body
 {
 	margin: 0;
 	padding: 0;
-	color: #555;
+	color: #ddd;
 	font: normal 10pt Arial,Helvetica,sans-serif;
 	background: none;
+        position: relative;
+        top: -5px;
 }
 
+blockquote { color: #aaa; }
 #page
 {
 	margin-top: 5px;
 	margin-bottom: 5px;
-	background: white;
-	background: rgba(255,255,255,0.9);
-	border: 1px solid #C9E0ED;
+	background: rgba(16, 16, 16, .8);
+	border: 8px solid rgba(12, 12, 12, .9);
+        border-bottom-left-radius: 40px;
+        border-bottom-right-radius: 40px;
 }
 
 #header
 {
 	margin: 0;
-	padding: 0;
-	border-top: 3px solid #C9E0ED;
+	padding: 0 5px;
+}
+
+#header img {
+        height: 113px;
+}
+
+h1 {
+        color: #D20005;
+        font-size: 18px;
+        font-family: OrbitronBold, Arial;
+        display: inline-block
+}
+
+#header h1 {
+        position: relative;
+        top: -43px;
 }
 
 #content
@@ -47,7 +66,6 @@ body
 	margin: 10px 20px;
 	font-size: 0.8em;
 	text-align: center;
-	border-top: 1px solid #C9E0ED;
 }
 
 #logo
@@ -74,18 +92,20 @@ body
 
 #mainmenu ul li a
 {
-	color:#ffffff;
+	color:#ddd;
 	background-color:transparent;
 	font-size:12px;
 	font-weight:bold;
 	text-decoration:none;
 	padding:5px 8px;
+        position: relative;
+        top: -1px;
 }
 
 #mainmenu ul li a:hover, #mainmenu ul li.active a
 {
-	color: #6399cd;
-	background-color:#EFF4FA;
+	color: #d00021;
+	background-color:#ddd;
 	text-decoration:none;
 }
 

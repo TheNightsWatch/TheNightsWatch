@@ -20,6 +20,15 @@
 <link rel="stylesheet" type="text/css"
 	href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
 
+<link rel="stylesheet" type="text/css"
+        href="<?php echo Yii::app()->request->baseUrl; ?>/css/custom-theme/jquery-ui.custom.css" />
+
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.min.js"></script>
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery-ui.custom.min.js"></script>
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.mousewheel.js"></script>
+
+
+
 <link rel="shortcut icon"
 	href="<?php echo Yii::app()->request->baseUrl; ?>/favicon.ico" />
 
@@ -31,9 +40,8 @@
 	<div class="container" id="page">
 
 		<div id="header">
-			<div id="logo">
-				<?php echo CHtml::encode(Yii::app()->name); ?>
-			</div>
+			<img src="<? echo Yii::app()->request->baseUrl; ?>/images/icon.png" />
+	 	        <h1><?php echo CHtml::encode(Yii::app()->name); ?></h1>
 		</div>
 		<!-- header -->
 
@@ -52,10 +60,10 @@
 			        array('label'=>'Teamspeak', 'url'=>array('site/teamspeak')),
 			        array('label'=>'KOS', 'url'=>array('site/KOS'), 'visible'=>!Yii::app()->user->isGuest),
 			        array('label'=>'Mods', 'url'=>array('site/mods'), 'visible'=>!Yii::app()->user->isGuest),
-			        array('label'=>'Login', 'url'=>array('site/login'), 'visible'=>Yii::app()->user->isGuest, 'linkOptions' => array('style' => 'float:right;position:relative;top:-4px;')),
-			        array('label'=>'Join', 'url'=>array('site/register'), 'visible'=>Yii::app()->user->isGuest, 'linkOptions' => array('style' => 'float:right;position:relative;top:-4px;')),
-			        array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('site/logout'), 'visible'=>!Yii::app()->user->isGuest, 'linkOptions' => array('style' => 'float:right;position:relative;top:-4px;')),
-			        array('label'=>'Profile', 'url'=>array('site/profile'), 'visible'=>!Yii::app()->user->isGuest, 'linkOptions' => array('style' => 'float:right;position:relative;top:-4px;')),
+			        array('label'=>'Login', 'url'=>array('site/login'), 'visible'=>Yii::app()->user->isGuest, 'linkOptions' => array('style' => 'float:right;position:relative;top:-5px;')),
+			        array('label'=>'Join', 'url'=>array('site/register'), 'visible'=>Yii::app()->user->isGuest, 'linkOptions' => array('style' => 'float:right;position:relative;top:-5px;')),
+			        array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('site/logout'), 'visible'=>!Yii::app()->user->isGuest, 'linkOptions' => array('style' => 'float:right;position:relative;top:-5px;')),
+			        array('label'=>'Profile', 'url'=>array('site/profile'), 'visible'=>!Yii::app()->user->isGuest, 'linkOptions' => array('style' => 'float:right;position:relative;top:-5px;')),
 			    ),
 		)); ?>
 		</div>
