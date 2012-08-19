@@ -52,6 +52,7 @@ $(document).ready(function()
 	});
 	$('#chatForm').on('submit',function(e) {
 		e.preventDefault();
+		if($('#message').val() == '') return;
 		var data = $('#chatForm').serialize();
 		$('#chatForm input,#chatForm button').attr('disabled',true);
 		$.post('<?php echo $this->createUrl('chat/post'); ?>',data,function() {
@@ -59,8 +60,11 @@ $(document).ready(function()
 			{
 				$('#chatForm input,#chatForm button').attr('disabled',false);
 				$('#message').val('');
+			},function()
+			{
+			    $('#chatForm input,#chatForm button').attr('disabled',false);
 			});
-		});
+		}).error(function() { $('#chatForm input,#chatForm button').attr('disabled',false); });
 	});
 	$('#messages .timestamp').each(function(i,ele) {
 		var ele = $(ele);

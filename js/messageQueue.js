@@ -25,7 +25,9 @@ messageQueue.prototype.initialLoad = function(_this) {
 		_this.load(_this);
 	}, 2000);
 };
-messageQueue.prototype.load = function(_this, callback) {
+messageQueue.prototype.load = function(_this, callback, errorCallback) {
+	if (errorCallback === undefined)
+		errorCallback = function() { };
 	if (_this === undefined)
 		var _this = this;
 	if (_this.currentTimeout)
@@ -116,7 +118,7 @@ messageQueue.prototype.load = function(_this, callback) {
 			_this.doScroll();
 		if (callback !== undefined)
 			callback();
-	});
+	}).error(errorCallback);
 	_this.currentTimeout = setTimeout(function() {
 		_this.load(_this);
 	}, 2000);
