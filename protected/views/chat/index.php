@@ -265,7 +265,7 @@ function setSlider($scrollpane){//$scrollpane is the div to be scrolled
 }
 
 #messages .timestamp {
-	color: #999;
+	color: #444;
 }
 
 #messages .username {
@@ -273,7 +273,7 @@ function setSlider($scrollpane){//$scrollpane is the div to be scrolled
 }
 
 #messages .message {
-	color: #444;
+	color: #999;
 }
 
 #chatForm {
@@ -309,7 +309,11 @@ function setSlider($scrollpane){//$scrollpane is the div to be scrolled
 	background: #101010;
 	border: 1px solid #110f0f;
 	border-radius: 2px;
-	color: #444;
+	color: #999;
+}
+
+label {
+    color: #444;
 }
 
 #announcement {

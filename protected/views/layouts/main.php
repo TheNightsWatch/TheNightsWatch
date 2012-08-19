@@ -16,16 +16,19 @@
 	<![endif]-->
 
 <link rel="stylesheet" type="text/css"
-	href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css?v=20120807v1" />
+	href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css?v=20120819v1" />
 <link rel="stylesheet" type="text/css"
 	href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
 
 <link rel="stylesheet" type="text/css"
-        href="<?php echo Yii::app()->request->baseUrl; ?>/css/custom-theme/jquery-ui.custom.css" />
+	href="<?php echo Yii::app()->request->baseUrl; ?>/css/custom-theme/jquery-ui.custom.css" />
 
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.min.js"></script>
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery-ui.custom.min.js"></script>
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.mousewheel.js"></script>
+<script
+	src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.min.js"></script>
+<script
+	src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery-ui.custom.min.js"></script>
+<script
+	src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.mousewheel.js"></script>
 
 
 
@@ -40,8 +43,11 @@
 	<div class="container" id="page">
 
 		<div id="header">
-			<img src="<? echo Yii::app()->request->baseUrl; ?>/images/icon.png" />
-	 	        <h1><?php echo CHtml::encode(Yii::app()->name); ?></h1>
+			<img
+				src="<?php echo Yii::app()->request->baseUrl; ?>/images/icon.png" />
+			<h1>
+				<?php echo CHtml::encode(Yii::app()->name); ?>
+			</h1>
 		</div>
 		<!-- header -->
 
@@ -55,7 +61,7 @@
 			        array('label'=>'Members', 'url'=>array('user/index')),
 			        array('label'=>'Chat', 'url'=>array('chat/index'), 'visible'=>!Yii::app()->user->isGuest),
 			        array('label'=>'Elections', 'url'=>array('election/index'), 'visible'=>($ongoingElections && !Yii::app()->user->isGuest)),
-			        array('label'=>'Election Results', 'url' => array('election/results'), 'visible' => !$ongoingElections),
+			        // array('label'=>'Election Results', 'url' => array('election/results'), 'visible' => !$ongoingElections),
 			        array('label'=>'Reddit', 'url'=>'http://reddit.com/r/TheNightsWatch'),
 			        array('label'=>'Teamspeak', 'url'=>array('site/teamspeak')),
 			        array('label'=>'KOS', 'url'=>array('site/KOS'), 'visible'=>!Yii::app()->user->isGuest),
