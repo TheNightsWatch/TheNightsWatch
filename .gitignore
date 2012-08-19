@@ -5,3 +5,5 @@ protected/config/local.php
 favicon.gif
 protected/data/minecraft.jar
 google87b937d428a0ebfd.html
+Thumbs.db
+.DS_Store
