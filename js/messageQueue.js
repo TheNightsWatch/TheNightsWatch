@@ -122,14 +122,10 @@ messageQueue.prototype.load = function(_this, callback) {
 	}, 2000);
 };
 messageQueue.prototype.getShouldScroll = function() {
-	var height = $('#messages').height();
-	var scrollHeight = $('#messages').prop('scrollHeight');
-	if (scrollHeight - height == $('#messages').prop('scrollTop'))
+	if ($(".slider-vertical").slider("value") == 0)
 		return true;
 	return false;
 };
 messageQueue.prototype.doScroll = function() {
-	$('#messages').prop({
-		scrollTop : $('#messages').prop('scrollHeight')
-	});
+	$(".slider-vertical").slider("value",0);
 };
