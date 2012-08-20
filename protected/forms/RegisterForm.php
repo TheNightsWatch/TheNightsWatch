@@ -19,6 +19,7 @@ class RegisterForm extends CFormModel
 			array('password2','compare','compareAttribute' => 'password'),
 			array('ign','uniqueOrNull'),
 			array('type','in','range'=>array(User::TYPE_MAESTER,User::TYPE_RANGER)),
+		    array('ign','premium'),
 		);
 	}
 	
@@ -29,6 +30,16 @@ class RegisterForm extends CFormModel
 			'password2' =>'Re-type Password',
 			'ign' => 'In Game Name',
 		);
+	}
+	
+	public function premium($attribute,$params)
+	{
+	    $url = "http://minecraft.net/haspaid.jsp?user=" . urlencode($this->ign);
+	    $data = file_get_contents($url);
+	    if($data != "true")
+	    {
+	        $this->addError('ign','You must be a registered user of Minecraft');
+	    }
 	}
 	
 	public function uniqueOrNull($attribute,$params)
