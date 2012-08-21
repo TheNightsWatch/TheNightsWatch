@@ -10,10 +10,10 @@ var overviewerConfig = {
                 578
             ], 
             "isOverlay": false, 
-            "last_rendertime": 1344980427, 
+            "last_rendertime": 1345532406, 
             "name": "MineZ Map", 
             "poititle": "Signs", 
-            "north_direction": 0, 
+            "north_direction": 1, 
             "minZoom": 3, 
             "bgcolor": "#1a1a1a", 
             "zoomLevels": 9, 
@@ -21,7 +21,7 @@ var overviewerConfig = {
             "imgextension": "png", 
             "defaultZoom": 4, 
             "world": "MineZ - overworld", 
-            "maxZoom": 5, 
+            "maxZoom": 6, 
             "path": "MineZ"
         }
     ], 
@@ -60,6 +60,6 @@ var overviewerConfig = {
             67, 
             94
         ], 
-        "cacheTag": "1344983550"
+        "cacheTag": "1345542469"
     }
 };
