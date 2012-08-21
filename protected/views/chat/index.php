@@ -255,7 +255,7 @@ function setSlider($scrollpane){//$scrollpane is the div to be scrolled
 
 #messages {
 	display: block;
-	width: 100%;
+	width: 683px;
 }
 
 #messages li {
@@ -329,7 +329,7 @@ label {
 #scroll-pane,.scroll-pane{position:relative}
 .scroll-content {position:absolute;top:0;left:0}
 .slider-wrap{position:absolute;right:0;top:0;width:20px;}
-.slider-vertical{position:relative;height:100%}
+.slider-vertical{position:relative;height:100%; border: 0 !important; background: none !important}
 .ui-slider-handle{width:20px;height:10px;margin:0 auto;background-color:black;display:block;position:absolute}
 .ui-slider-handle img{border:none}
 .scrollbar-top{position:absolute;top:0;}

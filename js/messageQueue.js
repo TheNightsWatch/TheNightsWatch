@@ -114,6 +114,11 @@ messageQueue.prototype.load = function(_this, callback, errorCallback) {
 
 		$('#chatForm .csrf').attr('name', data.csrf.name).attr('value',
 				data.csrf.token);
+		
+		var distance = (100 - $(".slider-vertical").slider("value")) * $('#messages').height();
+		setSlider($('#chat'));
+		$(".slider-vertical").slider("value", 100.0 - (distance / $('#messages').height()));	
+
 		if (scroll)
 			_this.doScroll();
 		if (callback !== undefined)
