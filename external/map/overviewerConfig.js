@@ -21,7 +21,7 @@ var overviewerConfig = {
             "imgextension": "png", 
             "defaultZoom": 4, 
             "world": "MineZ - overworld", 
-            "maxZoom": 6, 
+            "maxZoom": 9, 
             "path": "MineZ"
         }
     ], 

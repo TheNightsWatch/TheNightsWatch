@@ -25,8 +25,7 @@ class MapController extends Controller
             file_put_contents($ourFiles . implode("/",$pathArray) . "/" . $file,$contents);
             $this->refresh(true);
         } else { 
-            header("HTTP/1.1 404 NOT FOUND");
-            Yii::app()->end();
+            $this->redirect($url,true,302);
         }
     }
 }
