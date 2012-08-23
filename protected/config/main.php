@@ -35,7 +35,7 @@ return array(
 			    'minecraft.jar' => 'site/modDownload',
 			    
 			    // Map Downloader
-                'external/map/MineZ/<path:.+>' => 'map/download',
+                'map/MineZ/<path:.+>' => 'map/download',
 			    
 				// Other Routes
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
