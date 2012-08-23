@@ -2,6 +2,34 @@
 
 class MapController extends Controller
 {
+    public function filters()
+    {
+        return array(
+            'accessControl',
+            array(
+                'BanFilter + view',
+            ),
+        );
+    }
+
+    public function accessRules()
+    {
+        return array(
+            array('allow',
+                'actions'=>array('view','download'),
+                'users' => array('@'),
+            ),
+            array('deny',
+                'actions'=>array('view','download'),
+                'users'=>array('*')
+            ),
+        );
+    }
+    public function actionView()
+    {
+        $this->layout = '//layouts/blank';
+        $this->render('index');
+    }
     public function actionDownload($path)
     {
         Yii::app()->session->close();
@@ -11,7 +39,7 @@ class MapController extends Controller
         $pathArray = explode("/",$path);
         $file = array_pop($pathArray);
         $url = "http://minez.net/map/MineZ/{$path}";
-        
+
         $context = stream_context_create(array(
             'http' => array(
                 'method' => 'GET',
@@ -24,7 +52,7 @@ class MapController extends Controller
             mkdir($ourFiles . implode("/",$pathArray),0775,true);
             file_put_contents($ourFiles . implode("/",$pathArray) . "/" . $file,$contents);
             $this->refresh(true);
-        } else { 
+        } else {
             $this->redirect($url,true,302);
         }
     }

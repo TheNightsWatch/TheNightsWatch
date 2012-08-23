@@ -8,7 +8,7 @@
     <li><a href="http://www.minecraftforum.net/topic/986083-">FancyGUI</a> - Makes MineCraft's normal pages prettier, and gives you a nifty friend's list.</li>
     <li><a href="http://www.minecraftforum.net/topic/1114612-">Status Effect HUD</a> - Shows what's ailing you at any time on screen</li>
     <li><a href="http://www.minecapes.net/">MineCapes</a> - Set your own cape and see your friends'.</li>
-    <li><a href="<?php echo Yii::app()->request->baseUrl ?>/other/nightswatch-capes.zip">Night's Watch Capes</a> [for 1.3.1] - Modification that sits on top of MineCapes.  Does lots of neat things.</li>
+    <li><a href="<?php echo Yii::app()->request->baseUrl ?>/other/nightswatch-capes.zip">Night's Watch Capes</a> [for 1.3.1] - Securely adds Night's Watch specific capes on MineZ servers.</li>
 </ul>
 <p>If you don't want to play with modding around, we've made a <a href="<?php echo $this->createUrl('site/modDownload'); ?>">a nifty minecraft.jar [1.3.1]</a> that has all of it for you - and don't worry!  It's protected.  You can only access it if you're a member of the watch and a Minecraft Premium user.  Just stick it in <tt><a href="file:///%APPDATA%/.minecraft/bin">%APPDATA%/.minecraft/bin</a></tt> (overwriting your previous installation) and you're ready to go!</p>
 
