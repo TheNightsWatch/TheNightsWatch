@@ -49,7 +49,9 @@ class MapController extends Controller
         $contents = @file_get_contents($url,false,$context);
         if($contents)
         {
-            mkdir($ourFiles . implode("/",$pathArray),0775,true);
+            if(!file_exist($ourFiles . implode("/",$pathArray)))
+                mkdir($ourFiles . implode("/",$pathArray),0775,true);
+            
             file_put_contents($ourFiles . implode("/",$pathArray) . "/" . $file,$contents);
             $this->refresh(true);
         } else {
