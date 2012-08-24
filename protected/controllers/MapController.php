@@ -43,13 +43,13 @@ class MapController extends Controller
         $context = stream_context_create(array(
             'http' => array(
                 'method' => 'GET',
-                'timeout' => 2,
+                'timeout' => 0.5,
             ),
         ));
         $contents = @file_get_contents($url,false,$context);
         if($contents)
         {
-            if(!file_exist($ourFiles . implode("/",$pathArray)))
+            if(!file_exists($ourFiles . implode("/",$pathArray)))
                 mkdir($ourFiles . implode("/",$pathArray),0775,true);
             
             file_put_contents($ourFiles . implode("/",$pathArray) . "/" . $file,$contents);
