@@ -55,7 +55,7 @@ class Place extends ActiveRecord
     {
         if($this->type == self::TYPE_TOWN) return 0x00FF00;
         if($this->type == self::TYPE_MAJOR) return 0xFF0000;
-        if($this->type == self::TYPE_MINOR) return 0x7D00FF;
+        if($this->type == self::TYPE_MINOR) return 0x7C00FF;
         if($this->type == self::TYPE_DUNGEON) return 0x00FFFF;
     }
 }
