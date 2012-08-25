@@ -9,9 +9,13 @@ return array(
 		'application.components.*',
 		'application.vendors.*',
 		'application.filters.*',
+	    'application.extensions.yii-mail.*',
 	),
 	'modules'=>array(),
 	'components'=>array(
+	    'mail' => array(
+	        'class' => 'YiiMail',
+        ),
 		'request'=>array(
 			'enableCsrfValidation' => true,
 			'enableCookieValidation' => true,
