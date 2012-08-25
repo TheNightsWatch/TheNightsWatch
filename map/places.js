@@ -12,14 +12,14 @@ $(document).ready(function(){
 			place.loot = parseInt(place.loot);
 			
 			if(place.type == 'DUNGEON') icon = iconDIR + 'dungeon.png';
-			if(place.type == 'MAJOR' && place.loot & 6 == 6) icon = iconDIR + 'major_both.png';
-			if(place.type == 'MAJOR' && place.loot & 4 == 4) icon = iconDIR + 'major_mil.png';
-			if(place.type == 'MAJOR' && place.loot & 2 == 2) icon = iconDIR + 'major_food.png';
-			if(place.type == 'MAJOR' && place.loot & 1 == 1) icon = iconDIR + 'major_civ.png';
+			if(place.type == 'MAJOR' && (place.loot & 1) == 1) icon = iconDIR + 'major_civ.png';
+			if(place.type == 'MAJOR' && (place.loot & 2) == 2) icon = iconDIR + 'major_food.png';
+			if(place.type == 'MAJOR' && (place.loot & 4) == 4) icon = iconDIR + 'major_mil.png';
+			if(place.type == 'MAJOR' && (place.loot & 6) == 6) icon = iconDIR + 'major_both.png';
 			if(place.type == 'MINOR') icon = iconDIR + 'minor.png';
-			if(place.type == 'TOWN' && place.loot & 6 == 6) icon = iconDIR + 'town_both.png';
-			if(place.type == 'TOWN' && place.loot & 4 == 4) icon = iconDIR + 'town_mil.png';
-			if(place.type == 'TOWN' && place.loot & 2 == 2) icon = iconDIR + 'town_food.png';
+			if(place.type == 'TOWN' && (place.loot & 2) == 2) icon = iconDIR + 'town_food.png';
+			if(place.type == 'TOWN' && (place.loot & 4) == 4) icon = iconDIR + 'town_mil.png';
+			if(place.type == 'TOWN' && (place.loot & 6) == 6) icon = iconDIR + 'town_both.png';
 			
 			var img = new google.maps.MarkerImage(icon);
 			new google.maps.Marker({
