@@ -16,11 +16,11 @@ class MapController extends Controller
     {
         return array(
             array('allow',
-                'actions'=>array('view','download'),
+                'actions'=>array('view','download','places'),
                 'users' => array('@'),
             ),
             array('deny',
-                'actions'=>array('view','download'),
+                'actions'=>array('view','download','places'),
                 'users'=>array('*')
             ),
         );
@@ -29,6 +29,25 @@ class MapController extends Controller
     {
         $this->layout = '//layouts/blank';
         $this->render('index');
+    }
+    public function actionPlaces()
+    {
+        $this->jsonOut(Place::model()->findAll());
+    }
+    public function actionPoints()
+    {
+        header("Content-Type: text/plain");
+        $places = Place::model()->findAll();
+        foreach($places as $place)
+        {
+            $hex = dechex($place->color);
+            if(strlen($hex) < 6)
+            {
+                $hex = str_repeat("0",6 - strlen($hex)) . $hex;
+            }
+            $hex = strtoupper($hex);
+            echo $place->name,":",$place->x,":",$place->y,":",$place->z,":true:",$hex,"\n";
+        }
     }
     public function actionDownload($path)
     {
@@ -43,7 +62,11 @@ class MapController extends Controller
         $context = stream_context_create(array(
             'http' => array(
                 'method' => 'GET',
-                'timeout' => 0.5,
+                'timeout' => 1,
+                'user_agent' => "Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2) Gecko/20100301 Ubuntu/9.10 (karmic) Firefox/3.6",
+                'header' => array(
+                    'Accept' => 'image/png;q=0.9,*/*;q=0.8'
+                ),
             ),
         ));
         $contents = @file_get_contents($url,false,$context);

@@ -194,7 +194,7 @@ overviewer.gmap = {
             overviewer.mapView.updateCurrentTileset();
 
             compass.render();
-            spawnmarker.render();
+            // spawnmarker.render();
 
             // update list of spawn overlays
             overlayControl.render();

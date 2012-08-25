@@ -18,6 +18,7 @@
 <script type="text/javascript" src="/map/overviewerConfig.js"></script>
 <script type="text/javascript" src="/map/overviewer.js"></script>
 <script type="text/javascript" src="/map/baseMarkers.js"></script>
+<script type="text/javascript" src="/map/places.js"></script>
 
 </head>
 
