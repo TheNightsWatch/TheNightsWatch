@@ -66,6 +66,7 @@
 			        array('label'=>'Teamspeak', 'url'=>array('site/teamspeak')),
 			        array('label'=>'KOS', 'url'=>array('site/KOS'), 'visible'=>!Yii::app()->user->isGuest),
 			        array('label'=>'Mods', 'url'=>array('site/mods'), 'visible'=>!Yii::app()->user->isGuest),
+			        array('label'=>'Rules of Engagement', 'url'=>array('site/rules')),
 			        array('label'=>'Login', 'url'=>array('site/login'), 'visible'=>Yii::app()->user->isGuest, 'linkOptions' => array('style' => 'float:right;position:relative;top:-5px;')),
 			        array('label'=>'Join', 'url'=>array('site/register'), 'visible'=>Yii::app()->user->isGuest, 'linkOptions' => array('style' => 'float:right;position:relative;top:-5px;')),
 			        array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('site/logout'), 'visible'=>!Yii::app()->user->isGuest, 'linkOptions' => array('style' => 'float:right;position:relative;top:-5px;')),

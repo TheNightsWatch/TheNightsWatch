@@ -79,6 +79,11 @@ class SiteController extends Controller
         ));
     }
 
+    public function actionRules()
+    {
+        $this->render('rules');
+    }
+    
     public function actionMods()
     {
         $this->render('mods');

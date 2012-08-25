@@ -36,6 +36,7 @@ return array(
 			    'profile' => 'site/profile',
 			    'KOS' => 'site/KOS',
 			    'mods' => 'site/mods',
+			    'rules' => 'site/rules',
 			    'minecraft.jar' => 'site/modDownload',
 			    
 			    // Map Downloader
