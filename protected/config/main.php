@@ -19,7 +19,7 @@ return array(
 		'request'=>array(
 		    'class' => 'HttpRequest',
 		    'noCsrfValidationRoutes' => array(
-		        array('map/update'),
+		        'map/update',
 	        ),
 			'enableCsrfValidation' => true,
 			'enableCookieValidation' => true,
