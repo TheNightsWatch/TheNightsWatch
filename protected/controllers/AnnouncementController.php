@@ -61,8 +61,7 @@ class AnnouncementController extends Controller
             $message->setFrom(array($sender->ign.'@minez-nightswatch.com' => $sender->title . ' ' . $sender->ign));
             $message->setTo(array('members@minez-nightswatch.com' => "The Night's Watch"));
             $message->setBcc($bcc);
-            $message->view = 'blank';
-            $message->setBody($announcement->body,'html/text','UTF-8');
+            $message->setBody($announcement->body,'text/html','UTF-8');
             $amt = Yii::app()->mail->send($message);
             die('The Announcement has been saved and sent to '.$amt.' people');
         }
