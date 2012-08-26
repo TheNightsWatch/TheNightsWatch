@@ -50,7 +50,7 @@ class AnnouncementController extends Controller
         $bcc = array();
         foreach($users as $user)
         {
-            if(!$user->settings || $user->settings->email)
+            if((!$user->settings || $user->settings->email) && !empty($user->email))
                 $bcc[] = $user->email;
         }
 
