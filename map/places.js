@@ -36,7 +36,7 @@ $(document).ready(function(){
 				map: overviewer.map,
 				title: place.name,
 				visible: true,
-				zIndex: 999,
+				zIndex: 900,
 				icon: img,
 			});
 			
