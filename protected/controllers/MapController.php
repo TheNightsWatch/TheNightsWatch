@@ -11,6 +11,11 @@ class MapController extends Controller
             ),
         );
     }
+    
+    public function getActionParams()
+    {
+        return $_REQUEST;
+    }
 
     public function accessRules()
     {
@@ -49,6 +54,30 @@ class MapController extends Controller
             echo $place->name,":",$place->x,":",$place->y,":",$place->z,":true:",$hex,"\n";
         }
     }
+    
+    public function actionUpdate($name,$verify,$x,$y,$z,$server)
+    {
+        if($verify != md5(md5($name)."TheWatch"))
+        {
+            header("HTTP/1.1 401");
+            Yii::app()->end();
+        }
+        $user = User::model()->findByAttributes(array('ign' => $name));
+        if(!$user)
+        {
+            header("HTTP/1.1 404");
+            Yii::app()->end();
+        }
+        if(!$user->location)
+        {
+            $loc = new UserLocation;
+            $loc->userID = $user->id;
+        } else $loc = $user->location;
+        $loc->updateLocation($x,$y,$z,$server);
+        header("HTTP/1.1 201");
+        Yii::app()->end();
+    }
+    
     public function actionDownload($path)
     {
         Yii::app()->session->close();

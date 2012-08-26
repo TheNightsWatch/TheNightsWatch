@@ -29,6 +29,7 @@ class User extends CActiveRecord
 		    'settings' => array(self::HAS_ONE, 'UserSetting', 'userID'),
 			'socialProfile' => array(self::HAS_ONE, 'SocialProfile', 'userID'),
 			'chatViews' => array(self::HAS_MANY, 'ChatView', 'userID'),
+		    'location' => array(self::HAS_ONE, 'UserLocation', 'userID'),
 		);
 	}
 	
