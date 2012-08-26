@@ -11,6 +11,7 @@ class UserController extends Controller
 	
 	public function actionHead($unique,$size = 16)
 	{
+	    if(intval($unique)) $unique = User::model()->findByPk($unique)->ign;
 		$this->redirect(User::getHead($unique,$size),true,301);
 	}
 	

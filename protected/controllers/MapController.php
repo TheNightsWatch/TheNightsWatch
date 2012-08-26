@@ -7,11 +7,11 @@ class MapController extends Controller
         return array(
             'accessControl',
             array(
-                'BanFilter + view',
+                'BanFilter + view, players',
             ),
         );
     }
-    
+
     public function getActionParams()
     {
         return $_REQUEST;
@@ -21,11 +21,11 @@ class MapController extends Controller
     {
         return array(
             array('allow',
-                'actions'=>array('view','download','places'),
+                'actions'=>array('view','download','places','players'),
                 'users' => array('@'),
             ),
             array('deny',
-                'actions'=>array('view','download','places'),
+                'actions'=>array('view','download','places','players'),
                 'users'=>array('*')
             ),
         );
@@ -39,6 +39,28 @@ class MapController extends Controller
     {
         $this->jsonOut(Place::model()->findAll());
     }
+
+    public function actionPlayers()
+    {
+        $locs = UserLocation::model()->with('user')->findAll('UNIX_TIMESTAMP() - UNIX_TIMESTAMP(lastUpdate) < 60');
+        $out = array();
+        foreach($locs as $loc)
+        {
+            $out[] = array(
+                'timestamp' => $loc->lastUpdate->format('Ymd H:i:s'),
+                'id' => 4,
+                'msg' => $loc->user->ign,
+                'x' => $loc->x,
+                'y' => $loc->y,
+                'z' => $loc->z,
+                'world' => 'MineZ - overworld',
+                'server' => $loc->server,
+                'rank' => $loc->user->rank,
+            );
+        }
+        $this->jsonOut($out);
+    }
+
     public function actionPoints()
     {
         header("Content-Type: text/plain");
@@ -54,7 +76,7 @@ class MapController extends Controller
             echo $place->name,":",$place->x,":",$place->y,":",$place->z,":true:",$hex,"\n";
         }
     }
-    
+
     public function actionUpdate($name,$verify,$x,$y,$z,$server)
     {
         if($verify != md5(md5($name)."TheWatch"))
@@ -77,7 +99,7 @@ class MapController extends Controller
         header("HTTP/1.1 201");
         Yii::app()->end();
     }
-    
+
     public function actionDownload($path)
     {
         Yii::app()->session->close();
@@ -103,7 +125,7 @@ class MapController extends Controller
         {
             if(!file_exists($ourFiles . implode("/",$pathArray)))
                 mkdir($ourFiles . implode("/",$pathArray),0775,true);
-            
+
             file_put_contents($ourFiles . implode("/",$pathArray) . "/" . $file,$contents);
             $this->refresh(true);
         } else {
