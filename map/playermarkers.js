@@ -176,7 +176,7 @@ function loadPlayers() {
 function smartServerName(server)
 {
 	if(server == 'smp') return 'us1 private';
-	if(server.split("-")[1]) return server.split("-")[0] + server.split("-")[1];
+	if(server.split("-")[1]) return server.split("-")[0] + ' ' + server.split("-")[1];
 	return server + ' private';
 }
 
