@@ -6,7 +6,7 @@ class AnnouncementController extends Controller
     {
         return array(
             array(
-                'CouncilFilter',
+                'CouncilFilter - view',
             ),
         );
     }
