@@ -73,7 +73,9 @@ class MapController extends Controller
                 $hex = str_repeat("0",6 - strlen($hex)) . $hex;
             }
             $hex = strtoupper($hex);
-            echo $place->name,":",$place->x,":",$place->y,":",$place->z,":true:",$hex,"\n";
+            $on = 'false';
+            if($place->type == 'TOWN') $on = 'true';
+            echo $place->name,":",$place->x,":",$place->y,":",$place->z,":{$on}:",$hex,"\n";
         }
     }
 
