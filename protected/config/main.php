@@ -17,6 +17,10 @@ return array(
 	        'class' => 'YiiMail',
         ),
 		'request'=>array(
+		    'class' => 'HttpRequest',
+		    'noCsrfValidationRoutes' => array(
+		        array('map/update'),
+	        ),
 			'enableCsrfValidation' => true,
 			'enableCookieValidation' => true,
 		),
