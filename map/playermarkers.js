@@ -256,7 +256,7 @@ function checkPlayers() {
          *If the player has not updated within the timeout window
          *They need to be removed, but only if we haven't already removed them
          */
-        if (player.updated<timeout && !player.removed) {
+        if ((player.updated < timeout || player.y < 0) && !player.removed) {
             removePlayer(player.name);
         }
     }

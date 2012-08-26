@@ -19,7 +19,7 @@
 <script type="text/javascript" src="/map/overviewer.js"></script>
 <script type="text/javascript" src="/map/baseMarkers.js"></script>
 <script type="text/javascript" src="/map/places.js"></script>
-<script type="text/javascript" src="/map/playermarkers.js"></script>
+<script type="text/javascript" src="/map/playermarkers.js?v=20120826v1"></script>
 
 </head>
 
