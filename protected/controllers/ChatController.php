@@ -73,6 +73,7 @@ class ChatController extends Controller
 
     public function actionNew($since,$room = 'lobby')
     {
+        Yii::app()->session->close();
         $view = ChatView::model()->findByAttributes(array(
             'room' => $room,
             'userID' => Yii::app()->user->getId(),
@@ -133,11 +134,13 @@ class ChatController extends Controller
 
     public function actionPing($room = 'lobby')
     {
+        Yii::app()->session->close();
         $this->jsonOut('Not Supported',501);
     }
 
     public function actionPost($room = 'lobby')
     {
+        Yii::app()->session->close();
         $model = new ChatForm;
         if(isset($_POST['ChatForm']))
         {

@@ -42,6 +42,7 @@ class MapController extends Controller
 
     public function actionPlayers()
     {
+        Yii::app()->session->close();
         $locs = UserLocation::model()->with('user')->findAll('UNIX_TIMESTAMP() - UNIX_TIMESTAMP(lastUpdate) < 60');
         $out = array();
         foreach($locs as $loc)
@@ -81,6 +82,7 @@ class MapController extends Controller
 
     public function actionUpdate($name,$verify,$x,$y,$z,$server)
     {
+        Yii::app()->session->close();
         if($verify != md5(md5($name)."TheWatch"))
         {
             header("HTTP/1.1 401");
