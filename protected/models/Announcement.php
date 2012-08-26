@@ -15,6 +15,12 @@ class Announcement extends ActiveRecord
         return parent::model($c);
     }
     
+    public function rules() {
+        return array(
+            array('userID, subject, body', 'safe'),
+        );
+    }
+    
     public function tableName() { return 'announcement'; }
     
     public function relations()
