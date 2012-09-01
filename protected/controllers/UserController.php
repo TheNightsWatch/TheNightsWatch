@@ -48,6 +48,7 @@ class UserController extends Controller
 		elseif($user->rank == 'HEAD' && $user->type == 'MAESTER') $file = 'grandMaester-cape';
 		elseif($user->type == 'RANGER') $file = 'ranger-cape';
 		elseif($user->type == 'MAESTER') $file = 'maester-cape';
+		elseif($user->type == 'BUILDER') $file = 'builder-cape';
 		echo file_get_contents(Yii::app()->basePath."/data/{$file}.png");
 		Yii::app()->end();
 	}
