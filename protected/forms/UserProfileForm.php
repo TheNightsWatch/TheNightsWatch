@@ -34,7 +34,7 @@ class UserProfileForm extends CFormModel
         return array(
             array('email','boolean'),
             array('reddit, skype','length','min' => 1, 'allowEmpty' => true),
-            array('profession','in','range'=>array(User::TYPE_MAESTER,User::TYPE_RANGER)),
+            array('profession','in','range'=>array(User::TYPE_MAESTER,User::TYPE_RANGER,User::TYPE_BUILDER)),
         );
     }
 

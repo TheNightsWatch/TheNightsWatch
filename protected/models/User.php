@@ -4,6 +4,7 @@ class User extends CActiveRecord
 {
 	const TYPE_RANGER = 'RANGER';
 	const TYPE_MAESTER = 'MAESTER';
+	const TYPE_BUILDER = 'BUILDER';
 	
 	private $regex = array(
 		'donorLevel' => '/Showing stats for:.*\[([^]]+)\]/',

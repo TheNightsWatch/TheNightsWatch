@@ -22,10 +22,16 @@ $this->breadcrumbs = array(
 	    'clientOptions'=>array(
 	        'validateOnSubmit' => true,
 	    )
-    ))?>
+    ));
+	
+	$types = array(NULL => '', User::TYPE_RANGER => 'Ranger - I want to kill the undead',User::TYPE_MAESTER => 'Maester - I want to heal the living and support the Rangers');
+	if($user->type == User::TYPE_BUILDER)
+	    $types[User::TYPE_BUILDER] = 'Builder - I want to build & maintain our base';
+	
+	?>
 	<div class="row">
 		<?php echo $form->labelEx($model,'profession'); ?>
-		<?php echo $form->dropDownList($model,'profession',array(NULL => '', User::TYPE_RANGER => 'Ranger - I want to kill the undead',User::TYPE_MAESTER => 'Maester - I want to heal the living and support the Rangers')); ?>
+		<?php echo $form->dropDownList($model,'profession',$types); ?>
 		<?php echo $form->error($model,'profession'); ?>
 	</div>
 
