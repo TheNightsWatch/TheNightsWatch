@@ -26,6 +26,10 @@ class UserController extends Controller
 	    {
 	    	throw new CHttpException(404,"No Longer a Member");
 	    }
+	    if($user->deserter == 'DISABLED')
+	    {
+	        throw new CHttpException(404,"Account Disabled");
+	    }
 	    return $user;
 	}
 	
@@ -56,7 +60,7 @@ class UserController extends Controller
 	public function actionView($unique)
 	{
 		$user = User::model()->findByAttributes(array('ign' => $unique));
-		if(!$user)
+		if(!$user || $user->deserter == 'DISABLED')
 		{
 			$this->layout = '//layouts/column1';
 			$this->render('notAMember',array('name' => $unique));
