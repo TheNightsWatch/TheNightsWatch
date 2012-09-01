@@ -65,7 +65,7 @@ class MapController extends Controller
     public function actionPoints()
     {
         header("Content-Type: text/plain");
-        $places = Place::model()->findAll();
+        $places = Place::model()->findAll(array('order' => 'name ASC'));
         foreach($places as $place)
         {
             $hex = dechex($place->color);
