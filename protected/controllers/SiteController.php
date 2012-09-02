@@ -31,9 +31,6 @@ class SiteController extends Controller
             array(
                 'VerifyFilter + profile, KOS, mod, mods',
             ),
-            array(
-                'PremiumFilter + mods, modDownload',
-            ),
         );
     }
 
@@ -41,11 +38,11 @@ class SiteController extends Controller
     {
         return array(
             array('allow',
-                'actions'=>array('profile','KOS','modDownload','mods'),
+                'actions'=>array('profile','KOS','modDownload','mods','verify'),
                 'users' => array('@'),
             ),
             array('deny',
-                'actions'=>array('profile','KOS','modDownload','mods'),
+                'actions'=>array('profile','KOS','modDownload','mods','verify'),
                 'users'=>array('*')
             ),
         );
