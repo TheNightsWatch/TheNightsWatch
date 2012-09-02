@@ -5,7 +5,7 @@ class UserController extends Controller
 	public function actionIndex()
 	{
 		$this->setPageTitle('Member List');
-		$brothers = User::model()->findAllByAttributes(array('deserter' => 'NO'));
+		$brothers = User::model()->findAllByAttributes(array('deserter' => 'NO', 'verified' => 1));
 		$this->render('index',array('users' => $brothers));
 	}
 	
@@ -21,6 +21,10 @@ class UserController extends Controller
 	    if(!$user)
 	    {
 	    	throw new CHttpException(404,"No Such User");
+	    }
+	    if(!$user->verified)
+	    {
+	        throw new CHttpException(404,"User Not Verified");
 	    }
 	    if($user->deserter == 'LEFT')
 	    {
