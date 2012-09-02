@@ -15,6 +15,7 @@ class RegisterForm extends CFormModel
 	{
 		return array(
 			array('ign, password, password2, email, type','required'),
+		    array('email','email'),
 			array('rememberMe','boolean'),
 			array('password2','compare','compareAttribute' => 'password'),
 			array('ign','uniqueOrNull'),
