@@ -1,3 +1,4 @@
+<h1>Minecraft Account Verification</h1>
 <?php if(Yii::app()->user->hasFlash('verify')): ?>
 <div class="flash-success">
 	<?php echo Yii::app()->user->getFlash('verify'); ?>
@@ -18,10 +19,10 @@
 <?php endif; ?>
 
 <?php $form = $this->beginWidget('CActiveForm'); ?>
-<label>Username: <input name="user" />
+<label>Minecraft Username: <input name="user" />
 </label>
 <br />
-<label>Password: <input name="pass" type="password" />
+<label>Minecraft Password: <input name="pass" type="password" />
 </label>
 <br />
 <input type="submit" />
