@@ -256,8 +256,9 @@ class SiteController extends Controller
                     $user->ign = $api->username;
                     $user->verified = true;
                     $user->save();
+                    Yii::app()->user->setFlash('verify','Your Minecraft account has been verified.');
                 }
-                Yii::app()->user->setFlash('verify','Your Minecraft account has been verified.');
+                Yii::app()->user->setFlash('verify_error','The account you attempted to verify with does not match your IGN.');
             } catch(MinecraftBadLoginException $e) {
                 Yii::app()->user->setFlash('verify_error','Wrong username or password.');
             } catch(MinecraftMigrationException $e) {
