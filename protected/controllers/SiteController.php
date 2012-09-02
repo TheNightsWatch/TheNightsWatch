@@ -29,6 +29,9 @@ class SiteController extends Controller
                 'BanFilter + profile, KOS, mod, mods',
             ),
             array(
+                'VerifyFilter + profile, KOS, mod, mods',
+            ),
+            array(
                 'PremiumFilter + mods, modDownload',
             ),
         );
@@ -239,5 +242,30 @@ class SiteController extends Controller
     public function actionKOS()
     {
         $this->redirect('https://docs.google.com/spreadsheet/ccc?key=0Aqn3YLIby6B7dHRNTDhHY1pueGN1MGNtRE91VnQ4TEE',301);
+    }
+    
+    public function actionVerify()
+    {
+        if(!empty($_POST))
+        {
+            try {
+                $api = new MinecraftAPI($_POST['user'],$_POST['pass']);
+                $user = User::model()->findByPk(Yii::app()->user->getId());
+                if(strtolower($user->ign) == strtolower($api->username))
+                {
+                    $user->ign = $api->username;
+                    $user->verified = true;
+                    $user->save();
+                }
+                Yii::app()->user->setFlash('verify','Your Minecraft account has been verified.');
+            } catch(MinecraftBadLoginException $e) {
+                Yii::app()->user->setFlash('verify_error','Wrong username or password.');
+            } catch(MinecraftMigrationException $e) {
+                Yii::app()->user->setFlash('verify_error','Please enter your Mojang account username and password.');
+            } catch(MinecraftBasicException $e) {
+                Yii::app()->user->setFlash('verify_error','You do not have a premium Minecraft account.  You will be unable to use this website.');
+            }
+        }
+        $this->render('verify');
     }
 }

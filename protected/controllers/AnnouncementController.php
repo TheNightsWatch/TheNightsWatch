@@ -8,6 +8,12 @@ class AnnouncementController extends Controller
             array(
                 'CouncilFilter - view',
             ),
+            array(
+                'BanFilter',
+            ),
+            array(
+                'VerifyFilter - view',
+            ),
         );
     }
     public function actionView($id)

@@ -9,6 +9,9 @@ class MapController extends Controller
             array(
                 'BanFilter + view, players',
             ),
+            array(
+                'VerifyFilter + view, players',
+            ),
         );
     }
 

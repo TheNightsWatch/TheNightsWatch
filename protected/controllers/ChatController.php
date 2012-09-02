@@ -12,6 +12,9 @@ class ChatController extends Controller
             array(
                 'BanFilter',
             ),
+            array(
+                'VerifyFilter',
+            ),
         );
     }
 

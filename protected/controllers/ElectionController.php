@@ -7,8 +7,11 @@ class ElectionController extends Controller
 		return array(
 			'accessControl',
 			array(
-				'application.filters.BanFilter + index',
+				'BanFilter + index',
 			),
+		    array(
+		        'VerifyFilter + index',
+	        ),
 		);
 	}
 
