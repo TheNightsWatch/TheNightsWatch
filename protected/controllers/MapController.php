@@ -112,7 +112,7 @@ class MapController extends Controller
         Yii::app()->session->close();
         // This should only be called for 404s.  It downloads the corresponding image from MineZ
         // and then adds it to our file structure.
-        $ourFiles = Yii::app()->basePath . '/../external/map/MineZ/';
+        $ourFiles = Yii::app()->basePath . '/../map/MineZ/';
         $pathArray = explode("/",$path);
         $file = array_pop($pathArray);
         $url = "http://minez.net/map/MineZ/{$path}";
