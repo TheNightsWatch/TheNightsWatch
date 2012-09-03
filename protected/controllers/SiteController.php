@@ -117,6 +117,7 @@ class SiteController extends Controller
         if(isset($_POST['UserProfileForm']))
         {
             $model->attributes=$_POST['UserProfileForm'];
+            if($user->rank != User::RANK_MEMBER) $model->profession = $user->type;
             if($model->validate() && $model->save())
             {
                 Yii::app()->user->setFlash('profile','Your profile has been updated.');
@@ -124,7 +125,7 @@ class SiteController extends Controller
             }
         }
          
-        $this->render('profile',array('model' => $model));
+        $this->render('profile',array('model' => $model, 'user' => $user));
     }
 
     /**

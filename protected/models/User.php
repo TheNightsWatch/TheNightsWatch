@@ -1,10 +1,45 @@
 <?php
 
+/**
+ * @property int id
+ * @property string ign
+ * @property string password
+ * @property string email
+ * @property string type
+ * @property string rank
+ * @property string deserter
+ * @property string minezDonor
+ * @property DateTime joinDate
+ * @property DateTime lastLogin
+ * @property boolean verified
+ * @author Navarr
+ *
+ */
 class User extends CActiveRecord
 {
 	const TYPE_RANGER = 'RANGER';
 	const TYPE_MAESTER = 'MAESTER';
 	const TYPE_BUILDER = 'BUILDER';
+	const TYPE_STEWARD = 'STEWARD';
+	
+	const RANK_MEMBER = 'MEMBER';
+	// First Builder, First Ranger, Grand Maester
+	const RANK_HEAD = 'HEAD';
+	// Council Member
+	const RANK_COUNCIL = 'COUNCIL';
+	// Lord Commander
+	const RANK_COMMANDER = 'COMMANDER';
+	
+	// Status for whether or not they've left
+	const DESERTER_NO = 'NO';
+	const DESERTER_DESERTER = 'DESERTER';
+	const DESERTER_LEFT = 'LEFT';
+	const DESERTER_DISABLED = 'DISABLED';
+	
+	const DONOR_NO = 'NO';
+	const DONOR_SILVER = 'SILVER';
+	const DONOR_GOLD = 'GOLD';
+	const DONOR_PLATINUM = 'PLATINUM';
 	
 	private $regex = array(
 		'donorLevel' => '/Showing stats for:.*\[([^]]+)\]/',
