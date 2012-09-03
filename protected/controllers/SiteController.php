@@ -58,7 +58,7 @@ class SiteController extends Controller
 
         $last15 = User::model()->findAll(array(
             'condition' => 'deserter = :desertion',
-            'params' => array('desertion' => 'NO'),
+            'params' => array('desertion' => 'NO', 'verified' => 1),
             'order' => 'IF(rank != \'MEMBER\',1,0) DESC, IF(rank = \'COMMANDER\',1,0) DESC, id DESC',
             'limit' => 15
         ));
