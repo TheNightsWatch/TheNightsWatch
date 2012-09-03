@@ -57,8 +57,8 @@ class SiteController extends Controller
         $this->clearPageTitle();
 
         $last15 = User::model()->findAll(array(
-            'condition' => 'deserter = :desertion',
-            'params' => array('desertion' => 'NO', 'verified' => 1),
+            'condition' => 'deserter = :desertion AND verified=1',
+            'params' => array('desertion' => 'NO'),
             'order' => 'IF(rank != \'MEMBER\',1,0) DESC, IF(rank = \'COMMANDER\',1,0) DESC, id DESC',
             'limit' => 15
         ));
