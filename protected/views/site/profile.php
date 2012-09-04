@@ -53,6 +53,12 @@ $this->breadcrumbs = array(
 		<?php echo $form->textField($model,'skype'); ?>
 		<?php echo $form->error($model,'skype'); ?>
 	</div>
+	
+	<div class="row">
+	    <?php echo $form->labelEx($model,'twitter'); ?>
+	    <?php echo $form->textField($model,'twitter'); ?>
+	    <?php echo $form->error($model,'twitter'); ?>
+	</div>
 
 	<div class="row">
 		<label><?php echo $form->checkbox($model,'email'); ?> <em>Send me

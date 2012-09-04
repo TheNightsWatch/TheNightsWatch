@@ -1,6 +1,7 @@
 <?php
 
 /**
+ * @author Navarr
  * @property int id
  * @property string ign
  * @property string password
@@ -12,8 +13,6 @@
  * @property DateTime joinDate
  * @property DateTime lastLogin
  * @property boolean verified
- * @author Navarr
- *
  */
 class User extends CActiveRecord
 {

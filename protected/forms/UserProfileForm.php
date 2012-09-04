@@ -5,6 +5,7 @@ class UserProfileForm extends CFormModel
     public $reddit;
     public $skype;
     public $email;
+    public $twitter;
     public $profession;
 
     public $user = null;
@@ -19,6 +20,7 @@ class UserProfileForm extends CFormModel
         {
             $model->reddit = $user->socialProfile->reddit;
             $model->skype = $user->socialProfile->skype;
+            $model->twitter = $user->socialProfile->twitter;
         }
         if($user->settings)
         {
@@ -33,7 +35,7 @@ class UserProfileForm extends CFormModel
     {
         return array(
             array('email','boolean'),
-            array('reddit, skype','length','min' => 1, 'allowEmpty' => true),
+            array('reddit, skype, twitter','length','min' => 1, 'allowEmpty' => true),
             array('profession','in','range'=>array(User::TYPE_MAESTER,User::TYPE_RANGER,User::TYPE_BUILDER)),
         );
     }
@@ -59,6 +61,11 @@ class UserProfileForm extends CFormModel
             $this->user->socialProfile->skype = $this->skype;
         else
             $this->user->socialProfile->skype = NULL;
+        
+        if(!empty($this->twitter))
+            $this->user->socialProfile->twitter = $this->twitter;
+        else
+            $this->user->socialProfile->twitter = NULL;
 
         // On the User Settings Model
         if($this->user->settings == null)

@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * 
+ * @author Navarr
+ * @property int userID
+ * @property string twitter
+ * @property string skype
+ * @property string reddit
+ */
 class SocialProfile extends CActiveRecord
 {
 	public static function model($className=__CLASS__)
