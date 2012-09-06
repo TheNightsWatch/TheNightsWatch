@@ -150,7 +150,7 @@ class ChatController extends Controller
             $model->attributes=$_POST['ChatForm'];
             if($model->validate())
             {
-                $old = ChatMessage::model()->findByAttributes(array(
+                $old = ChatMessage::model()->find(array(
                     'condition' => 'userID = :id AND room = :room',
                     'params' => array('id' => Yii::app()->user->getId(),'room' => $room),
                     'order' => 'timestamp DESC',
