@@ -150,11 +150,19 @@ class ChatController extends Controller
             $model->attributes=$_POST['ChatForm'];
             if($model->validate())
             {
-                $message = new ChatMessage;
-                $message->userID = Yii::app()->user->getId();
-                $message->message = $model->message;
-                $message->room = $room;
-                $success = $message->save();
+                $old = ChatMessage::findByAttributes(array(
+                    'condition' => 'userID = :id AND room = :room',
+                    'params' => array('id' => Yii::app()->user->getId(),'room' => $room),
+                    'order' => 'timestamp DESC',
+                ));
+                if($old->message != $new->message)
+                {
+                    $message = new ChatMessage;
+                    $message->userID = Yii::app()->user->getId();
+                    $message->message = $model->message;
+                    $message->room = $room;
+                    $success = $message->save();
+                } else $success = true;
                 if(Yii::app()->request->isAjaxRequest) $this->jsonOut(array(
                     'success' => $success,
                     'message' => $success ? $message : null,
