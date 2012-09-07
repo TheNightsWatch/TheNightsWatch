@@ -115,16 +115,13 @@ class MapController extends Controller
         $ourFiles = Yii::app()->basePath . '/../map/MineZ/';
         $pathArray = explode("/",$path);
         $file = array_pop($pathArray);
-        $url = "http://minez.net/map/MineZ/{$path}";
-
+        $url = "http://www.hcfactions.net/minez/map/MineZ/{$path}";
         $context = stream_context_create(array(
             'http' => array(
                 'method' => 'GET',
-                'timeout' => 1,
-                'user_agent' => "Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2) Gecko/20100301 Ubuntu/9.10 (karmic) Firefox/3.6",
-                'header' => array(
-                    'Accept' => 'image/png;q=0.9,*/*;q=0.8'
-                ),
+                'timeout' => 2,
+                'protocol_version' => 1.1,
+                
             ),
         ));
         $contents = @file_get_contents($url,false,$context);
