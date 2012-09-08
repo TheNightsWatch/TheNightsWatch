@@ -26,13 +26,17 @@ class UserController extends Controller
         {
             throw new CHttpException(404,"User Not Verified");
         }
-        if($user->deserter == 'LEFT')
+        if($user->deserter == User::DESERTER_LEFT)
         {
             throw new CHttpException(404,"No Longer a Member");
         }
-        if($user->deserter == 'DISABLED')
+        if($user->deserter == User::DESERTER_DISABLED)
         {
             throw new CHttpException(404,"Account Disabled");
+        }
+        if($user->deserter == User::DESERTER_ADMIN)
+        {
+            throw new CHttpException(404,"User not really a member");
         }
         return $user;
     }
