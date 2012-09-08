@@ -40,9 +40,16 @@ class UserController extends Controller
         }
         return $user;
     }
+    
+    private function filterOutStyleCodes(&$text)
+    {
+        $text = preg_replace("/§[a-f0-9]/iu",'',$text);
+        return $text;
+    }
 
     public function actionCapeHead($unique)
     {
+        $this->filterOutStyleCodes($unique);
         $this->capeBailOrUser($unique);
         header("HTTP/1.1 200 OK");
         Yii::app()->end();
@@ -50,6 +57,7 @@ class UserController extends Controller
 
     public function actionCape($unique)
     {
+        $this->filterOutStyleCodes($unique);
         $user = $this->capeBailOrUser($unique);
         Yii::app()->session->close();
         header("Content-Type: image/png");
