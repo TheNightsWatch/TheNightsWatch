@@ -53,7 +53,7 @@ class AnnouncementController extends Controller
         $announcement->userID = Yii::app()->user->getId();
 
         $sender = User::model()->findByPk(Yii::app()->user->getId());
-        $users = User::model()->with('settings')->findAllByAttributes(array('deserter' => 'NO'));
+        $users = User::model()->with('settings')->findAllByAttributes(array('deserter' => 'NO','verified' => 1));
         $bcc = array();
         foreach($users as $user)
         {
@@ -68,7 +68,8 @@ class AnnouncementController extends Controller
             $message->setFrom(array($sender->ign.'@minez-nightswatch.com' => $sender->title . ' ' . $sender->ign));
             $message->setTo(array('members@minez-nightswatch.com' => "The Night's Watch"));
             $message->setBcc($bcc);
-            $message->setBody($announcement->body,'text/html','UTF-8');
+            $body = $announcement->body . '<br /><hr /><center>You can unsubscribe from these emails at any time by accessing the <a href="'.$this->createAbsoluteUrl('site/profile').'">the profile page</a>.</center>';
+            $message->setBody($body,'text/html','UTF-8');
             $amt = Yii::app()->mail->send($message);
             die('The Announcement has been saved and sent to '.$amt.' people');
         }
