@@ -28,7 +28,7 @@ class UserIdentity extends CUserIdentity
 		}
 		
 		// User left or deserted
-		if($user->deserter != 'NO')
+		if($user->deserter != User::DESERTER_NO && $user->deserter != User::DESERTER_ADMIN)
 		{
 			$this->errorCode = self::ERROR_DESERTION;
 			return !$this->errorCode;

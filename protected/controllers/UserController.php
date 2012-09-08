@@ -64,15 +64,15 @@ class UserController extends Controller
     public function actionView($unique)
     {
         $user = User::model()->with('socialProfile')->findByAttributes(array('ign' => $unique));
-        if(!$user || $user->deserter == 'DISABLED')
+        if(!$user || $user->deserter == User::DESERTER_DISABLED || $user->deserter == User::DESERTER_ADMIN)
         {
             $this->layout = '//layouts/column1';
             $this->render('notAMember',array('name' => $unique));
             return;
         }
-        if($user->deserter != 'NO')
+        if($user->deserter != User::DESERTER_NO)
         {
-            if($user->deserter == 'LEFT') $verbbed = 'left';
+            if($user->deserter == User::DESERTER_LEFT) $verbbed = 'left';
             else $verbbed = 'deserted';
             throw new CHttpException(410,"{$user->ign} has {$verbbed} the Night's Watch.");
         }

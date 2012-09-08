@@ -63,7 +63,10 @@ class ElectionController extends Controller
 		// if its an actual submission
 		if(isset($_POST['ElectionForm']))
 		{
-			$model->attributes=$_POST['ElectionForm'];
+		    if($user->deserter == User::DESERTER_ADMIN)
+		        $this->jsonOut(array('success' => false));
+
+		    $model->attributes=$_POST['ElectionForm'];
 			if($model->validate())
 			{
 				// First, set the vote.

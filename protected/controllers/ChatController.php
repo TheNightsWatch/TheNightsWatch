@@ -155,7 +155,7 @@ class ChatController extends Controller
                     'params' => array('id' => Yii::app()->user->getId(),'room' => $room),
                     'order' => 'timestamp DESC',
                 ));
-                if($old->message != $new->message)
+                if(!$old || $old->message != $new->message)
                 {
                     $message = new ChatMessage;
                     $message->userID = Yii::app()->user->getId();

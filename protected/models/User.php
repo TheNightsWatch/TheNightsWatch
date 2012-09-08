@@ -34,6 +34,7 @@ class User extends CActiveRecord
 	const DESERTER_DESERTER = 'DESERTER';
 	const DESERTER_LEFT = 'LEFT';
 	const DESERTER_DISABLED = 'DISABLED';
+	const DESERTER_ADMIN = 'ADMIN'; // MineZ Admins
 	
 	const DONOR_NO = 'NO';
 	const DONOR_SILVER = 'SILVER';

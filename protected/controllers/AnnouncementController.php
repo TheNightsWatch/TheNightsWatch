@@ -19,10 +19,11 @@ class AnnouncementController extends Controller
     public function actionView($id)
     {
         $announcement = Announcement::model()->findByPk($id);
+        $user = !Yii::app()->user->isGuest ? User::model()->findByPk(Yii::app()->user->getId()) : false;
         if(!$announcement)
             throw new CHttpException(404,"No Such Announcement");
 
-        if(Yii::app()->user->isGuest && ($announcement->go_public == NULL || $announcement->go_public->getTimestamp() > time()))
+        if((Yii::app()->user->isGuest || !$user->verified || $user->deserter != User::DESERTER_NO) && ($announcement->go_public == NULL || $announcement->go_public->getTimestamp() > time()))
             throw new CHttpException(403,"Access Denied");
 
         $this->render('view',array('model' => $announcement));
