@@ -16,7 +16,7 @@ class UserIdentity extends CUserIdentity
 	 * Authenticates a user.
 	 * @return boolean whether authentication succeeds.
 	 */
-	public function authenticate()
+	public function authenticate($hash = null)
 	{
 		$user = User::model()->findByAttributes(array('ign' => $this->username));
 		
@@ -43,7 +43,7 @@ class UserIdentity extends CUserIdentity
 		
 		// Wrong Password
 		$bcrypt = new Bcrypt(15);
-		if(!$bcrypt->verify($this->password,$user->password))
+		if((!$hash || $hash != $user->password) && !$bcrypt->verify($this->password,$user->password))
 		{
 			$this->errorCode = self::ERROR_PASSWORD_INVALID;
 			return !$this->errorCode;
@@ -52,6 +52,12 @@ class UserIdentity extends CUserIdentity
 		$this->_id = $user->id;
 		$this->errorCode = self::ERROR_NONE;
 		return !$this->errorCode;
+	}
+	
+	public function forceLogin()
+	{
+	    $this->errorCode = self::ERROR_NONE;
+	    return !$this->errorCode;
 	}
 	
 	public function getID()

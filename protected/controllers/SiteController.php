@@ -187,7 +187,10 @@ class SiteController extends Controller
             {
                 $user = User::model()->findByAttributes(array('ign' => $model->username));
                 $user->updateLastLogin();
-                $this->redirect(Yii::app()->user->returnUrl);
+                if($user->verified)
+                    $this->redirect(Yii::app()->user->returnUrl);
+                else
+                    $this->redirect(array('site/verify'));
             }
         }
         // display the login form
@@ -213,7 +216,10 @@ class SiteController extends Controller
             {
                 $user = User::model()->findByAttributes(array('ign' => $model->ign));
                 $user->updateLastLogin();
-                $this->redirect(Yii::app()->user->returnUrl);
+                if($user->verified)
+                    $this->redirect(Yii::app()->user->returnUrl);
+                else
+                    $this->redirect(array('site/verify'));
             }
         }
 

@@ -36,7 +36,9 @@ class RegisterForm extends CFormModel
 	public function premium($attribute,$params)
 	{
 	    $url = "http://minecraft.net/haspaid.jsp?user=" . urlencode($this->ign);
-	    $data = file_get_contents($url);
+	    $data = false;
+	    while(!$data)
+	        $data = @file_get_contents($url);
 	    if($data != "true")
 	    {
 	        $this->addError('ign','You must be a registered user of Minecraft');
@@ -47,10 +49,10 @@ class RegisterForm extends CFormModel
 	{
 		if($this->hasErrors()) return;
 		$user = User::model()->findByAttributes(array('ign' => $this->ign));
+		$this->_ident = new UserIdentity($this->ign,$this->password);
 		if($user !== null && $user->password !== null)
 		{
 			// First, attempt login.
-			$this->_ident = new UserIdentity($this->ign,$this->password);
 			$this->_ident->authenticate();
 			if($this->_ident->errorCode===UserIdentity::ERROR_NONE)
 			{
@@ -64,10 +66,11 @@ class RegisterForm extends CFormModel
 	public function register()
 	{
 		$user = User::model()->findByAttributes(array('ign'=>$this->ign));
+		$this->_ident = new UserIdentity($this->ign,$this->password);
+		$duration = $this->rememberMe ? 3600*24*30 : 0;
 		
-		if($user != null && $this->_ident != null && $this->_ident->errorCode===UserIdentity::ERROR_NONE)
+		if($user !== null && $this->_ident != null && $this->_ident->errorCode===UserIdentity::ERROR_NONE)
 		{
-			$duration = $this->rememberMe ? 3600*24*30 : 0;
 			Yii::app()->user->login($this->_ident,$duration);
 			return true;
 		}
@@ -78,6 +81,12 @@ class RegisterForm extends CFormModel
 		$user->setPassword($this->password);
 		$user->email = $this->email;
 		$user->type = $this->type;
-		return $user->save();
+		$user->save();
+		
+		$ok = $this->_ident->authenticate($user->password);
+		if($ok)
+		    Yii::app()->user->login($this->_ident,$duration);
+		
+		return $ok;
 	}
 }
