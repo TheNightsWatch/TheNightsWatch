@@ -31,6 +31,9 @@ class SiteController extends Controller
             array(
                 'VerifyFilter + profile, KOS, mod, mods',
             ),
+            array(
+                'IPLogFilter'
+            ),
         );
     }
 
@@ -83,12 +86,12 @@ class SiteController extends Controller
     {
         $this->render('rules');
     }
-    
+
     public function actionMods()
     {
         $this->render('mods');
     }
-    
+
     public function actionModDownload()
     {
         /*
@@ -247,7 +250,7 @@ class SiteController extends Controller
     {
         $this->redirect('https://docs.google.com/spreadsheet/ccc?key=0Aqn3YLIby6B7dHRNTDhHY1pueGN1MGNtRE91VnQ4TEE',301);
     }
-    
+
     public function actionVerify()
     {
         if(!empty($_POST))

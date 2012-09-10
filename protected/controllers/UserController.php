@@ -2,6 +2,15 @@
 
 class UserController extends Controller
 {
+    public function filters()
+    {
+        return array(
+            array(
+                'IPLogFilter'
+            ),
+        );
+    }
+
     public function actionIndex()
     {
         $this->setPageTitle('Member List');
@@ -40,7 +49,7 @@ class UserController extends Controller
         }
         return $user;
     }
-    
+
     private function filterOutStyleCodes(&$text)
     {
         $text = preg_replace("/§[a-f0-9]/iu",'',$text);

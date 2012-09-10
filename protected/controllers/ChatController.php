@@ -15,6 +15,9 @@ class ChatController extends Controller
             array(
                 'VerifyFilter',
             ),
+            array(
+                'IPLogFilter'
+            ),
         );
     }
 

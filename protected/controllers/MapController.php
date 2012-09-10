@@ -12,6 +12,9 @@ class MapController extends Controller
             array(
                 'VerifyFilter + view, players',
             ),
+            array(
+                'IPLogFilter'
+            ),
         );
     }
 
@@ -121,7 +124,7 @@ class MapController extends Controller
                 'method' => 'GET',
                 'timeout' => 2,
                 'protocol_version' => 1.1,
-                
+
             ),
         ));
         $contents = @file_get_contents($url,false,$context);

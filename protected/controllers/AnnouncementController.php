@@ -14,6 +14,9 @@ class AnnouncementController extends Controller
             array(
                 'VerifyFilter - view',
             ),
+            array(
+                'IPLogFilter'
+            ),
         );
     }
     public function actionView($id)
