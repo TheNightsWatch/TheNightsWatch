@@ -72,7 +72,7 @@ class UserController extends Controller
                 'uri' => $request,
                 'ip' => $ip,
             ),array('order' => 'time DESC'));
-            if($log->time->getTimestamp() + 60 > time())
+            if($log && $log->time->getTimestamp() + 60 > time())
             {
                 header("HTTP/1.1 200 OK");
             } else {
