@@ -8,7 +8,7 @@ class IPLogFilter extends CFilter
 	}
 	public function postFilter($chain)
 	{
-	    $request = preg_replace("/§[a-f0-9]/iu",'',Yii::app()->request->getRequestUri());
+	    $request = str_replace("§",'',Yii::app()->request->getRequestUri());
 	    $uid = Yii::app()->user->isGuest ? NULL : Yii::app()->user->getId();
 	    $ip = Yii::app()->request->getUserHostAddress();
 	    

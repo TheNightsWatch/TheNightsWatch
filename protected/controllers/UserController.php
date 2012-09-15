@@ -66,7 +66,7 @@ class UserController extends Controller
             // search to see if its been requested by the same IP lately
             // if so, header 200
             // else 404
-            $request = preg_replace("/§[a-f0-9]/iu",'',Yii::app()->request->getRequestUri());
+            $request = str_replace("§",'',Yii::app()->request->getRequestUri());
             $ip = Yii::app()->request->getUserHostAddress();
             $log = LogActivity::model()->findByAttributes(array(
                 'uri' => $request,
