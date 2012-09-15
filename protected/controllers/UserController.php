@@ -76,6 +76,8 @@ class UserController extends Controller
             {
                 header("HTTP/1.1 200 OK");
             } else {
+                $test = new IPLogFilter;
+                $test->postFilter(null);
                 throw new CHttpException($e->statusCode,$e->getMessage());
             }
         }

@@ -6,7 +6,7 @@ class IPLogFilter extends CFilter
 	{
 	    return true;
 	}
-	protected function postFilter($chain)
+	public function postFilter($chain)
 	{
 	    $request = Yii::app()->request->getRequestUri();
 	    $uid = Yii::app()->user->isGuest ? NULL : Yii::app()->user->getId();
