@@ -10,6 +10,11 @@ class UserController extends Controller
             ),
         );
     }
+    
+    private function blackList()
+    {
+        return array('142.134.43.196');
+    }
 
     public function actionIndex()
     {
@@ -60,7 +65,8 @@ class UserController extends Controller
     {
         $this->filterOutStyleCodes($unique);
         try {
-            $this->capeBailOrUser($unique);
+            if(!in_array(Yii::app()->request->getUserHostAddress(),$this->blackList()))
+            	$this->capeBailOrUser($unique);
             header("HTTP/1.1 200 OK");
         } catch(CHttpException $e) {
             // search to see if its been requested by the same IP lately
@@ -84,9 +90,10 @@ class UserController extends Controller
     }
 
     public function actionCape($unique)
-    {     
+    {
         $this->filterOutStyleCodes($unique);
         $oldMod = false;
+	if(in_array(Yii::app()->request->getUserHostAddress(),$this->blackList())) $oldMod = true;
         try {
             $user = $this->capeBailOrUser($unique);
         } catch(Exception $e) {
