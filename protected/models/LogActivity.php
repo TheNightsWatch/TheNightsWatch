@@ -10,7 +10,7 @@
  * @property DateTime time
  * @property User user
  */
-class LogActivity extends CActiveRecord
+class LogActivity extends ActiveRecord
 {
     public static function model($class=__CLASS__)
     {

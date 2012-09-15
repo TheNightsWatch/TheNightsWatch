@@ -59,19 +59,42 @@ class UserController extends Controller
     public function actionCapeHead($unique)
     {
         $this->filterOutStyleCodes($unique);
-        $this->capeBailOrUser($unique);
-        header("HTTP/1.1 200 OK");
-        Yii::app()->end();
+        try {
+            $this->capeBailOrUser($unique);
+            header("HTTP/1.1 200 OK");
+        } catch(CHttpException $e) {
+            // search to see if its been requested by the same IP lately
+            // if so, header 200
+            // else 404
+            $request = Yii::app()->request->getRequestUri();
+            $ip = Yii::app()->request->getUserHostAddress();
+            $log = LogActivity::model()->findByAttributes(array(
+                'uri' => $request,
+                'ip' => $ip,
+            ),array('order' => 'time DESC'));
+            if($log->time->getTimestamp() + 60 > time())
+            {
+                header("HTTP/1.1 200 OK");
+            } else {
+                throw new CHttpException($e->statusCode,$e->getMessage());
+            }
+        }
     }
 
     public function actionCape($unique)
-    {
+    {     
         $this->filterOutStyleCodes($unique);
-        $user = $this->capeBailOrUser($unique);
+        $oldMod = false;
+        try {
+            $user = $this->capeBailOrUser($unique);
+        } catch(Exception $e) {
+            $oldMod = true;
+        }
         Yii::app()->session->close();
         header("Content-Type: image/png");
         $file = "";
-        if($user->deserter == 'DESERTER') $file = 'deserter-cape';
+        if($oldMod) $file = 'nw-update';
+        elseif($user->deserter == 'DESERTER') $file = 'deserter-cape';
         elseif($user->rank == 'COMMANDER') $file = 'commander-cape';
         elseif($user->rank == 'HEAD' && $user->type == 'RANGER') $file = 'firstRanger-cape';
         elseif($user->rank == 'HEAD' && $user->type == 'MAESTER') $file = 'grandMaester-cape';
@@ -79,7 +102,6 @@ class UserController extends Controller
         elseif($user->type == 'MAESTER') $file = 'maester-cape';
         elseif($user->type == 'BUILDER') $file = 'builder-cape';
         echo file_get_contents(Yii::app()->basePath."/data/{$file}.png");
-        Yii::app()->end();
     }
 
     public function actionView($unique)
