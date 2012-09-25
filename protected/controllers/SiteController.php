@@ -248,7 +248,7 @@ class SiteController extends Controller
 
     public function actionKOS()
     {
-        $this->redirect('https://docs.google.com/spreadsheet/ccc?key=0Aqn3YLIby6B7dHRNTDhHY1pueGN1MGNtRE91VnQ4TEE',301);
+        $this->redirect(Yii::app()->params['kos'],301);
     }
 
     public function actionVerify()
