@@ -53,7 +53,7 @@
 
 		<div id="mainmenu">
 			<?php
-			$ongoingElections = Election::countAllOngoing();
+			try { $ongoingElections = Election::countAllOngoing(); } catch(Exception $e) { $ongoingElections = array(); }
 			$this->widget('zii.widgets.CMenu',array(
 			    'items'=>array(
 			        array('label'=>'Home', 'url'=>array('site/index')),
