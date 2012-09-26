@@ -50,20 +50,22 @@ class MapController extends Controller
     {
         Yii::app()->session->close();
         $locs = UserLocation::model()->with('user')->findAll('UNIX_TIMESTAMP() - UNIX_TIMESTAMP(lastUpdate) < 60');
+        $loggedInUser = User::model()->findByPk(Yii::app()->user->getId());
         $out = array();
         foreach($locs as $loc)
         {
-            $out[] = array(
-                'timestamp' => $loc->lastUpdate->format('Ymd H:i:s'),
-                'id' => 4,
-                'msg' => $loc->user->ign,
-                'x' => $loc->x,
-                'y' => $loc->y,
-                'z' => $loc->z,
-                'world' => 'MineZ - overworld',
-                'server' => $loc->server,
-                'rank' => $loc->user->rank,
-            );
+            if($loc->user->id == $loggedInUser->id || in_array($loggedInUser->rank,array(User::RANK_HEAD,User::RANK_COMMANDER)))
+                $out[] = array(
+                    'timestamp' => $loc->lastUpdate->format('Ymd H:i:s'),
+                    'id' => 4,
+                    'msg' => $loc->user->ign,
+                    'x' => $loc->x,
+                    'y' => $loc->y,
+                    'z' => $loc->z,
+                    'world' => 'MineZ - overworld',
+                    'server' => $loc->server,
+                    'rank' => $loc->user->rank,
+                );
         }
         $this->jsonOut($out);
     }
