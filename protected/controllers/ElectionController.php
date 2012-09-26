@@ -7,10 +7,10 @@ class ElectionController extends Controller
         return array(
             'accessControl',
             array(
-                'BanFilter + index',
+                'BanFilter + index, nominate',
             ),
             array(
-                'VerifyFilter + index',
+                'VerifyFilter + index, nominate',
             ),
             array(
                 'IPLogFilter'
@@ -22,7 +22,7 @@ class ElectionController extends Controller
     {
         return array(
             array('allow',
-                'actions' => array('index','results'),
+                'actions' => array('index','results','nominate'),
                 'users' => array('@'),
             ),
             array('allow',
@@ -30,7 +30,7 @@ class ElectionController extends Controller
                 'users' => array('*'),
             ),
             array('deny',
-                'actions' => array('index'),
+                'actions' => array('index','nominate'),
                 'users' => array('*'),
             )
         );
@@ -43,14 +43,14 @@ class ElectionController extends Controller
 
         foreach($elections as $k => $election)
         {
-            $time = strtotime($election->startTime);
+            $time = strtotime($election->nominateStartTime);
             $joinTime = strtotime($user->joinDate);
             if($joinTime > $time) unset($elections[$k]);
         }
 
         if(!count($elections))
         {
-            $this->render('../site/error',array('message' => 'In order to prevent election fraud, you are unable to participate in elections that started before you joined the Watch'));
+            $this->render('../site/error',array('message' => 'In order to prevent election fraud, you are unable to participate in elections where nominations began before you joined the Watch'));
             return;
         }
 
@@ -96,6 +96,11 @@ class ElectionController extends Controller
         $this->render('index',array('elections' => $elections));
     }
 
+    public function actionNominate()
+    {
+        throw new CHttpException(501,"Not Yet Implemented");
+    }
+    
     public function actionResults()
     {
         $elections = Election::model()->findAll(array('condition' => 'endTime <= NOW()', 'order' => 'endTime DESC'));
