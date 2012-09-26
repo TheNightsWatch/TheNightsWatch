@@ -10,7 +10,7 @@ class UserController extends Controller
             ),
         );
     }
-    
+
     private function blackList()
     {
         return array('142.134.43.196');
@@ -64,42 +64,17 @@ class UserController extends Controller
     public function actionCapeHead($unique)
     {
         $this->filterOutStyleCodes($unique);
-        try {
-            if(!in_array(Yii::app()->request->getUserHostAddress(),$this->blackList()))
-            	$this->capeBailOrUser($unique);
-            header("HTTP/1.1 200 OK");
-        } catch(CHttpException $e) {
-            // search to see if its been requested by the same IP lately
-            // if so, header 200
-            // else 404
-            $request = str_replace("§",'',Yii::app()->request->getRequestUri());
-            $ip = Yii::app()->request->getUserHostAddress();
-            $log = LogActivity::model()->findByAttributes(array(
-                'uri' => $request,
-                'ip' => $ip,
-            ),array('order' => 'time DESC'));
-            if($log && $log->time->getTimestamp() + 60 > time())
-            {
-                header("HTTP/1.1 200 OK");
-            } else {
-                $test = new IPLogFilter;
-                $test->postFilter(null);
-                throw new CHttpException($e->statusCode,$e->getMessage());
-            }
-        }
+        $this->capeBailOrUser($unique);
+        header("HTTP/1.1 200 OK");
     }
 
     public function actionCape($unique)
     {
-        $this->filterOutStyleCodes($unique);
-        $oldMod = false;
-	if(in_array(Yii::app()->request->getUserHostAddress(),$this->blackList())) $oldMod = true;
-        try {
-            $user = $this->capeBailOrUser($unique);
-        } catch(Exception $e) {
-            $oldMod = true;
-        }
         Yii::app()->session->close();
+        $this->filterOutStyleCodes($unique);
+        $user = User::model()->findByAttributes(array('ign' => $unique));
+        if(!$user) throw new CHttpException(404,"User does not exist");
+        $oldMod = false;
         header("Content-Type: image/png");
         $file = "";
         if($oldMod) $file = 'nw-update';

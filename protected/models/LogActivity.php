@@ -3,11 +3,8 @@
 /**
  * 
  * @author Navarr
- * @property int id
  * @property string ip
- * @property string uri
  * @property int uid
- * @property DateTime time
  * @property User user
  */
 class LogActivity extends ActiveRecord
@@ -19,13 +16,13 @@ class LogActivity extends ActiveRecord
     
     public function tableName()
     {
-        return 'log';
+        return 'ip';
     }
     
     public function rules()
     {
         return array(
-            array('ip, uid, uri, time', 'safe', 'on' => 'insert')
+            array('ip, uid', 'safe', 'on' => 'insert')
         );
     }
     
