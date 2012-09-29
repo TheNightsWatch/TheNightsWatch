@@ -13,7 +13,7 @@
 	<div class="electionHeader">
 		<?= htmlspecialchars($election->title) ?>
 	</div>
-	<div class="electionImage">
+	<div class="electionImage" <?php if($model->getElection()->winnerCount > 1): ?>style="display:none;"<?php endif; ?>>
 		<div
 			style="width: 100px; height: 100px; display: inline-block; position: relative;">
 			<img src="<?= $model->candidate ? $model->candidate->user->headUrl(100) : 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='; ?>"
@@ -23,8 +23,14 @@
 		</div>
 	</div>
 	<div class="electionSubmit">
+	    <?php 
+	        $htmlOptions = array();
+	        if($model->getElection()->winnerCount > 1) $htmlOptions['multiple'] = 'multiple';
+	        $htmlOptions['data-selectAmt'] = $model->getElection()->winnerCount;
+	    ?>
 		<?php echo $form->hiddenField($model,'electionID',array('value' => $model->electionID)); ?>
-		<?php echo $form->dropDownList($model,'candidateID',$model->getCandidateDropdownArray()) ?>
+		<?php echo $form->dropDownList($model,'candidateID',$model->getCandidateDropdownArray(),$htmlOptions) ?>
+		<?php if($model->getElection()->winnerCount > 1): ?><br /><br />Please select <?= $model->getElection()->winnerCount ?><br /><br /><?php endif; ?>
 		<?php echo CHtml::submitButton('Vote'); ?>
 	</div>
 	<?php $this->endWidget(); ?>

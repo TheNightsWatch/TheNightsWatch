@@ -43,7 +43,7 @@ class ElectionController extends Controller
 
         foreach($elections as $k => $election)
         {
-            $time = strtotime($election->nominateStartTime);
+            $time = $election->nominateStartTime->getTimestamp();
             $joinTime = strtotime($user->joinDate);
             if($joinTime > $time) unset($elections[$k]);
         }
@@ -78,11 +78,15 @@ class ElectionController extends Controller
                     'voterID' => Yii::app()->user->getId(),
                 ));
 
-                $vote = new ElectionVote;
-                $vote->electionID = $model->electionID;
-                $vote->candidateID = $model->candidateID;
-                $vote->voterID = Yii::app()->user->getId();
-                $success = $vote->save();
+                $success = true;
+                foreach($model->getCandidateArray() as $candidateID)
+                {
+                    $vote = new ElectionVote;
+                    $vote->electionID = $model->electionID;
+                    $vote->candidateID = $candidateID;
+                    $vote->voterID = Yii::app()->user->getId();
+                    $success = $vote->save() && $success;
+                }
 
                 if(isset($_POST['ajax']))
                 {
@@ -100,7 +104,7 @@ class ElectionController extends Controller
     {
         throw new CHttpException(501,"Not Yet Implemented");
     }
-    
+
     public function actionResults()
     {
         $elections = Election::model()->findAll(array('condition' => 'endTime <= NOW()', 'order' => 'endTime DESC'));
