@@ -261,6 +261,11 @@ class SiteController extends Controller
                 if(strtolower($user->ign) == strtolower($api->username))
                 {
                     $user->ign = $api->username;
+                    if(!$user->verified)
+                    {
+                        $user->joinDate = new CDbExpression('NOW()');
+                        $user->lastLogin = new CDbExpression('NOW()');
+                    }
                     $user->verified = true;
                     $user->save();
                     Yii::app()->user->setFlash('verify','Your Minecraft account has been verified.');
