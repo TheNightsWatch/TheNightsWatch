@@ -31,10 +31,16 @@ Yii::app()->clientScript->registerCoreScript('jquery');
 		e.preventDefault();
 		var form = $(this);
 		var action = form.attr('action');
-		var id = $(this).find('select').val();
-		if(!id)
+		var select = form.find('select');
+		var id = select.val();
+		if(!id || id == "" || (id.length && $.inArray("",id) != -1))
 		{
 			alert("Listen...\nYou can't vote for nobody.\nSo either vote for somebody, or don't vote at all.");
+			return;
+		}
+		if(id.length && id.length > select.attr('data-selectAmt'))
+		{
+			alert("Hey now.  I told you to only vote for " + select.attr('data-selectAmt') + "!");
 			return;
 		}
 
@@ -53,6 +59,7 @@ Yii::app()->clientScript->registerCoreScript('jquery');
 				box.attr('data-votedFor',id);
 				if(box.find('select').val() == id)
 					box.find('.electionImage div div').show();
+				if(select.attr('data-selectAmt') > 1) alert('Your vote has been successfully counted!');
 			}
 		});
 	});

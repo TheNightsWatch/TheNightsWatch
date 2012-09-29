@@ -1,5 +1,17 @@
 <?php
 
+/**
+ * 
+ * @author Navarr
+ * @property int id
+ * @property string title
+ * @property DateTime nominateStartTime
+ * @property DateTime startTime
+ * @property DateTime endTime
+ * @property int winnerCount
+ * @property array:Candidate candidates
+ * @property array:ElectionVote votes
+ */
 class Election extends ActiveRecord
 {
 	private $winner = null;
