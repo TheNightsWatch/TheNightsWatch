@@ -54,7 +54,7 @@ class MapController extends Controller
         $out = array();
         foreach($locs as $loc)
         {
-            if($loc->user->id == $loggedInUser->id || in_array($loggedInUser->rank,array(User::RANK_HEAD,User::RANK_COMMANDER)))
+            if($loc->user->id == $loggedInUser->id || in_array($loggedInUser->rank,array(User::RANK_HEAD,User::RANK_COMMANDER,User::RANK_COUNCIL)))
                 $out[] = array(
                     'timestamp' => $loc->lastUpdate->format('Ymd H:i:s'),
                     'id' => 4,
