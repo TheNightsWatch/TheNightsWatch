@@ -61,7 +61,7 @@ Yii::app()->clientScript->registerCoreScript('jquery');
 					box.find('.electionImage div div').show();
 				if(select.attr('data-selectAmt') > 1) alert('Your vote has been successfully counted!');
 			}
-		});
+		}).fail(function() { alert('There was an error.  Please try again.'); });
 	});
 </script>
 <style>
