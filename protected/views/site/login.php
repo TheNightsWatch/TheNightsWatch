@@ -28,7 +28,7 @@ $this->breadcrumbs=array(
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'password'); ?>
-		<?php echo $form->passwordField($model,'password'); ?>
+		<?php echo $form->passwordField($model,'password'); ?> <small>(<em><a href="<?php echo $this->createUrl('site/forgot'); ?>">Help! I forgot!</a></em>)</small>
 		<?php echo $form->error($model,'password'); ?>
 	</div>
 

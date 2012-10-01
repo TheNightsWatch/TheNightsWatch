@@ -56,6 +56,8 @@ class UserIdentity extends CUserIdentity
 	
 	public function forceLogin()
 	{
+	    $user = User::model()->findByAttributes(array('ign' => $this->username));
+	    $this->_id = $user->id;
 	    $this->errorCode = self::ERROR_NONE;
 	    return !$this->errorCode;
 	}

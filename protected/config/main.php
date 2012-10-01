@@ -42,6 +42,7 @@ return array(
 			    'mods' => 'site/mods',
 			    'rules' => 'site/rules',
 			    'minecraft.jar' => 'site/modDownload',
+			    'resetPassword' => 'site/forgot',
 			    
 			    // Map Downloader
                 'map/MineZ/<path:.+>' => 'map/download',

@@ -251,6 +251,22 @@ class SiteController extends Controller
         $this->redirect(Yii::app()->params['kos'],301);
     }
 
+    public function actionForgot()
+    {
+        $model = new ForgotForm();
+        if(isset($_POST['ForgotForm']))
+        {
+            $model->attributes = $_POST['ForgotForm'];
+            if($model->validate() && $model->changePassword())
+            {
+                $user = User::model()->findByAttributes(array('ign' => $model->ign));
+                $user->updateLastLogin();
+                $this->redirect(Yii::app()->user->returnUrl);
+            }
+        }
+        $this->render('forgot',array('model' => $model));
+    }
+
     public function actionVerify()
     {
         if(!empty($_POST))
