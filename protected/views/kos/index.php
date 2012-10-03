@@ -19,9 +19,9 @@ function statusToColor($status)
 </p>
 <table>
 	<thead>
-		<th colspan="2">Username</th>
-		<th title="Year/month/day">Last Seen</th>
-		<th>Server</th>
+		<th colspan="2" style="min-width:12em;">Username</th>
+		<th title="Year/month/day" style="min-width:5em;">Last Seen</th>
+		<th style="min-width:8em;">Server</th>
 		<th>Latest Report</th>
 	</thead>
 	<tbody>
@@ -47,9 +47,12 @@ function statusToColor($status)
 			</td>
 			<td><?php echo count($kosum->reports) ? CHtml::encode($kosum->reports[0]->server) : ''; ?>
 			</td>
-			<td><?php echo count($kosum->reports) ? (mb_strlen($kosum->reports[0]->report,'UTF-8') > 100 ? CHtml::encode(mb_substr($kosum->reports[0]->report,0,100))."..." : CHtml::encode($kosum->reports[0]->report)) : ''; ?>
+			<td class="proof"><?php echo count($kosum->reports) ? (mb_strlen($kosum->reports[0]->report,'UTF-8') > 100 ? CHtml::encode(mb_substr($kosum->reports[0]->report,0,100))."..." : CHtml::encode($kosum->reports[0]->report)) : ''; ?>
 			</td>
 		</tr>
 		<?php endforeach; ?>
 	</tbody>
 </table>
+<style>
+td.proof { white-space: nowrap; text-overflow: ellipsis; }
+</style>
