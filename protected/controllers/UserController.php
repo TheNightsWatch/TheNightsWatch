@@ -32,23 +32,24 @@ class UserController extends Controller
     private function capeBailOrUser($user)
     {
         $user = User::model()->findByAttributes(array('ign' => $user));
-        if(!$user)
+        if(!$user) $kos = KOS::model()->findByAttributes(array('ign' => $user));
+        if(!$user && !$kos)
         {
             throw new CHttpException(404,"No Such User");
         }
-        if(!$user->verified)
+        if(!$user->verified && !$kos)
         {
             throw new CHttpException(404,"User Not Verified");
         }
-        if($user->deserter == User::DESERTER_LEFT)
+        if($user->deserter == User::DESERTER_LEFT && !$kos)
         {
             throw new CHttpException(404,"No Longer a Member");
         }
-        if($user->deserter == User::DESERTER_DISABLED)
+        if($user->deserter == User::DESERTER_DISABLED && !$kos)
         {
             throw new CHttpException(404,"Account Disabled");
         }
-        if($user->deserter == User::DESERTER_ADMIN)
+        if($user->deserter == User::DESERTER_ADMIN && !$kos)
         {
             throw new CHttpException(404,"User not really a member");
         }
@@ -73,18 +74,22 @@ class UserController extends Controller
         Yii::app()->session->close();
         $this->filterOutStyleCodes($unique);
         $user = User::model()->findByAttributes(array('ign' => $unique));
-        if(!$user) throw new CHttpException(404,"User does not exist");
+        $kos = KOS::model()->findByAttributes(array('ign' => $unique));
+        if(!$user && !$kos) throw new CHttpException(404,"User does not exist");
         $oldMod = false;
         header("Content-Type: image/png");
         $file = "";
         if($oldMod) $file = 'nw-update';
-        elseif($user->deserter == 'DESERTER') $file = 'deserter-cape';
-        elseif($user->rank == 'COMMANDER') $file = 'commander-cape';
-        elseif($user->rank == 'HEAD' && $user->type == 'RANGER') $file = 'firstRanger-cape';
-        elseif($user->rank == 'HEAD' && $user->type == 'MAESTER') $file = 'grandMaester-cape';
-        elseif($user->type == 'RANGER') $file = 'ranger-cape';
-        elseif($user->type == 'MAESTER') $file = 'maester-cape';
-        elseif($user->type == 'BUILDER') $file = 'builder-cape';
+        elseif($user && $user->deserter == 'DESERTER') $file = 'deserter-cape';
+        elseif($kos && $kos->status == KOS::STATUS_ACCEPTED) $file = 'deserter-cape';
+        elseif($user && $user->rank == User::RANK_COMMANDER) $file = 'commander-cape';
+        elseif($user && $user->rank == User::RANK_HEAD && $user->type == User::TYPE_RANGER) $file = 'firstRanger-cape';
+        elseif($user && $user->rank == User::RANK_HEAD && $user->type == User::TYPE_MAESTER) $file = 'grandMaester-cape';
+        elseif($user && $user->type == User::TYPE_RANGER) $file = 'ranger-cape';
+        elseif($user && $user->type == User::TYPE_MAESTER) $file = 'maester-cape';
+        elseif($user && $user->type == User::TYPE_BUILDER) $file = 'builder-cape';
+        elseif($kos && $kos->status == KOS::STATUS_WARNING) $file = 'warning-cape';
+        elseif($kos && $kos->status == KOS::STATUS_CAUTION) $file = 'caution-cape';
         echo file_get_contents(Yii::app()->basePath."/data/{$file}.png");
     }
 
