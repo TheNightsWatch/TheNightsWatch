@@ -89,7 +89,7 @@ class UserController extends Controller
         elseif($user && $user->type == User::TYPE_MAESTER) $file = 'maester-cape';
         elseif($user && $user->type == User::TYPE_BUILDER) $file = 'builder-cape';
         elseif($kos && $kos->status == KOS::STATUS_WARNING) $file = 'warning-cape';
-        elseif($kos && $kos->status == KOS::STATUS_CAUTION) $file = 'caution-cape';
+        elseif($kos && $kos->status == KOS::STATUS_CAUTION) $file = 'wary-cape';
         echo file_get_contents(Yii::app()->basePath."/data/{$file}.png");
     }
 
