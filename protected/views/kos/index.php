@@ -7,8 +7,8 @@ function statusToColor($status)
     $colors = array(
         KOS::STATUS_ACCEPTED => 'red',
         KOS::STATUS_DESERTER => 'darkred',
-        KOS::STATUS_CAUTION => 'yellow',
-        KOS::STATUS_WARNING => 'blue',
+        KOS::STATUS_CAUTION => 'blue',
+        KOS::STATUS_WARNING => 'yellow',
     );
     return $colors[$status];
 }
