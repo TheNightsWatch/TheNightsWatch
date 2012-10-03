@@ -59,9 +59,9 @@ return array(
 				'user/<unique:\w+>'=>'user/view',
 				'user/<unique:\w+>/<action:\w+>'=>'user/<action>',
 			    
-			    'kos' => 'KOS/index',
-			    'kos/add' => 'KOS/add',
-			    'kos/<unique:\w+>'=>'KOS/view',
+			    'kos' => 'kos/index',
+			    'kos/add' => 'kos/add',
+			    'kos/<unique:\w+>'=>'kos/view',
 
 				// Controller/Action
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
