@@ -6,18 +6,19 @@ class KOSForm extends CFormModel
     public $server;
     public $report;
     public $proof;
-    
+
     public $id;
-    
+
     public function rules()
     {
         return array(
             array('ign, server, report','required'),
             array('proof', 'safe'),
             array('ign','premium'),
+            array('server','serverCheck'),
         );
     }
-    
+
     public function premium($attribute,$params)
     {
         $url = "http://minecraft.net/haspaid.jsp?user=".urlencode($this->ign);
@@ -27,14 +28,25 @@ class KOSForm extends CFormModel
             $this->addError('ign','Not a valid Minecraft User');
         }
     }
-    
+
+    public function serverCheck($attribute,$params)
+    {
+        $parts = explode(".",$this->server);
+        if(substr($parts[0],0,3) == "lms")
+            $this->addError('server',"Night's Watch Rules do not apply on LMS Servers");
+        $mineZPart = ".minez.net";
+        $this->server = strtolower($this->server);
+        if(substr($this->server,-1 * strlen($minezPart)) == $mineZPart)
+            $this->server = substr($this->server,0,-1 * strlen($mineZPart));
+    }
+
     public function attributeLabels()
     {
         return array(
             'ign' => 'Username',
         );
     }
-    
+
     public function save()
     {
         $kos = KOS::model()->findByAttributes(array('ign' => $this->ign));
