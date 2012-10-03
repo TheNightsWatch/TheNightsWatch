@@ -15,6 +15,14 @@ class KOSController extends Controller
     public function accessRules()
     {
         return array(
+            array('allow',
+                'actions'=>array('index','add','view'),
+                'users' => array('@'),
+            ),
+            array('deny',
+                'actions'=>array('index','add','view'),
+                'users'=>array('*')
+            ),
         );
     }
 
