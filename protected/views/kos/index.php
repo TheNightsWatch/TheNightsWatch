@@ -49,16 +49,10 @@ function statusToColor($status)
 			</td>
 			<td><?php echo count($kosum->reports) ? CHtml::encode($kosum->reports[0]->server) : ''; ?>
 			</td>
-			<td class="proof"><span><?php echo count($kosum->reports) ? (mb_strlen($kosum->reports[0]->report,'UTF-8') > 100 ? CHtml::encode(mb_substr($kosum->reports[0]->report,0,100))."..." : CHtml::encode($kosum->reports[0]->report)) : ''; ?>
+			<td class="proof"><span><?php echo count($kosum->reports) ? (mb_strlen($kosum->reports[0]->report,'UTF-8') > 70 ? CHtml::encode(mb_substr($kosum->reports[0]->report,0,70))."..." : CHtml::encode($kosum->reports[0]->report)) : ''; ?>
 			</span>
 			</td>
 		</tr>
 		<?php endforeach; ?>
 	</tbody>
 </table>
-<style>
-td.proof span {
-	white-space: nowrap;
-	text-overflow: ellipsis;
-}
-</style>
