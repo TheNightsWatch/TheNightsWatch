@@ -1,3 +1,4 @@
+<?php $this->setPageTitle($kkos->ign); ?>
 <p>
 	<strong>Status:</strong>
 	<em><?php echo KOS::translateStatus($kos->status); ?></em>

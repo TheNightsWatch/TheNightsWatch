@@ -1,3 +1,4 @@
+<?php $this->setPageTitle('File a KOS Request'); ?>
 <div class="form">
 	<?php $form = $this->beginWidget('CActiveForm', array(
 	    'action' => array('kos/add'),
