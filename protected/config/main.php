@@ -38,7 +38,6 @@ return array(
 				'register' => 'site/register',
 				'logout' => 'site/logout',
 			    'profile' => 'site/profile',
-			    'KOS' => 'site/KOS',
 			    'mods' => 'site/mods',
 			    'rules' => 'site/rules',
 			    'minecraft.jar' => 'site/modDownload',
@@ -59,6 +58,10 @@ return array(
 				'user' => 'user/index',
 				'user/<unique:\w+>'=>'user/view',
 				'user/<unique:\w+>/<action:\w+>'=>'user/<action>',
+			    
+			    'kos' => 'kos/index',
+			    'kos/add' => 'kos/add',
+			    'kos/<unique:\w+>'=>'kos/view',
 
 				// Controller/Action
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',

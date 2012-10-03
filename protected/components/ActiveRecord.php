@@ -13,10 +13,11 @@ class ActiveRecord extends CActiveRecord
              * the user sets it as to the string format specified in $this->_sql_format,
              * allowing the record to ignore the type of the variable completely.
              */
-            if(is_int($value))
-                $value = date($this->_sql_format,$value);
-            else if($value instanceof DateTime)
+            
+            if($value instanceof DateTime)
                 $value = $value->format($this->_sql_format);
+            else if(is_int($value))
+                $value = date($this->_sql_format,$value);
             else if(is_string($value))
                 $value = date($this->_sql_format,strtotime($value));
         }
@@ -29,10 +30,11 @@ class ActiveRecord extends CActiveRecord
         {
             $value = parent::__get($name);
             if($value instanceof CDbCriteria)
-            {
                 return $value;
-            }
-            return new DateTime($value);
+            else if($value instanceof DateTime)
+                return $value;
+            else
+                return new DateTime($value);
         }
         return parent::__get($name);
     }
