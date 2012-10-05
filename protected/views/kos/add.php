@@ -25,6 +25,15 @@
 		<?php echo $form->labelEx($model,'report'); ?>
 		<?php echo $form->textArea($model,'report'); ?>
 		<?php echo $form->error($model,'report'); ?>
+		<p class="note">
+			<strong>We support markdown!</strong><br /> What does this mean? It
+			means you can use safe bits of HTML and <a
+				href="http://daringfireball.net/projects/markdown/syntax">markdown
+				syntax</a> within your reason and proof.<br /> <br /> To include an
+			image in your proof, please use the code ![](http://imgur.com/image).
+			To make a link <a href="http://google.com/">like this</a>, simply
+			type [like this](http://google.com). That's all it takes!
+		</p>
 	</div>
 
 	<div class="row">
