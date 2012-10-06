@@ -20,6 +20,7 @@ return array(
 		    'class' => 'HttpRequest',
 		    'noCsrfValidationRoutes' => array(
 		        'map/update',
+		        'user/cape',
 	        ),
 			'enableCsrfValidation' => true,
 			'enableCookieValidation' => true,

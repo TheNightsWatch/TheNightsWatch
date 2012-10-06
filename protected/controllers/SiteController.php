@@ -98,13 +98,14 @@ class SiteController extends Controller
         if(file_exists(Yii::app()->basePath.'/data/magicLauncher.zip'))
         {
             header("Content-Type: application/zip");
-            header("Content-Disposition: attachment; filename=TWN_Windows.zip");
-            echo file_get_contents(Yii::app()->basePath.'/data/magicLauncher.zip');
+            header("Content-Disposition: attachment; filename=TNW_Windows.zip");
+            header("Content-Length: ".filesize(Yii::app()->basePath.'/data/magicLauncher.zip'));
+            readfile(Yii::app()->basePath.'/data/magicLauncher.zip');
             die();
         }
         throw new CHttpException(404,"Minecraft Modification does not exist.");
     }
-    
+
     public function actionModDownload()
     {
         /*
@@ -119,8 +120,8 @@ class SiteController extends Controller
         {
             header("Content-Type: application/java-archive");
             header("Content-Disposition: attachment; filename=minecraft.jar");
-            echo file_get_contents(Yii::app()->basePath.'/data/minecraft.jar');
-            die();
+            header("Content-Length: ".filesize(Yii::app()->basePath.'/data/minecraft.jar'));
+            readfile(Yii::app()->basePath.'/data/minecraft.jar');
         }
         throw new CHttpException(404,"Minecraft Modification does not exist.");
     }
