@@ -108,6 +108,18 @@ class MapController extends Controller
             $loc->userID = $user->id;
         } else $loc = $user->location;
         $loc->updateLocation($x,$y,$z,$server);
+        
+        // Look for Events
+        $ip = gethostbyname($server);
+        $events = Event::model()->findAll(array(
+            'condition' => '(ip LIKE :ip OR ip IS NULL) AND (:x BETWEEN x1 AND x2 AND :y BETWEEN y1 AND y2) AND (NOW() BETWEEN start AND end OR (NOW() > start AND end IS NULL))',
+            'params' => array('x' => $x, 'y' => $y, 'ip' => $ip),
+        ));
+        foreach($events as $event)
+        {
+            $event->addAttendee($user);
+        }
+        
         header("HTTP/1.1 201");
         Yii::app()->end();
     }
