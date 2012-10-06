@@ -2,7 +2,7 @@
 
 class UserController extends Controller
 {
-    const LATEST_CAPE_VERSION = 1.3;
+    const LATEST_CAPE_VERSION = 1.4;
 
     public function filters()
     {

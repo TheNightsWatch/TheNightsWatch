@@ -4,6 +4,7 @@ protected/config/local.php
 .settings/
 favicon.gif
 protected/data/minecraft.jar
+protected/data/magicLauncher.zip
 other/nightswatch.zip
 capesDirectory.list
 google87b937d428a0ebfd.html
