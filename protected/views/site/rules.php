@@ -1,3 +1,31 @@
+<?php if(!Yii::app()->user->isGuest): ?>
+<strong>Rules of the Watch:</strong>
+<blockquote>
+<blockquote>
+	<ol>
+		<li>You may not kill any player unprovoked. Read the rules of
+			engagement (which you are bound to) to understand what we consider "provocation"</li>
+		<li>You may not steal from players - If you commit to a trade you must
+			follow through with it.</li>
+		<li>You may not share information on our website with non-Night's
+			Watch players - For announcements, only link them. If they can't see
+			them, then they're not supposed to.</li>
+		<li>You may not leave the watch without a request to do so signed by
+			the Lord Commander</li>
+	</ol>
+</blockquote>
+<p>
+	Doing any of the above may warrant your immediate placement as a
+	deserter. Particularly heinous offenses may lead to members of the
+	Watch hunting you down. The Watch is supposed to be a great big happy
+	family. And you know what they say - <q><strong><em>You do not anger
+				the family.</em> </strong> </q>
+</p>
+</blockquote>
+<br />
+<hr />
+<br />
+<?php endif; ?>
 <p>We, the Night's Watch, self-declared protectors of the realm - have
 	seen chaos ensue the land, with public servers increasingly growing
 	towards brave survivors killing each other on sight. We seek an end to
