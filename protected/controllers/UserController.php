@@ -2,6 +2,8 @@
 
 class UserController extends Controller
 {
+    const LATEST_CAPE_VERSION = 1.2;
+
     public function filters()
     {
         return array(
@@ -29,8 +31,18 @@ class UserController extends Controller
         $this->redirect(User::getHead($unique,$size),true,301);
     }
 
+    private function capeModIsUpToDate()
+    {
+        if(!isset($_REQUEST['version'])) return false;
+        $explode = explode("_",$_REQUEST['version'],2);
+        $ver = $explode[1];
+        if($ver < self::LATEST_CAPE_VERSION) return false;
+        return true;
+    }
+
     private function capeBailOrUser($user)
     {
+        if(!$this->capeModIsUpToDate()) return null;
         $user = User::model()->findByAttributes(array('ign' => $user));
         if(!$user) $kos = KOS::model()->findByAttributes(array('ign' => $user));
         if(!$user && !$kos)
@@ -73,10 +85,13 @@ class UserController extends Controller
     {
         Yii::app()->session->close();
         $this->filterOutStyleCodes($unique);
-        $user = User::model()->findByAttributes(array('ign' => $unique));
-        $kos = KOS::model()->findByAttributes(array('ign' => $unique));
-        if(!$user && !$kos) throw new CHttpException(404,"User does not exist");
-        $oldMod = false;
+        $oldMod = !$this->capeModIsUpToDate();
+        if(!$oldMod)
+        {
+            $user = User::model()->findByAttributes(array('ign' => $unique, 'verified' => 1));
+            $kos = KOS::model()->findByAttributes(array('ign' => $unique));
+        }
+        if(!$oldMod && !$user && !$kos) throw new CHttpException(404,"User does not exist");
         header("Content-Type: image/png");
         $file = "";
         if($oldMod) $file = 'nw-update';
