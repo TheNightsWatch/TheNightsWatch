@@ -26,10 +26,10 @@ class SiteController extends Controller
         return array(
             'accessControl',
             array(
-                'BanFilter + profile, KOS, mod, mods',
+                'BanFilter + profile, KOS, magicDownload, modDownload, mods',
             ),
             array(
-                'VerifyFilter + profile, KOS, mod, mods',
+                'VerifyFilter + profile, KOS, magicDownload, modDownload, mods',
             ),
             array(
                 'IPLogFilter'
@@ -92,6 +92,19 @@ class SiteController extends Controller
         $this->render('mods');
     }
 
+    public function actionMagicDownload()
+    {
+        Yii::app()->session->close();
+        if(file_exists(Yii::app()->basePath.'/data/magicLauncher.zip'))
+        {
+            header("Content-Type: application/zip");
+            header("Content-Disposition: attachment; filename=TWN_Windows.zip");
+            echo file_get_contents(Yii::app()->basePath.'/data/magicLauncher.zip');
+            die();
+        }
+        throw new CHttpException(404,"Minecraft Modification does not exist.");
+    }
+    
     public function actionModDownload()
     {
         /*
