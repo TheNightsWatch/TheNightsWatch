@@ -41,6 +41,7 @@ return array(
 			    'profile' => 'site/profile',
 			    'mods' => 'site/mods',
 			    'rules' => 'site/rules',
+			    'voice' => 'site/teamspeak',
 			    'minecraft.jar' => 'site/modDownload',
 			    'resetPassword' => 'site/forgot',
 			    
@@ -83,6 +84,6 @@ return array(
 		),
 	),
 	'params'=>array(
-		'adminEmail'=>'me+thenightswatch@navarr.me',
+		'adminEmail'=>'navarr@minez-nightswatch.com',
 	),
 );

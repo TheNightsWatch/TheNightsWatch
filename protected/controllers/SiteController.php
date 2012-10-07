@@ -257,7 +257,13 @@ class SiteController extends Controller
      */
     public function actionTeamspeak()
     {
-        $this->render('teamspeak',array('teamspeak' => 'ts3server://ts.tundrasofangmar.net?port=9991&channel=The Night\'s Watch'));
+        $this->setPageTitle('Voice Chat');
+        $this->render('teamspeak',array(
+            'teamspeak' => Yii::app()->params['teamspeak'],
+            'uri_teamspeak' => Yii::app()->params['uri_teamspeak'],
+            'mumble' => Yii::app()->params['mumble'],
+            'uri_mumble' => Yii::app()->params['uri_mumble'],
+        ));
     }
 
     public function actionKOS()
