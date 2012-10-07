@@ -45,7 +45,7 @@
 	<li>Enjoy!</li>
 </ol>
 
-<p>Manual Installation</p>
+<p>Manual Installation [Windows/Mac/Linux]</p>
 <p>If you do not want our prebuild mod packages, then you can make your own. Below is the recommended install order of the mods</p>
 <ol>
 	<li>ModLoader - ModLoader is ALWAYS first</li>
