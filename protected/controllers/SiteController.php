@@ -62,11 +62,11 @@ class SiteController extends Controller
         $last15 = User::model()->findAll(array(
             'condition' => 'deserter = :desertion AND verified=1',
             'params' => array('desertion' => 'NO'),
-            'order' => 'IF(rank != \'MEMBER\',1,0) DESC, IF(rank = \'COMMANDER\',1,0) DESC, id DESC',
+            'order' => 'IF(rank = \'COMMANDER\',1,0) DESC, IF(rank = \'HEAD\',1,0) DESC, IF(rank = \'COUNCIL\',1,0) DESC, id DESC',
             'limit' => 15
         ));
 
-        for($i = 0;$i < 5;++$i)
+        for($i = 0;$i < 7;++$i)
         {
             $temp = array_shift($last15);
             if($temp->rank == 'MEMBER')
