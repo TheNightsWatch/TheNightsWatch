@@ -15,6 +15,7 @@ class KOS extends ActiveRecord
     const STATUS_WARNING = 'WARNING';
     const STATUS_ACCEPTED = 'ACCEPTED';
     const STATUS_DESERTER = 'DESERTER';
+    const STATUS_WARRANT = 'WARRANT';
     
     public static function model($c=__CLASS__) { return parent::model($c); }
     public function tableName() { return 'kos'; }
@@ -32,7 +33,8 @@ class KOS extends ActiveRecord
             self::STATUS_CAUTION => 'Be Wary Of',
             self::STATUS_WARNING => 'Use Caution Around',
             self::STATUS_ACCEPTED => 'Kill on Sight',
-            self::STATUS_DESERTER => 'Deserters - Kill on Sight',
+            self::STATUS_DESERTER => 'Deserters & their Alts - Kill on Sight',
+            self::STATUS_WARRANT => 'A warrant has been issued for the deaths of:',
         );
         return $translations[$status];
     }

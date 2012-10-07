@@ -1,3 +1,4 @@
+<?php $this->setPageTitle('Install the Mod'); ?>
 <p>We don't recommend installing mods manually, instead, please install one our already prebuilt mods packages of the following:</p>
 <ul>
     <li><a href="<?php echo $this->createUrl('site/magicDownload'); ?>">Night's Watch Minecraft Client [Windows - 1.3.2]</a></li>

@@ -20,7 +20,7 @@ class KOSController extends Controller
                 'users' => array('@'),
             ),
             array('deny',
-                'actions'=>array('index','add','view'),
+                'actions'=>array('add'),
                 'users'=>array('*')
             ),
         );
