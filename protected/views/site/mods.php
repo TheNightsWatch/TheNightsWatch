@@ -1,8 +1,8 @@
-<?php $this->setPageTitle('Install the Mod'); ?>
 <p>We don't recommend installing mods manually, instead, please install one our already prebuilt mods packages of the following:</p>
 <ul>
     <li><a href="<?php echo $this->createUrl('site/magicDownload'); ?>">Night's Watch Minecraft Client [Windows - 1.3.2]</a></li>
-    <li><a href="<?php echo $this->createUrl('site/modDownload'); ?>">Night's Watch Jar [Windows/Mac/Linux - 1.3.2]</a></li>
+    <li><a href="<?php echo $this->createUrl('site/modDownload'); ?>">Night's Watch Jar [Windows/Linux - 1.3.2]</a></li>
+    <li><a href="<?php echo $this->createUrl('site/macModDownload'); ?>">Night's Watch Jar [Mac - 1.3.2]</a></li>
 </ul>
 <p><strong>Note:</strong></p>
 <p> The Night Watch Minecraft Client currently only works for Windows. We have to rewrite all the scripts so they will also work on Mac/Linux. The version that will work on all OSs should be up in a few days. Until then, you can still use the Night's Watch Jar for Mac/Linux.</p>
@@ -17,6 +17,7 @@
     <li><a href="http://www.minecraftforum.net/topic/1438531-">FriendsOverlay</a> - An improved Friend System (our replacement for Fancy GUI - sorry about the lack of a fancy gui, though)</li>
     <li><a href="http://minez.jbakies.com/">MineZ Tactical HUD</a> - A mod that shows your armor, status effects, and arrow count on screen</li>
     <li><a href="http://www.minecapes.net/">MineCapes</a> - Set your own cape and see your friends'.</li>
+    <li><a href="http://minez.net/forum/m/7729648/viewthread/4514454-minez-improved-ui-mod">MineZUI Mod</a> - Awesome HUD mod for MineZ</li>
     <li><a href="<?php echo Yii::app()->request->baseUrl ?>/other/nightswatch.zip">Night's Watch Mods</a> [for 1.3.2] - Adds the Night's Watch cape &amp; shows you on the live map. Also has a few compatibility fixes. Uses a custom MineCapes version.</li>
 </ul>
 
@@ -36,15 +37,17 @@
 <p>Night's Watch Minecraft Jar [Windows/Mac/Linux]</p>
 <p>The Jar comes with all the above mods install, but it does not have Faithful 32 or Magic Launcher, it already has all the mods inside of the jar.</p>
 <ol>
+	<li>If you are using Mac, make sure you downloaded the Mac version</li>
 	<li>Download the Night's Watch Jar</li>
 	<li>Open your File Manager (Explorer, Computer, Finder, Natuilus, etc.)</li>
 	<li>Goto "%APPDATA%\.minecraft\mods"</li>
 	<li>Delete or move any mods you have in this folder. The only folder left should be rei_minimap if you have it. You will have to manually figure out how to reinstall your old mods.</li>
 	<li>Goto "%APPDATA%\.minecraft\bin"</li>
 	<li>Put your Night's Watch Jar here and overwrite your old minecraft.jar</li>
-	<li>Start Minecraft like you normally do</li>
+	<li>Start Minecraft like you normally do**</li>
 	<li>Enjoy!</li>
 </ol>
+<p>**Note for Mac Users: If your Minecraft is freezing at the Mojang screen, you installed the wrong Jar. There is a problem with FriendsOverlay Notifications on Mac. Sorry, you cannot get them.</p>
 
 <p>Manual Installation [Windows/Mac/Linux]</p>
 <p>If you do not want our prebuild mod packages, then you can make your own. Below is the recommended install order of the mods</p>
@@ -57,7 +60,7 @@
 	<li>Night's Watch Mods** - make sure you install merge_TNW.zip LAST!!!</li>
 	<li>Enjoy!</li>
 </ol>
-<p>**Note on using Night's Watch Mods: There are three different ZIPs in this one. You can pick which ones you want. mod_minecapes_X.X.X_TNW_vX.X.zip is our custom version of MineCapes, it gives you your Night's Watch cape. It also shows Deserters and KOS members. mod_TNWConnector.zip has our mod to communicate with our Website to tell us when you are online. This help everyone know who is online and such. Currently, only you can see yourself on the Live Map. merge_TNW.zip is compatibility fixes so all the mods play nicely. You only need the MineZ.class if you have Rei's Minimap and the MineZ Tactical HUD. You only need mod_FriendsOverlay class if you have Minecapes and FirendsOverlay installed. aow.class is only needed if you have FriendsOverlay, Rei's Minimap and MineZ Tactical HUD.</p>
+<p>**Note on using Night's Watch Mods: There are three different ZIPs in this one. You can pick which ones you want. mod_minecapes_X.X.X_TNW_vX.X.zip is our custom version of MineCapes, it gives you your Night's Watch cape. It also shows Deserters and KOS members. mod_TNWConnector.zip has our mod to communicate with our Website to tell us when you are online. This help everyone know who is online and such. Currently, only you can see yourself on the Live Map. merge_TNW.zip is compatibility fixes so all the mods play nicely. Read the README with the Night's Watch Mods for more.</p>
 
 <p><strong>If You Need Help:</strong></p>
 <p>First, make sure your ".minecraft/mods" folder has no .ZIP files in it. If it does, we assume you know what you are doing and you are on you own. Otherwise, please goto all the threads/website for these and read all the FAQs for them and see if any of those problems cover yours. If you are still having problems and Minecraft is crashing, run Minecraft, and right AFTER it crashes, open ".minecraft/crash-reports/" and post it on <a href="http://pastebin.com">pastebin</a> and mod mail us the link and what is wrong at <a href="http://www.reddit.com/message/compose?to=%2Fr%2FTheNightsWatch">/r/TheNightsWatch</a> with what you were doing in the game to cause it to crash. There is no promise we can help fix you problems.</p>

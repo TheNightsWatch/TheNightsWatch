@@ -108,13 +108,6 @@ class SiteController extends Controller
 
     public function actionModDownload()
     {
-        /*
-         * This actively filters out non-logged in users, banned users, and non-premium users.
-        *
-        * Unfortunately, we can't verify that the person they've claimed is their own minecraft account.
-        *
-        * Well, fuck.
-        */
         Yii::app()->session->close();
         if(file_exists(Yii::app()->basePath.'/data/minecraft.jar'))
         {
@@ -126,6 +119,19 @@ class SiteController extends Controller
         throw new CHttpException(404,"Minecraft Modification does not exist.");
     }
 
+    public function actionMacModDownload()
+    {
+        Yii::app()->session->close();
+        if(file_exists(Yii::app()->basePath.'/data/minecraft-mac.jar'))
+        {
+            header("Content-Type: application/java-archive");
+            header("Content-Disposition: attachment; filename=minecraft.jar");
+            header("Content-Length: ".filesize(Yii::app()->basePath.'/data/minecraft-mac.jar'));
+            readfile(Yii::app()->basePath.'/data/minecraft-mac.jar');
+        }
+        throw new CHttpException(404,"Minecraft Modification does not exist.");
+    }
+    
     public function actionProfile()
     {
         $user = User::model()->findByPk(Yii::app()->user->getId());
