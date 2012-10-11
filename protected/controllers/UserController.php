@@ -13,11 +13,6 @@ class UserController extends Controller
         );
     }
 
-    private function blackList()
-    {
-        return array('142.134.43.196');
-    }
-
     public function actionIndex()
     {
         $this->setPageTitle('Member List');
