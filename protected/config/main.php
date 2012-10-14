@@ -13,6 +13,10 @@ return array(
 	),
 	'modules'=>array(),
 	'components'=>array(
+	    'filecache' => array(
+	        'class' => 'system.caching.CDbCache',
+	        'cacheTableName' => 'filecache',
+        ),
 	    'mail' => array(
 	        'class' => 'YiiMail',
         ),

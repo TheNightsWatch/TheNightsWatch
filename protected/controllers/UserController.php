@@ -10,6 +10,12 @@ class UserController extends Controller
             array(
                 'IPLogFilter'
             ),
+            array(
+                'COutputCache + cape',
+                'duration' => 60*5,
+                'varyByParam' => array('unique','version'),
+                'cacheID' => 'filecache',
+            ),
         );
     }
 
