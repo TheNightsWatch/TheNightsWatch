@@ -26,10 +26,10 @@ class SiteController extends Controller
         return array(
             'accessControl',
             array(
-                'BanFilter + profile, KOS, magicDownload, modDownload, mods',
+                'BanFilter + profile, KOS, magicDownload, modDownload, mods, teamspeak',
             ),
             array(
-                'VerifyFilter + profile, KOS, magicDownload, modDownload, mods',
+                'VerifyFilter + profile, KOS, magicDownload, modDownload, mods, teamspeak',
             ),
             array(
                 'IPLogFilter'
@@ -41,11 +41,11 @@ class SiteController extends Controller
     {
         return array(
             array('allow',
-                'actions'=>array('profile','KOS','modDownload','mods','verify'),
+                'actions'=>array('profile','KOS','modDownload','mods','verify','teamspeak'),
                 'users' => array('@'),
             ),
             array('deny',
-                'actions'=>array('profile','KOS','modDownload','mods','verify'),
+                'actions'=>array('profile','KOS','modDownload','mods','verify','teamspeak'),
                 'users'=>array('*')
             ),
         );
