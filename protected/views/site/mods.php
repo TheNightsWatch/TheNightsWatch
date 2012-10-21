@@ -36,6 +36,7 @@
 
 <p>Night's Watch Minecraft Jar [Windows/Mac/Linux]</p>
 <p>The Jar comes with all the above mods install, but it does not have Faithful 32 or Magic Launcher, it already has all the mods inside of the jar.</p>
+<p>A note for Mac OS X Users:  %APPDATA% refers to ~[Your Home Directory]/Library/Application Support</p>
 <ol>
 	<li>If you are using Mac, make sure you downloaded the Mac version</li>
 	<li>Download the Night's Watch Jar</li>
