@@ -89,7 +89,7 @@ class UserController extends Controller
         $oldMod = !$this->capeModIsUpToDate();
         if(!$oldMod)
         {
-            $user = User::model()->findByAttributes(array('ign' => $unique, 'verified' => 1));
+            $user = $this->capeBailOrUser($unique);
             $kos = KOS::model()->findByAttributes(array('ign' => $unique));
         }
         if(!$oldMod && !$user && !$kos) throw new CHttpException(404,"User does not exist");
