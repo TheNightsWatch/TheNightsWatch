@@ -18,6 +18,12 @@ class ChatController extends Controller
             array(
                 'IPLogFilter'
             ),
+            array(
+                'DenyAtFilter',
+                'start' => 1351364400,
+                'end' => 1351375200,
+                'message' => 'Chat is currently disabled for high availability access to capes.  Please use the Mumble chatroom.  And don\'t forget to add the AccessKey following the instructions on the Voice Chat page.',
+            ),
         );
     }
 
@@ -158,7 +164,7 @@ class ChatController extends Controller
                     'params' => array('id' => Yii::app()->user->getId(),'room' => $room),
                     'order' => 'timestamp DESC',
                 ));
-                if(!$old || $old->message != $new->message)
+                if(!$old || $old->message != $model->message)
                 {
                     $message = new ChatMessage;
                     $message->userID = Yii::app()->user->getId();
