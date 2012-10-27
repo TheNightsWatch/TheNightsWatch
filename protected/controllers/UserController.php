@@ -108,7 +108,22 @@ class UserController extends Controller
         elseif($user && $user->type == User::TYPE_BUILDER) $file = 'builder-cape';
         elseif($kos && $kos->status == KOS::STATUS_WARNING) $file = 'warning-cape';
         elseif($kos && $kos->status == KOS::STATUS_CAUTION) $file = 'wary-cape';
-        echo file_get_contents(Yii::app()->basePath."/data/{$file}.png");
+        
+        $path = Yii::app()->basePath."/data/";
+        if($user->deserter != 'DESERTER' && $user->honors > 0)
+        {
+            $max = 1;
+            $stars = $user->honors > $max ? $max : $user->honors;
+            $image = imagecreatefromstring(file_get_contents($path.$file.".png"));
+            imagesavealpha($image,true);
+            $overlay = imagecreatefromstring(file_get_contents($path."cape-star-{$stars}.png"));
+            imagesavealpha($overlay,true);
+            $w = imagesx($image);
+            $h = imagesy($image);
+            imagecopyresampled($image,$overlay,0,0,0,0,$w,$h,$w,$h);
+            imagepng($image);
+        }
+        else echo file_get_contents($path.$file.".png");
     }
 
     public function actionView($unique)

@@ -14,6 +14,7 @@
  * @property DateTime joinDate
  * @property DateTime lastLogin
  * @property boolean verified
+ * @property int honors
  */
 class User extends CActiveRecord
 {
