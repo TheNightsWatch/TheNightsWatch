@@ -101,6 +101,8 @@ class UserController extends Controller
         elseif($user && $user->rank == User::RANK_COMMANDER) $file = 'commander-cape';
         elseif($user && $user->rank == User::RANK_HEAD && $user->type == User::TYPE_RANGER) $file = 'firstRanger-cape';
         elseif($user && $user->rank == User::RANK_HEAD && $user->type == User::TYPE_MAESTER) $file = 'grandMaester-cape';
+        elseif($user && $user->rank == User::RANK_COUNCIL && $user->type == User::TYPE_RANGER) $file = 'rangerCouncil-cape';
+        elseif($user && $user->rank == User::RANK_COUNCIL && $user->type == User::TYPE_MAESTER) $file = 'maesterCouncil-cape';
         elseif($user && $user->type == User::TYPE_RANGER) $file = 'ranger-cape';
         elseif($user && $user->type == User::TYPE_MAESTER) $file = 'maester-cape';
         elseif($user && $user->type == User::TYPE_BUILDER) $file = 'builder-cape';
