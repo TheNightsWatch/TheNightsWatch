@@ -22,7 +22,7 @@ class ChatController extends Controller
                 'DenyAtFilter',
                 'start' => 1351364400,
                 'end' => 1351375200,
-                'message' => 'Chat is currently disabled for high availability access to capes.  Please use the Mumble chatroom.  And don\'t forget to add the AccessKey following the instructions on the Voice Chat page.',
+                'message' => 'Chat is currently disabled for high availability access to capes.  You can find <a href="http://minez-nightswatch.com/announcement/29">information about today\'s event here</a>.  Please use the Mumble chatroom.  And don\'t forget to add the AccessKey following the instructions on the Voice Chat page.',
             ),
         );
     }
