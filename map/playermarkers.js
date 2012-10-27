@@ -4,7 +4,7 @@
 
 var JSONFile            =   '/map/players'; //The JSON file containing the player data
 var refreshTime         =   5; //How many seconds should we wait between updating the JSONFile.
-var avatarserver        =   'http://overviewer.org/avatar/<playername>/head'; //The address for the player avatar script. 
+var avatarserver        =   'https://minotar.net/helm/<playername>/16.png'; //The address for the player avatar script. 
 
 var showPlayerMarkers   =   true; // Should we show the players moving around on the map?
 var playerMarkers       =    []; //The array of player objects

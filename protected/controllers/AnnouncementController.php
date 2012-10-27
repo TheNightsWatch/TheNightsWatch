@@ -51,6 +51,7 @@ class AnnouncementController extends Controller
 
     public function actionPost()
     {
+	Yii::app()->session->close();
         $announcement = new Announcement;
         $announcement->attributes = $_POST['Announcement'];
         $announcement->userID = Yii::app()->user->getId();

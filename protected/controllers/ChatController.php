@@ -69,7 +69,7 @@ class ChatController extends Controller
         ));
 
 
-        if($announcement->expires == NULL || $announcement->expires->getTimestamp() > time())
+        if($announcement && ($announcement->expires == NULL || $announcement->expires->getTimestamp() > time()))
             $this->announcement = $announcement;
 
         $this->render('index',array(

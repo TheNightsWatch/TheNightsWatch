@@ -74,7 +74,7 @@ h1 {
 	font-size: 200%;
 }
 
-#mainmenu
+#mainmenu, thead th
 {
 	background:white url(bg.gif) repeat-x left top;
 }

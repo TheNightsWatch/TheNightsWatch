@@ -26,10 +26,10 @@ class SiteController extends Controller
         return array(
             'accessControl',
             array(
-                'BanFilter + profile, KOS, mod, mods',
+                'BanFilter + profile, KOS, magicDownload, modDownload, mods, teamspeak',
             ),
             array(
-                'VerifyFilter + profile, KOS, mod, mods',
+                'VerifyFilter + profile, KOS, magicDownload, modDownload, mods, teamspeak',
             ),
             array(
                 'IPLogFilter'
@@ -41,11 +41,11 @@ class SiteController extends Controller
     {
         return array(
             array('allow',
-                'actions'=>array('profile','KOS','modDownload','mods','verify'),
+                'actions'=>array('profile','KOS','modDownload','mods','verify','teamspeak'),
                 'users' => array('@'),
             ),
             array('deny',
-                'actions'=>array('profile','KOS','modDownload','mods','verify'),
+                'actions'=>array('profile','KOS','modDownload','mods','verify','teamspeak'),
                 'users'=>array('*')
             ),
         );
@@ -62,11 +62,11 @@ class SiteController extends Controller
         $last15 = User::model()->findAll(array(
             'condition' => 'deserter = :desertion AND verified=1',
             'params' => array('desertion' => 'NO'),
-            'order' => 'IF(rank != \'MEMBER\',1,0) DESC, IF(rank = \'COMMANDER\',1,0) DESC, id DESC',
+            'order' => 'IF(rank = \'COMMANDER\',1,0) DESC, IF(rank = \'HEAD\',1,0) DESC, IF(rank = \'COUNCIL\',1,0) DESC, id DESC',
             'limit' => 15
         ));
 
-        for($i = 0;$i < 5;++$i)
+        for($i = 0;$i < 7;++$i)
         {
             $temp = array_shift($last15);
             if($temp->rank == 'MEMBER')
@@ -92,26 +92,46 @@ class SiteController extends Controller
         $this->render('mods');
     }
 
-    public function actionModDownload()
+    public function actionMagicDownload()
     {
-        /*
-         * This actively filters out non-logged in users, banned users, and non-premium users.
-        *
-        * Unfortunately, we can't verify that the person they've claimed is their own minecraft account.
-        *
-        * Well, fuck.
-        */
         Yii::app()->session->close();
-        if(file_exists(Yii::app()->basePath.'/data/minecraft.jar'))
+        if(file_exists(Yii::app()->basePath.'/data/magicLauncher.zip'))
         {
-            header("Content-Type: application/java-archive");
-            header("Content-Disposition: attachment; filename=minecraft.jar");
-            echo file_get_contents(Yii::app()->basePath.'/data/minecraft.jar');
+            header("Content-Type: application/zip");
+            header("Content-Disposition: attachment; filename=TNW_Windows.zip");
+            header("Content-Length: ".filesize(Yii::app()->basePath.'/data/magicLauncher.zip'));
+            readfile(Yii::app()->basePath.'/data/magicLauncher.zip');
             die();
         }
         throw new CHttpException(404,"Minecraft Modification does not exist.");
     }
 
+    public function actionModDownload()
+    {
+        Yii::app()->session->close();
+        if(file_exists(Yii::app()->basePath.'/data/minecraft.jar'))
+        {
+            header("Content-Type: application/java-archive");
+            header("Content-Disposition: attachment; filename=minecraft.jar");
+            header("Content-Length: ".filesize(Yii::app()->basePath.'/data/minecraft.jar'));
+            readfile(Yii::app()->basePath.'/data/minecraft.jar');
+        }
+        throw new CHttpException(404,"Minecraft Modification does not exist.");
+    }
+
+    public function actionMacModDownload()
+    {
+        Yii::app()->session->close();
+        if(file_exists(Yii::app()->basePath.'/data/minecraft-mac.jar'))
+        {
+            header("Content-Type: application/java-archive");
+            header("Content-Disposition: attachment; filename=minecraft.jar");
+            header("Content-Length: ".filesize(Yii::app()->basePath.'/data/minecraft-mac.jar'));
+            readfile(Yii::app()->basePath.'/data/minecraft-mac.jar');
+        }
+        throw new CHttpException(404,"Minecraft Modification does not exist.");
+    }
+    
     public function actionProfile()
     {
         $user = User::model()->findByPk(Yii::app()->user->getId());
@@ -243,12 +263,34 @@ class SiteController extends Controller
      */
     public function actionTeamspeak()
     {
-        $this->render('teamspeak',array('teamspeak' => 'ts3server://ts.tundrasofangmar.net?port=9991&channel=The Night\'s Watch'));
+        $this->setPageTitle('Voice Chat');
+        $this->render('teamspeak',array(
+            'teamspeak' => Yii::app()->params['teamspeak'],
+            'uri_teamspeak' => Yii::app()->params['uri_teamspeak'],
+            'mumble' => Yii::app()->params['mumble'],
+            'uri_mumble' => Yii::app()->params['uri_mumble'],
+        ));
     }
 
     public function actionKOS()
     {
         $this->redirect(Yii::app()->params['kos'],301);
+    }
+
+    public function actionForgot()
+    {
+        $model = new ForgotForm();
+        if(isset($_POST['ForgotForm']))
+        {
+            $model->attributes = $_POST['ForgotForm'];
+            if($model->validate() && $model->changePassword())
+            {
+                $user = User::model()->findByAttributes(array('ign' => $model->ign));
+                $user->updateLastLogin();
+                $this->redirect(Yii::app()->user->returnUrl);
+            }
+        }
+        $this->render('forgot',array('model' => $model));
     }
 
     public function actionVerify()
@@ -261,6 +303,11 @@ class SiteController extends Controller
                 if(strtolower($user->ign) == strtolower($api->username))
                 {
                     $user->ign = $api->username;
+                    if(!$user->verified)
+                    {
+                        $user->joinDate = new CDbExpression('NOW()');
+                        $user->lastLogin = new CDbExpression('NOW()');
+                    }
                     $user->verified = true;
                     $user->save();
                     Yii::app()->user->setFlash('verify','Your Minecraft account has been verified.');

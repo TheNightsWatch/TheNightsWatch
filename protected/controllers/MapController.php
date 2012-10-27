@@ -54,7 +54,7 @@ class MapController extends Controller
         $out = array();
         foreach($locs as $loc)
         {
-            if($loc->user->id == $loggedInUser->id || in_array($loggedInUser->rank,array(User::RANK_HEAD,User::RANK_COMMANDER)))
+            if($loc->user->id == $loggedInUser->id || $loggedInUser->deserter = User::DESERTER_ADMIN || in_array($loggedInUser->rank,array(User::RANK_HEAD,User::RANK_COMMANDER,User::RANK_COUNCIL)))
                 $out[] = array(
                     'timestamp' => $loc->lastUpdate->format('Ymd H:i:s'),
                     'id' => 4,
@@ -108,6 +108,18 @@ class MapController extends Controller
             $loc->userID = $user->id;
         } else $loc = $user->location;
         $loc->updateLocation($x,$y,$z,$server);
+        
+        // Look for Events
+        $ip = gethostbyname($server);
+        $events = Event::model()->findAll(array(
+            'condition' => '(ip LIKE :ip OR ip IS NULL) AND (:x BETWEEN x1 AND x2 AND :y BETWEEN y1 AND y2) AND (NOW() BETWEEN start AND end OR (NOW() > start AND end IS NULL))',
+            'params' => array('x' => $x, 'y' => $y, 'ip' => $ip),
+        ));
+        foreach($events as $event)
+        {
+            $event->addAttendee($user);
+        }
+        
         header("HTTP/1.1 201");
         Yii::app()->end();
     }

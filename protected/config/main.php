@@ -13,6 +13,10 @@ return array(
 	),
 	'modules'=>array(),
 	'components'=>array(
+	    'filecache' => array(
+	        'class' => 'system.caching.CDbCache',
+	        'cacheTableName' => 'filecache',
+        ),
 	    'mail' => array(
 	        'class' => 'YiiMail',
         ),
@@ -20,6 +24,7 @@ return array(
 		    'class' => 'HttpRequest',
 		    'noCsrfValidationRoutes' => array(
 		        'map/update',
+		        'user/cape',
 	        ),
 			'enableCsrfValidation' => true,
 			'enableCookieValidation' => true,
@@ -38,10 +43,11 @@ return array(
 				'register' => 'site/register',
 				'logout' => 'site/logout',
 			    'profile' => 'site/profile',
-			    'KOS' => 'site/KOS',
 			    'mods' => 'site/mods',
 			    'rules' => 'site/rules',
+			    'voice' => 'site/teamspeak',
 			    'minecraft.jar' => 'site/modDownload',
+			    'resetPassword' => 'site/forgot',
 			    
 			    // Map Downloader
                 'map/MineZ/<path:.+>' => 'map/download',
@@ -51,13 +57,17 @@ return array(
 				'<controller:\w+>/<id:\d+>/<action:\w+>'=>'<controller>/<action>',
 				
 				// Cape Route
-                array('user/cape','pattern' => 'cape/<unique:.+>.png', 'verb' => 'GET'),
+                array('user/cape','pattern' => 'cape/<unique:.+>.png', 'verb' => 'GET, POST'),
 			    array('user/capeHead','pattern' => 'cape/<unique:.+>.png', 'verb' => 'HEAD'),
 
 				// User Specific
 				'user' => 'user/index',
 				'user/<unique:\w+>'=>'user/view',
 				'user/<unique:\w+>/<action:\w+>'=>'user/<action>',
+			    
+			    'kos' => 'kos/index',
+			    'kos/add' => 'kos/add',
+			    'kos/<unique:\w+>'=>'kos/view',
 
 				// Controller/Action
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
@@ -78,6 +88,6 @@ return array(
 		),
 	),
 	'params'=>array(
-		'adminEmail'=>'me+thenightswatch@navarr.me',
+		'adminEmail'=>'navarr@minez-nightswatch.com',
 	),
 );

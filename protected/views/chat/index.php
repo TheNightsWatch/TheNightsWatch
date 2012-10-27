@@ -64,7 +64,7 @@ $(document).ready(function()
 			{
 			    $('#chatForm input,#chatForm button').attr('disabled',false);
 			});
-		}).error(function() { $('#chatForm input,#chatForm button').attr('disabled',false); });
+		}).fail(function() { $('#chatForm input,#chatForm button').attr('disabled',false); });
 	});
 	$('#messages .timestamp').each(function(i,ele) {
 		var ele = $(ele);
