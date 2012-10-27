@@ -93,14 +93,12 @@ class MapController extends Controller
         Yii::app()->session->close();
         if($verify != md5(md5($name)."TheWatch"))
         {
-            header("HTTP/1.1 401");
-            Yii::app()->end();
+            throw new CHttpException(401,"Wrong Verification");
         }
         $user = User::model()->findByAttributes(array('ign' => $name));
         if(!$user)
         {
-            header("HTTP/1.1 404");
-            Yii::app()->end();
+            throw new CHttpException(404,"User not Found");
         }
         if(!$user->location)
         {
@@ -108,7 +106,7 @@ class MapController extends Controller
             $loc->userID = $user->id;
         } else $loc = $user->location;
         $loc->updateLocation($x,$y,$z,$server);
-        
+        if(strpos(".",$server) === false) $server = $server.'.minez.net';
         // Look for Events
         $ip = gethostbyname($server);
         $events = Event::model()->findAll(array(
