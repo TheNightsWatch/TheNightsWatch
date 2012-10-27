@@ -111,7 +111,7 @@ class MapController extends Controller
         $ip = gethostbyname($server);
         $events = Event::model()->findAll(array(
             'condition' => '(ip LIKE :ip OR ip IS NULL) AND (:x BETWEEN x1 AND x2 OR :x BETWEEN x2 AND x1) AND (:y BETWEEN y1 AND y2 OR :y BETWEEN y2 AND y1) AND (NOW() BETWEEN start AND end OR (NOW() > start AND end IS NULL))',
-            'params' => array('x' => $x, 'y' => $y, 'ip' => $ip),
+            'params' => array('x' => $x, 'y' => $z, 'ip' => $ip),
         ));
         foreach($events as $event)
         {
