@@ -112,7 +112,7 @@ class UserController extends Controller
         $path = Yii::app()->basePath."/data/";
         if($user->deserter != 'DESERTER' && $user->honors > 0)
         {
-            $max = 1;
+            $max = 2;
             $stars = $user->honors > $max ? $max : $user->honors;
             $image = imagecreatefromstring(file_get_contents($path.$file.".png"));
             imagesavealpha($image,true);
