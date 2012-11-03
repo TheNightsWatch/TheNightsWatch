@@ -51,9 +51,11 @@ class AnnouncementController extends Controller
 
     public function actionPost()
     {
-	Yii::app()->session->close();
+        Yii::app()->session->close();
         $announcement = new Announcement;
         $announcement->attributes = $_POST['Announcement'];
+        $body = trim($announcement->body);
+        if(empty($body)) throw new CHttpException(500,"Prevented sending of empty body announcement");
         $announcement->userID = Yii::app()->user->getId();
 
         $sender = User::model()->findByPk(Yii::app()->user->getId());
