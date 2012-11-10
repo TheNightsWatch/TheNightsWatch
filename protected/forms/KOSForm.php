@@ -14,7 +14,6 @@ class KOSForm extends CFormModel
         return array(
             array('ign, server, report','required'),
             array('proof', 'safe'),
-            array('ign','premium'),
             array('server','serverCheck'),
         );
     }
