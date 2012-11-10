@@ -72,21 +72,21 @@ $(document).ready(function()
 		ele.attr('title',date.getLargeChatStamp()).text(date.getSmallChatStamp());
 	});
 	setTimeout(function() {
-		if(!window.Notification || typeof(Storage) == "undefined") return;
+		if(!window.webkitNotifications || typeof(Storage) == "undefined") return;
 		
-		if(Notification.permissionLevel() == "granted") $('#notify_chat').val(localStorage['notify_chat']);
+		if(window.webkitNotifications.checkPermission() == 0) $('#notify_chat').val(localStorage['notify_chat']);
 
 		$('#notify_chat').on('change',function() {
 			var enable = function() { localStorage['notify_chat'] = $('#notify_chat').val(); }
-			switch(Notification.permissionLevel())
+			switch(window.webkitNotifications.checkPermission())
 			{
-			case "granted":
+			case 0:
 				enable();
 				break;
-			case "denied":
+			case 2:
 				alert('Please enable Notifications in your browser\'s settings');
 				break;
-			case "default":
+			case 1:
 			default:
 				//Notification.requestPermission(function() { if(Notification.permissionLevel() == "granted") enable(); }); // Crashes in Chrome 21
 				window.webkitNotifications.requestPermission(function() { if(Notification.permissionLevel() == "granted") enable(); });
