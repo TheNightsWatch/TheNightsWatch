@@ -2,7 +2,7 @@
 
 class UserController extends Controller
 {
-    const LATEST_CAPE_VERSION = 1.5;
+    const LATEST_CAPE_VERSION = 1.7;
 
     public function filters()
     {
@@ -13,7 +13,7 @@ class UserController extends Controller
             array(
                 'COutputCache + cape',
                 'duration' => 60*5,
-                'varyByParam' => array('unique','version'),
+                'varyByParam' => array('unique','version','name','verify'),
                 'cacheID' => 'filecache',
             ),
         );
@@ -46,6 +46,11 @@ class UserController extends Controller
         if(!$this->capeModIsUpToDate()) return null;
         $user = User::model()->findByAttributes(array('ign' => $user));
         if(!$user) $kos = KOS::model()->findByAttributes(array('ign' => $user));
+        if(isset($_GET['test'])) {
+        header("Content-Type: text/plain");
+        var_dump($user);var_dump($kos);
+        die();
+        }
         if(!$user && !$kos)
         {
             throw new CHttpException(404,"No Such User");
@@ -81,6 +86,15 @@ class UserController extends Controller
         $this->capeBailOrUser($unique);
         header("HTTP/1.1 200 OK");
     }
+    
+    public function verifyCanCape($name,$verify)
+    {
+    	$whiteList = array();
+        if(md5(md5($name)."TheWatch") != $verify) return false;
+        $user = User::model()->findByAttributes(array('ign' => $name,'verified' => 1,'deserter' => User::DESERTER_NO));
+        if($user || in_array($name,$whiteList)) return true;
+        return false;
+    }
 
     public function actionCape($unique)
     {
@@ -91,6 +105,7 @@ class UserController extends Controller
         {
             $user = $this->capeBailOrUser($unique);
             $kos = KOS::model()->findByAttributes(array('ign' => $unique));
+            if(!$this->verifyCanCape($_REQUEST['name'],$_REQUEST['verify'])) throw new CHttpException(503,"Bad Verification {$_REQUEST['name']}, {$_REQUEST['verify']}");
         }
         if(!$oldMod && !$user && !$kos) throw new CHttpException(404,"User does not exist");
         header("Content-Type: image/png");
