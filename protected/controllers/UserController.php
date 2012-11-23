@@ -41,16 +41,11 @@ class UserController extends Controller
         return true;
     }
 
-    private function capeBailOrUser($user)
+    private function capeBailOrUser($unique)
     {
         if(!$this->capeModIsUpToDate()) return null;
-        $user = User::model()->findByAttributes(array('ign' => $user));
-        if(!$user) $kos = KOS::model()->findByAttributes(array('ign' => $user));
-        if(isset($_GET['test'])) {
-        header("Content-Type: text/plain");
-        var_dump($user);var_dump($kos);
-        die();
-        }
+        $user = User::model()->findByAttributes(array('ign' => $unique));
+        if(!$user) $kos = KOS::model()->findByAttributes(array('ign' => $unique));
         if(!$user && !$kos)
         {
             throw new CHttpException(404,"No Such User");
@@ -89,7 +84,7 @@ class UserController extends Controller
     
     public function verifyCanCape($name,$verify)
     {
-    	$whiteList = array();
+    	$whiteList = array('Irishkaiser','Domocheese1');
         if(md5(md5($name)."TheWatch") != $verify) return false;
         $user = User::model()->findByAttributes(array('ign' => $name,'verified' => 1,'deserter' => User::DESERTER_NO));
         if($user || in_array($name,$whiteList)) return true;
