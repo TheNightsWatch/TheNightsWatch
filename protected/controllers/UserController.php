@@ -106,7 +106,7 @@ class UserController extends Controller
         {
             $user = $this->capeBailOrUser($unique);
             $kos = KOS::model()->findByAttributes(array('ign' => $unique));
-            if($_REQUEST['version'] != 'TNW-viewer_100' && !$this->verifyCanCape($_REQUEST['name'],$_REQUEST['verify'])) throw new CHttpException(503,"Bad Verification {$_REQUEST['name']}, {$_REQUEST['verify']}");
+            if($_REQUEST['version'] != 'TNW-viewer_1000' && !$this->verifyCanCape($_REQUEST['name'],$_REQUEST['verify'])) throw new CHttpException(503,"Bad Verification {$_REQUEST['name']}, {$_REQUEST['verify']}");
         }
         if(!$oldMod && !$user && !$kos) throw new CHttpException(404,"User does not exist");
         header("Content-Type: image/png");
