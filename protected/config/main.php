@@ -89,5 +89,6 @@ return array(
 	),
 	'params'=>array(
 		'adminEmail'=>'navarr@minez-nightswatch.com',
+	    'whitelist' => array(),
 	),
 );

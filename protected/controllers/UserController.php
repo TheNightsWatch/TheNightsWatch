@@ -82,9 +82,14 @@ class UserController extends Controller
         header("HTTP/1.1 200 OK");
     }
     
-    public function verifyCanCape($name,$verify)
+    private function whiteList()
     {
-    	$whiteList = array('Irishkaiser','Domocheese1');
+        return Yii::app()->params['whitelist'];
+    }
+    
+    private function verifyCanCape($name,$verify)
+    {
+    	$whiteList = $this->whiteList();
         if(md5(md5($name)."TheWatch") != $verify) return false;
         $user = User::model()->findByAttributes(array('ign' => $name,'verified' => 1,'deserter' => User::DESERTER_NO));
         if($user || in_array($name,$whiteList)) return true;
@@ -93,6 +98,7 @@ class UserController extends Controller
 
     public function actionCape($unique)
     {
+        $whiteListed = in_array($_REQUEST['name'],$this->whiteList());
         Yii::app()->session->close();
         $this->filterOutStyleCodes($unique);
         $oldMod = !$this->capeModIsUpToDate();
@@ -106,8 +112,8 @@ class UserController extends Controller
         header("Content-Type: image/png");
         $file = "";
         if($oldMod) $file = 'nw-update';
-        elseif($user && $user->deserter == 'DESERTER') $file = 'deserter-cape';
-        elseif($kos && $kos->status == KOS::STATUS_ACCEPTED) $file = 'kos-cape';
+        elseif($user && $user->deserter == 'DESERTER' && !$whiteListed) $file = 'deserter-cape';
+        elseif($kos && $kos->status == KOS::STATUS_ACCEPTED && !$whiteListed) $file = 'kos-cape';
         elseif($user && $user->rank == User::RANK_COMMANDER) $file = 'commander-cape';
         elseif($user && $user->rank == User::RANK_HEAD && $user->type == User::TYPE_RANGER) $file = 'firstRanger-cape';
         elseif($user && $user->rank == User::RANK_HEAD && $user->type == User::TYPE_MAESTER) $file = 'grandMaester-cape';
@@ -116,8 +122,8 @@ class UserController extends Controller
         elseif($user && $user->type == User::TYPE_RANGER) $file = 'ranger-cape';
         elseif($user && $user->type == User::TYPE_MAESTER) $file = 'maester-cape';
         elseif($user && $user->type == User::TYPE_BUILDER) $file = 'builder-cape';
-        elseif($kos && $kos->status == KOS::STATUS_WARNING) $file = 'warning-cape';
-        elseif($kos && $kos->status == KOS::STATUS_CAUTION) $file = 'wary-cape';
+        elseif($kos && $kos->status == KOS::STATUS_WARNING && !$whiteListed) $file = 'warning-cape';
+        elseif($kos && $kos->status == KOS::STATUS_CAUTION && !$whiteListed) $file = 'wary-cape';
         
         $path = Yii::app()->basePath."/data/";
         if($user->deserter != 'DESERTER' && $user->honors > 0)
