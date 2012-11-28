@@ -63,7 +63,8 @@ class MapController extends Controller
                 $out[] = array(
                     'timestamp' => $loc->lastUpdate->format('Ymd H:i:s'),
                     'id' => 4,
-                    'msg' => ($loc->user->deserter == User::DESERTER_DESERTER ? '<abbr title="Deserter">[D]</abbr>' : '').$loc->user->ign,
+                    'msg' => $loc->user->ign,
+                    'display' => ($loc->user->deserter == User::DESERTER_DESERTER ? '<abbr title="Deserter">[D]</abbr> ' : '').$loc->user->ign,
                     'x' => $loc->x,
                     'y' => $loc->y,
                     'z' => $loc->z,

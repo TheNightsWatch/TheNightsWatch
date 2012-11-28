@@ -90,8 +90,8 @@ function createInfoWindowListener(marker,infoWindow) {
  * @param    name    string    The name of the player
  * @return    jQuery
  */
-function createPlayerListing(list,name,data) {
-    $(list).append('<li id="li_'+name+'" style="list-style-type:none;background-image: url('+getAvatarURL(name)+'); background-repeat: no-repeat; padding-left: 18px;color: white;">'+name+' ('+data.server+')</li>');
+function createPlayerListing(list,name,icon,data) {
+    $(list).append('<li id="li_' + name + '" style="list-style-type:none;background-image: url('+icon+'); background-repeat: no-repeat; padding-left: 18px;color: white;">'+data.display+' ('+data.server+')</li>');
     return $('#li_'+name);
 }
 
@@ -141,6 +141,7 @@ function loadPlayers() {
                      */
                     playerMarkers[name]    =    {
                         name:           name, //The player's name
+                        display:        data[i].display,
                         marker:         marker, //The player's map marker
            //             infoWindow:     infoWindow, //The player's informational window
            //             listener:       listener, //The map marker listener
@@ -227,7 +228,7 @@ function updatePlayer(name) {
             });
         }
     } else {
-        $(player.listing).empty().append(player.name + ' (' + player.server + ')'); //Empty the <li> and re-insert the player
+        $(player.listing).empty().append(player.display + ' (' + player.server + ')'); //Empty the <li> and re-insert the player
         if (showPlayerMarkers) { // only show the info window if the markers are enabled.
             /**
              *We re-bind the click event only if they are visible
