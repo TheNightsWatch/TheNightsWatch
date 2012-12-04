@@ -100,7 +100,7 @@ class User extends CActiveRecord
 	{
 	    $json = @file_get_contents("http://hcfactions.net/json/donorStatus.php?name={$this->ign}");
 	    if(!$json) return null;
-	    $json = json_decode($json);
+	    $json = json_decode($json,true);
 	    return $json['package'];
 	}
 	
