@@ -88,9 +88,20 @@ class User extends CActiveRecord
 			case 'type':
 				return (parent::__get('type') == null ? 'Member' : parent::__get('type'));
 				
+			case 'minezDonor':
+			    return $this->_getDonorStatus();
+				
 			default:
 				return parent::__get($var);
 		}
+	}
+	
+	private function _getDonorStatus()
+	{
+	    $json = @file_get_contents("http://hcfactions.net/json/donorStatus.php?name={$this->ign}");
+	    if(!$json) return null;
+	    $json = json_decode($json);
+	    return $json['package'];
 	}
 	
 	private function _getTitle()

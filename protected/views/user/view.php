@@ -13,5 +13,4 @@
 		<?php endif;?>
 	</div>
 </header>
-<p>Information will go here once/if I acquire some sort of API for MineZ
-	Stats</p>
+<p><?= CHtml::encode($user->ign) ?> is a <?= CHtml::encode($user->minezDonor); ?> level donator to MineZ.</p>
