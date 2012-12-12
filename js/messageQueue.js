@@ -77,13 +77,13 @@ messageQueue.prototype.load = function(_this, callback, errorCallback) {
 
 				var doThings = function(mData) {
 					setTimeout(function() {
-						if (!window.Notification)
+						if (!window.webkitNotifications)
 							return;
 						if (typeof (Storage) == "undefined")
 							return;
 						if (localStorage['notify_chat'] == "none")
 							return;
-						if (Notification.permissionLevel() != "granted")
+						if (window.webkitNotifications.checkPermission() !== 0)
 							return;
 
 						var options = {};
