@@ -6,7 +6,7 @@ class AnnouncementController extends Controller
     {
         return array(
             array(
-                'CouncilFilter - view',
+                'CouncilFilter - view, index',
             ),
             array(
                 'BanFilter',
@@ -19,6 +19,13 @@ class AnnouncementController extends Controller
             ),
         );
     }
+    
+    public function actionIndex()
+    {
+        $announcements = Announcement::model()->findAll(array('order' => 'timestamp ASC'));
+        $this->render('index',array('models' => $announcements));
+    }
+    
     public function actionView($id)
     {
         $announcement = Announcement::model()->findByPk($id);
