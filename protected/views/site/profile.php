@@ -24,9 +24,7 @@ $this->breadcrumbs = array(
 	    )
 	));
 
-	$types = array(NULL => '', User::TYPE_RANGER => 'Ranger - I want to kill the undead',User::TYPE_MAESTER => 'Maester - I want to heal the living and support the Rangers');
-	if($user->type == User::TYPE_BUILDER)
-	    $types[User::TYPE_BUILDER] = 'Builder - I want to build & maintain our base';
+	$types = array(NULL => '', User::TYPE_RANGER => 'Ranger - I want to kill the undead',User::TYPE_MAESTER => 'Maester - I want to heal the living and support the Rangers',User::TYPE_BUILDER => 'Builder - I want to gather resources and maintain the settlement');
 	if($user->type == User::TYPE_STEWARD)
 	    $types[User::TYPE_STEWARD] = 'Steward - I want to prepare food and items for the front line';
 

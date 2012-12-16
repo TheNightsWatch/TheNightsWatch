@@ -19,7 +19,7 @@ class RegisterForm extends CFormModel
 			array('rememberMe','boolean'),
 			array('password2','compare','compareAttribute' => 'password'),
 			array('ign','uniqueOrNull'),
-			array('type','in','range'=>array(User::TYPE_MAESTER,User::TYPE_RANGER)),
+			array('type','in','range'=>array(User::TYPE_MAESTER,User::TYPE_RANGER,User::TYPE_BUILDER)),
 		    array('ign','premium'),
 		);
 	}

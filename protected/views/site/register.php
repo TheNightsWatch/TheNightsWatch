@@ -79,7 +79,7 @@ $this->breadcrumbs=array(
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'type'); ?>
-		<?php echo $form->dropDownList($model,'type',array(NULL => '', User::TYPE_RANGER => 'Ranger - I want to kill the undead',User::TYPE_MAESTER => 'Maester - I want to heal the living and support the Rangers')); ?>
+		<?php echo $form->dropDownList($model,'type',array(NULL => '', User::TYPE_RANGER => 'Ranger - I want to kill the undead',User::TYPE_MAESTER => 'Maester - I want to heal the living and support the Rangers',User::TYPE_BUILDER => 'Builder - I want to gather resources and maintain the settlement')); ?>
 		<?php echo $form->error($model,'type'); ?>
 	</div>
 
