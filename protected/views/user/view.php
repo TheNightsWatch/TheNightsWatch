@@ -14,5 +14,5 @@
 	</div>
 </header>
 <?php if($user->minezDonor): ?>
-<p><?= CHtml::encode($user->ign) ?> is a <?= CHtml::encode($user->minezDonor); ?> level donator to MineZ.</p>
+<p><?= CHtml::encode($user->ign) ?> is <?php echo !in_array(strtolower(substr($user->minezDonor,0,1)),array('a','e','i','o','u')) ? 'a' : 'an' ?> <?= CHtml::encode($user->minezDonor); ?> level donator to MineZ.</p>
 <?php endif; ?>
