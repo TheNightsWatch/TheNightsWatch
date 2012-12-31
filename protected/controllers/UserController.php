@@ -113,6 +113,7 @@ class UserController extends Controller
         $file = "";
         if($oldMod) $file = 'nw-update';
         elseif($user && $user->deserter == 'DESERTER' && !$whiteListed) $file = 'deserter-cape';
+        elseif($kos && $kos->status == KOS::STATUS_WARRANT && !$whiteListed) $file = 'deserter-cape';
         elseif($kos && $kos->status == KOS::STATUS_ACCEPTED && !$whiteListed) $file = 'kos-cape';
         elseif($user && $user->rank == User::RANK_COMMANDER) $file = 'commander-cape';
         elseif($user && $user->rank == User::RANK_HEAD && $user->type == User::TYPE_RANGER) $file = 'firstRanger-cape';
