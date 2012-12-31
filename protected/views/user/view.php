@@ -13,4 +13,6 @@
 		<?php endif;?>
 	</div>
 </header>
+<?php if($user->minezDonor): ?>
 <p><?= CHtml::encode($user->ign) ?> is a <?= CHtml::encode($user->minezDonor); ?> level donator to MineZ.</p>
+<?php endif; ?>
