@@ -55,6 +55,7 @@ class MapController extends Controller
         foreach($locs as $loc)
         {
             if( // Display this user under any of these circumstances
+                true || // Enable Live Map for all again
                 $loc->user->id == $loggedInUser->id || // The user to be displayed is the logged in user 
                 $loggedInUser->deserter == User::DESERTER_ADMIN || // The logged in user is an "Admin"
                 in_array($loggedInUser->rank,array(User::RANK_HEAD,User::RANK_COMMANDER,User::RANK_COUNCIL)) || // The logged in user is Council or Above
