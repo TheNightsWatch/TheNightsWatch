@@ -43,7 +43,7 @@ class KOSForm extends CFormModel
     public function attributeLabels()
     {
         return array(
-            'ign' => 'Username',
+            'ign' => 'User being Reported',
         );
     }
 
