@@ -81,12 +81,12 @@ class UserController extends Controller
         $this->capeBailOrUser($unique);
         header("HTTP/1.1 200 OK");
     }
-    
+
     private function whiteList()
     {
         return Yii::app()->params['whitelist'];
     }
-    
+
     private function verifyCanCape($name,$verify)
     {
     	$whiteList = $this->whiteList();
@@ -98,7 +98,7 @@ class UserController extends Controller
 
     public function actionCape($unique)
     {
-        $whiteListed = in_array($_REQUEST['name'],$this->whiteList());
+        $whiteListed = isset($_REQUEST['name']) ? in_array($_REQUEST['name'],$this->whiteList()) : false;
         Yii::app()->session->close();
         $this->filterOutStyleCodes($unique);
         $oldMod = !$this->capeModIsUpToDate();
@@ -125,7 +125,7 @@ class UserController extends Controller
         elseif($user && $user->type == User::TYPE_BUILDER) $file = 'builder-cape';
         elseif($kos && $kos->status == KOS::STATUS_WARNING && !$whiteListed) $file = 'warning-cape';
         elseif($kos && $kos->status == KOS::STATUS_CAUTION && !$whiteListed) $file = 'wary-cape';
-        
+
         $path = Yii::app()->basePath."/data/";
         if($user->deserter != 'DESERTER' && $user->honors > 0)
         {
