@@ -50,19 +50,19 @@ class UserController extends Controller
         {
             throw new CHttpException(404,"No Such User");
         }
-        if(!$user->verified && !$kos)
+        if($user && !$user->verified && !$kos)
         {
             throw new CHttpException(404,"User Not Verified");
         }
-        if($user->deserter == User::DESERTER_LEFT && !$kos)
+        if($user && $user->deserter == User::DESERTER_LEFT && !$kos)
         {
             throw new CHttpException(404,"No Longer a Member");
         }
-        if($user->deserter == User::DESERTER_DISABLED && !$kos)
+        if($user && $user->deserter == User::DESERTER_DISABLED && !$kos)
         {
             throw new CHttpException(404,"Account Disabled");
         }
-        if($user->deserter == User::DESERTER_ADMIN && !$kos)
+        if($user && $user->deserter == User::DESERTER_ADMIN && !$kos)
         {
             throw new CHttpException(404,"User not really a member");
         }
@@ -127,7 +127,7 @@ class UserController extends Controller
         elseif($kos && $kos->status == KOS::STATUS_CAUTION && !$whiteListed) $file = 'wary-cape';
 
         $path = Yii::app()->basePath."/data/";
-        if($user->deserter != 'DESERTER' && $user->honors > 0)
+        if($user && $user->deserter != 'DESERTER' && $user->honors > 0)
         {
             $max = 2;
             $stars = $user->honors > $max ? $max : $user->honors;

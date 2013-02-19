@@ -36,7 +36,7 @@ class KOSForm extends CFormModel
             $this->addError('server',"Night's Watch Rules do not apply on LMS Servers");
         $mineZPart = ".minez.net";
         $this->server = strtolower($this->server);
-        if(substr($this->server,-1 * strlen($minezPart)) == $mineZPart)
+        if(substr($this->server,-1 * strlen($mineZPart)) == $mineZPart)
             $this->server = substr($this->server,0,-1 * strlen($mineZPart));
     }
 
