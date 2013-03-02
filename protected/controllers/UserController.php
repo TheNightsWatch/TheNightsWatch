@@ -2,7 +2,7 @@
 
 class UserController extends Controller
 {
-    const LATEST_CAPE_VERSION = 1.7;
+    const LATEST_CAPE_VERSION = 1.8;
 
     public function filters()
     {
@@ -108,26 +108,26 @@ class UserController extends Controller
             $kos = KOS::model()->findByAttributes(array('ign' => $unique));
             if($_REQUEST['version'] != 'TNW-viewer_1000' && !$this->verifyCanCape($_REQUEST['name'],$_REQUEST['verify'])) throw new CHttpException(503,"Bad Verification {$_REQUEST['name']}, {$_REQUEST['verify']}");
         }
-        if(!$oldMod && !$user && !$kos) throw new CHttpException(404,"User does not exist");
+        if(!$oldMod && !isset($user) && !isset($kos)) throw new CHttpException(404,"User does not exist");
         header("Content-Type: image/png");
         $file = "";
         if($oldMod) $file = 'nw-update';
-        elseif($user && $user->deserter == 'DESERTER' && !$whiteListed) $file = 'deserter-cape';
-        elseif($kos && $kos->status == KOS::STATUS_WARRANT && !$whiteListed) $file = 'deserter-cape';
-        elseif($kos && $kos->status == KOS::STATUS_ACCEPTED && !$whiteListed) $file = 'kos-cape';
-        elseif($user && $user->rank == User::RANK_COMMANDER) $file = 'commander-cape';
-        elseif($user && $user->rank == User::RANK_HEAD && $user->type == User::TYPE_RANGER) $file = 'firstRanger-cape';
-        elseif($user && $user->rank == User::RANK_HEAD && $user->type == User::TYPE_MAESTER) $file = 'grandMaester-cape';
-        elseif($user && $user->rank == User::RANK_COUNCIL && $user->type == User::TYPE_RANGER) $file = 'rangerCouncil-cape';
-        elseif($user && $user->rank == User::RANK_COUNCIL && $user->type == User::TYPE_MAESTER) $file = 'maesterCouncil-cape';
-        elseif($user && $user->type == User::TYPE_RANGER) $file = 'ranger-cape';
-        elseif($user && $user->type == User::TYPE_MAESTER) $file = 'maester-cape';
-        elseif($user && $user->type == User::TYPE_BUILDER) $file = 'builder-cape';
-        elseif($kos && $kos->status == KOS::STATUS_WARNING && !$whiteListed) $file = 'warning-cape';
-        elseif($kos && $kos->status == KOS::STATUS_CAUTION && !$whiteListed) $file = 'wary-cape';
+        elseif(isset($user) && $user->deserter == 'DESERTER' && !$whiteListed) $file = 'deserter-cape';
+        elseif(isset($kos) && $kos->status == KOS::STATUS_WARRANT && !$whiteListed) $file = 'deserter-cape';
+        elseif(isset($kos) && $kos->status == KOS::STATUS_ACCEPTED && !$whiteListed) $file = 'kos-cape';
+        elseif(isset($user) && $user->rank == User::RANK_COMMANDER) $file = 'commander-cape';
+        elseif(isset($user) && $user->rank == User::RANK_HEAD && $user->type == User::TYPE_RANGER) $file = 'firstRanger-cape';
+        elseif(isset($user) && $user->rank == User::RANK_HEAD && $user->type == User::TYPE_MAESTER) $file = 'grandMaester-cape';
+        elseif(isset($user) && $user->rank == User::RANK_COUNCIL && $user->type == User::TYPE_RANGER) $file = 'rangerCouncil-cape';
+        elseif(isset($user) && $user->rank == User::RANK_COUNCIL && $user->type == User::TYPE_MAESTER) $file = 'maesterCouncil-cape';
+        elseif(isset($user) && $user->type == User::TYPE_RANGER) $file = 'ranger-cape';
+        elseif(isset($user) && $user->type == User::TYPE_MAESTER) $file = 'maester-cape';
+        elseif(isset($user) && $user->type == User::TYPE_BUILDER) $file = 'builder-cape';
+        elseif(isset($kos) && $kos->status == KOS::STATUS_WARNING && !$whiteListed) $file = 'warning-cape';
+        elseif(isset($kos) && $kos->status == KOS::STATUS_CAUTION && !$whiteListed) $file = 'wary-cape';
 
         $path = Yii::app()->basePath."/data/";
-        if($user && $user->deserter != 'DESERTER' && $user->honors > 0)
+        if(isset($user) && $user->deserter != 'DESERTER' && $user->honors > 0)
         {
             $max = 2;
             $stars = $user->honors > $max ? $max : $user->honors;
