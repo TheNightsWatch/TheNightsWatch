@@ -1,5 +1,5 @@
 <p>We are no longer hand-holding mod installation.  You're on your own now.</p>
-<p>Our mod works with ModLoader and Optifine (both required) for [1.4.6]</p>
+<p>Our mod works with ModLoader (required) and Optifine (not required) for [1.5.2]</p>
 <p>If you're using <a href="http://www.minecraftforum.net/topic/939149-">Magic Launcher</a>, this is the order things should be in:</p>
 <ol>
     <li><a href="http://www.minecraftforum.net/topic/75440-">ModLoader</a></li>
