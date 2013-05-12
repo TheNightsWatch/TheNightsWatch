@@ -124,7 +124,7 @@ class User extends CActiveRecord
 	public static function getHead($unique, $size = 16, $withHelm = true)
 	{
 		$part = $withHelm ? 'helm' : 'head';
-		return "http://minotar.net/{$part}/".urlencode($unique)."/{$size}.png";
+		return "//minotar.net/{$part}/".urlencode($unique)."/{$size}.png";
 	}
 	
 	public function headUrl($size = 16, $withHelm = true)
