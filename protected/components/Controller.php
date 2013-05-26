@@ -68,8 +68,13 @@ class Controller extends CController
 	 */
 	public function jsonOut($info,$status = 200,$end = true)
 	{
-		header("Content-Type: application/json",true,$status);
-		echo CJSON::encode($info);
+	    if (isset($_GET['jsonp'])) {
+	        header("Content-Type: application/javascript",true,$status);
+	        echo $_GET['jsonp'].'('.CJSON::encode($info).');';
+	    } else {
+		    header("Content-Type: application/json",true,$status);
+		    echo CJSON::encode($info);
+		}
 		Yii::app()->end(0,$end);
 	}
 }

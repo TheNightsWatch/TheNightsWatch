@@ -2,7 +2,7 @@
 // https://github.com/overviewer/Minecraft-Overviewer-Addons
 // Please make sure you have markers.json accessable to the web.
 
-var JSONFile            =   '/map/players'; //The JSON file containing the player data
+var JSONFile            =   'https://minez-nightswatch.com/map/players'; //The JSON file containing the player data
 var refreshTime         =   5; //How many seconds should we wait between updating the JSONFile.
 var avatarserver        =   'https://minotar.net/helm/<playername>/16.png'; //The address for the player avatar script. 
 
@@ -100,17 +100,20 @@ function createPlayerListing(list,name,icon,data) {
  *
  * @return void
  */
+
 function loadPlayers() {
-    $.ajax({
-        url:JSONFile,
-        dataType: 'json',
-        cache: false,
-        success: function(data) {
+    var d = (new Date).getTime();
+    var s = $('script#nightswatch-update');
+    if (s.length) {
+        s.remove();
+    }
+    $('body').append('<script src="' + JSONFile + '?jsonp=loadPlayersSuccess&_time=' + d + '" id="nightswatch-update"></script>');
+}
+function loadPlayersSuccess(data) {
             for (var i in data) {
-                var curTileSet = overviewer.mapView.options.currentTileSet;
-                if (overviewerConfig.map.debug)
-                    //console.log('Updating ' +data[i].msg + ' from  ' + curTileSet.get("world").get("name"));
-                if (data[i].world != curTileSet.get("world").get("name")) continue;
+                var curTileSet = typeof overviewer.currentTileset != 'undefined' ? overviewer.currentTileset : overviewer.mapView.options.currentTileSet;
+                var worldName = overviewer.world && overviewer.world.name ? overviewer.world.name : curTileSet.get("world").get("name");
+                // if (data[i].world != worldName) continue;
                 if (data[i].id != 4) continue;
 
                 var item            =    data[i];
@@ -170,8 +173,6 @@ function loadPlayers() {
                 updatePlayer(name); //Update the player on the map
             }
             checkPlayers(); //Check for offline players
-        }
-    });
 }
 
 function smartServerName(server)

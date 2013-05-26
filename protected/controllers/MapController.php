@@ -124,7 +124,7 @@ class MapController extends Controller
         {
             $event->addAttendee($user);
         }
-        
+
         header("HTTP/1.1 201");
         Yii::app()->end();
     }

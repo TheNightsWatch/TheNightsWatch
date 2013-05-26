@@ -115,10 +115,6 @@ messageQueue.prototype.load = function(_this, callback, errorCallback) {
 		$('#chatForm .csrf').attr('name', data.csrf.name).attr('value',
 				data.csrf.token);
 		
-		var distance = (100 - $(".slider-vertical").slider("value")) * $('#messages').height();
-		setSlider($('#chat'));
-		$(".slider-vertical").slider("value", 100.0 - (distance / $('#messages').height()));	
-
 		if (scroll)
 			_this.doScroll();
 		if (callback !== undefined)
@@ -129,10 +125,14 @@ messageQueue.prototype.load = function(_this, callback, errorCallback) {
 	}, 2000);
 };
 messageQueue.prototype.getShouldScroll = function() {
-	if ($(".slider-vertical").slider("value") == 0)
-		return true;
-	return false;
+   var height = $('#chat').height();
+   var scrollHeight = $('#chat').prop('scrollHeight');
+   if (scrollHeight - height == $('#chat').prop('scrollTop'))
+        return true;
+   return false;
 };
 messageQueue.prototype.doScroll = function() {
-	$(".slider-vertical").slider("value",0);
+    $('#chat').prop({
+        scrollTop : $('#chat').prop('scrollHeight')
+    });
 };
