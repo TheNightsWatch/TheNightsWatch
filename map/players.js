@@ -70,6 +70,10 @@ var TNWPlugin = function () {
                     riseOnHover: true
                 });
                 player.marker.addTo(overviewer.map);
+                player.marker.on('click', function() {
+                    mapUi.expandSidebar();
+                    mapUi.openUrl('https://minez-nightswatch.com/user/' + player.name);
+                })
             }
             updated[player.name] = true;
         }
