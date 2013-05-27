@@ -34,6 +34,10 @@ var TNWPlugin = function () {
 
     this.updatePlayers = function (data) {
         var updated = {}, i, item, player, latlng, icon;
+        var onclick = function(e) {
+            mapUi.expandSidebar();
+            mapUi.openUrl('https://minez-nightswatch.com/user/' + e.target.options.title);
+        };
         for (i in data) {
             if (data.hasOwnProperty(i)) {
                 /**
@@ -76,10 +80,7 @@ var TNWPlugin = function () {
                         riseOnHover: true
                     });
                     player.marker.addTo(overviewer.map);
-                    player.marker.on('click', function () {
-                        mapUi.expandSidebar();
-                        mapUi.openUrl('https://minez-nightswatch.com/user/' + player.name);
-                    });
+                    player.marker.on('click', onclick);
                 }
                 updated[player.name] = true;
             }
